@@ -46,23 +46,32 @@ public class CustomerController {
 		String returnURL = "";
 
 		Customer customer = service.loginCustomer(csId, csPassword);
+		System.out.println(customer);
 
-		if (customer.getCsId().equals(csId)
+		if (customer == null) {
+			returnURL = "/index.do";
+		} else if (customer.getCsId().equals(csId)
 				&& customer.getCsPassword().equals(csPassword)) {//아이디,비번 비교
 			System.out.println(customer);
 			session.setAttribute("loginInfo", customer);
-			returnURL = "redirect:/customer/customer_main.do";
+//			returnURL = "redirect:/customer/customer_main.do";
+			returnURL = "customer/customer_main.tiles";
 		} else {
-			returnURL = "redirect:/";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
+			returnURL = "/index.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
 		}
 		return returnURL;
 	}
 
-	//고객 메인 컨트롤러 
-	@RequestMapping("/customer_main")
-	public String customer_main() {
+	@RequestMapping("/logincheck/home.do")
+	public String indexDo() {
 		return "customer/customer_main.tiles";
 	}
+//
+//	//고객 메인 컨트롤러 
+//	@RequestMapping("/logincheck/customer_main")
+//	public String customer_main() {
+//		return "customer/customer_main.tiles";
+//	}
 
 	//고객 ID로 고객 조회 처리 Handler
 	@RequestMapping("/findById")
@@ -81,7 +90,7 @@ public class CustomerController {
 
 	//고객 List 조회처리 Handler
 
-	@RequestMapping("/logincheck//list")
+	@RequestMapping("/logincheck/list")
 	public String list(@RequestParam(defaultValue = "1") String pageNo,
 			ModelMap model) {
 		int page = 1;
