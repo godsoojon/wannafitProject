@@ -3,7 +3,7 @@ drop table customer;
 CREATE TABLE friendlist (
 	fl_key VARCHAR2(20) NOT NULL, /* 친구목록식별키 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	firend_id VARCHAR2(10) /* 친구ID */
+	friend_id VARCHAR2(10) /* 친구ID */
 );
 drop table friendlist;
 
@@ -90,3 +90,8 @@ where page = 1;
 --					)
 --	)
 --	where page = 1
+insert into FRIENDLIST values('1','1111','1111'); 
+
+		select *
+		from friendList
+		where cs_id='1111';

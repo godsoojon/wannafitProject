@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.SessionScope;
 
 import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.customer.service.CustomerService;
@@ -70,7 +72,7 @@ public class CustomerController {
 		return "customer/customer_info.tiles";
 	}
 
-	@RequestMapping("/findByName")
+	@RequestMapping("/logincheck//findByName")
 	public String findByName(@RequestParam String csName, ModelMap model) {
 		List<Customer> list = service.findCustomerByName(csName);
 		model.addAttribute("namelist", list);
@@ -109,11 +111,15 @@ public class CustomerController {
 
 	@RequestMapping("/addFriendList")
 	public String addFriendList(@RequestParam String friendId,
-			@RequestParam String csId, Error errors, ModelMap model)
+			 Error errors, ModelMap model ,HttpSession session)
 					throws DuplicatedIdException, SQLException {
-		FriendList friendList = new FriendList("1", csId, friendId);
+		
+		 String n = String.valueOf(((Math.random() * 1000) + 1));
+		Customer customer= (Customer) session.getAttribute("loginInfo");
+		String id =customer.getCsId();
+		FriendList friendList = new FriendList(n,  id, friendId);
 		service.addFriendList(friendList);
-		List<FriendList> list = service.findFriendListById(csId);
+		List<FriendList> list = service.findFriendListById( id);
 		model.addAttribute("friendList", list);
 		return "customer/friend_list.tiles";
 	}

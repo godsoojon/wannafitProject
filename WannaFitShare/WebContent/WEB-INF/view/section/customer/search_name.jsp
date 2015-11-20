@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>친구찾기</h2>
-<form action ="${initParam.rootPath}/customer/findByName.do" method="post">
+<form action ="${initParam.rootPath}/customer/logincheck/findByName.do" method="post">
 친구이름 입력 :<input type ="text" name ="csName"><br> 
 <input type="submit" value ="찾기">
 </form>

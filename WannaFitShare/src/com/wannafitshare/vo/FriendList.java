@@ -7,11 +7,14 @@ public class FriendList implements Serializable{
 		private String flKey;
 		private String csId;
 		private String friendId;
-		public String getFlKey() {
-			return flKey;
-		}
+	
+	
 		public void setFlKey(String flKey) {
 			this.flKey = flKey;
+		}
+		
+		public String getFlKey() {
+			return flKey;
 		}
 		public String getCsId() {
 			return csId;

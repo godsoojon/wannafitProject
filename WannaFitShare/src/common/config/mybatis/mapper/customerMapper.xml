@@ -43,7 +43,7 @@
 		id="insertFriendList"
 		parameterType="friendList">
 		insert into FriendList(fl_key,cs_id,friend_id)
-		values(#{fl_Key}, #{cs_id}, #{friend_id})
+		values(#{flKey}, #{csId}, #{friendId})
 
 	</insert>
 	
