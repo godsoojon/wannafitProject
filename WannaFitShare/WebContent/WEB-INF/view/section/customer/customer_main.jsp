@@ -7,7 +7,7 @@
 </head>
 <body>
 <h3>고객 메인페이지</h3>
-고객 :${sessionScope.customer.customer}
+고객 :${sessionScope.loginInfo.csId}
 
 </body>
 </html>
