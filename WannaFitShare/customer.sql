@@ -1,7 +1,16 @@
 --table 삭제
+drop sequence person_no_seq;
+create sequence friendlist_fl_key_seq;
+
+
+select friend_id
+		from friendList
+		where
+		cs_id='1111';
+
 drop table customer;
 CREATE TABLE friendlist (
-	fl_key VARCHAR2(20) NOT NULL, /* 친구목록식별키 */
+	fl_key number(20) NOT NULL, /* 친구목록식별키 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	friend_id VARCHAR2(10) /* 친구ID */
 );

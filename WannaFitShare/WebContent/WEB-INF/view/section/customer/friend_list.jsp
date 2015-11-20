@@ -9,12 +9,12 @@
 	<c:otherwise>
 		<table style="width:500px" border="1">
 			<tr>
-				<th>friend_key</th>
+				
 				<th>친구 Id</th>
 			</tr>
 			<c:forEach items="${requestScope.friendList }" var="friendList">
 			<tr>
-				<td>${friendList.flKey}</td>
+			
 				<td>${friendList.friendId}</td>
 				
 			<tr>

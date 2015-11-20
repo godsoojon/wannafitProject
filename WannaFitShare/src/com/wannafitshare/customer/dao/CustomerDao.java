@@ -27,6 +27,6 @@ public interface CustomerDao {
 
 	int insertFriendList(FriendList friendList);
 
-	List<FriendList> selectfriendList(String csId);
+	List<String> selectfriendList(String csId);
 
 }

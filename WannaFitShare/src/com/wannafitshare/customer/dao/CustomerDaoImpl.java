@@ -53,7 +53,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public List<FriendList> selectfriendList(String csId) {
+	public List<String> selectfriendList(String csId) {
 		return session.selectList("customerMapper.selectFriendList", csId);
 	}
 

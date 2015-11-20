@@ -114,12 +114,16 @@ public class CustomerController {
 			 Error errors, ModelMap model ,HttpSession session)
 					throws DuplicatedIdException, SQLException {
 		
-		 String n = String.valueOf(((Math.random() * 1000) + 1));
+		
 		Customer customer= (Customer) session.getAttribute("loginInfo");
 		String id =customer.getCsId();
-		FriendList friendList = new FriendList(n,  id, friendId);
+		FriendList friendList = new FriendList(id, friendId);
 		service.addFriendList(friendList);
-		List<FriendList> list = service.findFriendListById( id);
+		System.out.println("=========================");
+		
+		List<String> list = service.findFriendListById(id);
+		
+		System.out.println("=========================");
 		model.addAttribute("friendList", list);
 		return "customer/friend_list.tiles";
 	}

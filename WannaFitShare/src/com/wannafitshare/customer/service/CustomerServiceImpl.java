@@ -127,7 +127,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<FriendList> findFriendListById(String csId) {
+	public List<String> findFriendListById(String csId) {
 		return dao.selectfriendList(csId);
 
 	}
