@@ -11,7 +11,6 @@ $(document).ready(function(){
 <h2>고객 정보 수정</h2>
 <spring:hasBindErrors name="customer"/>
 <form action="${initParam.rootPath}/customer/modify.do" method="post" id="modifyForm">
-<input type="hidden" name="pageNo" value="${param.pageNo }">
 <table border="1" style="width:500px">
 	<tr>
 		<th>고객 ID</th>

@@ -65,8 +65,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println(
-				"Interceptor.postHandle() -" + modelAndView.getViewName());
+//		System.out.println(
+//				"Interceptor.postHandle() -" + modelAndView.getViewName());
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)
 					throws Exception {
-		System.out.println("Interceptor.afterCompletion()------");
+//		System.out.println("Interceptor.afterCompletion()------");
 	}
 
 }

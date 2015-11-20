@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,13 +45,13 @@ public class CustomerController {
 		String returnURL = "";
 
 		Customer customer = service.loginCustomer(csId, csPassword);
-		System.out.println(customer);
+//		System.out.println(customer);
 
 		if (customer == null) {
 			returnURL = "/index.do";
 		} else if (customer.getCsId().equals(csId)
 				&& customer.getCsPassword().equals(csPassword)) {//아이디,비번 비교
-			System.out.println(customer);
+//			System.out.println(customer);
 			session.setAttribute("loginInfo", customer);
 //			returnURL = "redirect:/customer/customer_main.do";
 			returnURL = "customer/customer_main.tiles";
@@ -58,6 +59,13 @@ public class CustomerController {
 			returnURL = "/index.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
 		}
 		return returnURL;
+	}
+
+	@RequestMapping("/logincheck/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginInfo", null);
+		return "/index.do";
+
 	}
 
 	@RequestMapping("/logincheck/home.do")
@@ -128,32 +136,29 @@ public class CustomerController {
 	}
 
 	//등록 후 성공페이지로 이동 처리.
-	@RequestMapping("registerSuccess")
+	@RequestMapping("/registerSuccess")
 	public String registerSuccess(@RequestParam String csId, ModelMap model) {
 
 		model.addAttribute("customer", service.findCustomerById(csId));
 		return "customer/register_success.tiles";
 	}
 
-	//수정폼 조회 처리 Handler
-	@RequestMapping("modifyForm")
-	public String modifyForm(@RequestParam(defaultValue = "") String csId,
-			ModelMap model) throws Exception {
-//		요청파라미터 검증..wjidqwi
-		if (csId.trim().length() == 0) {
-			throw new Exception("수정할 고객의 아이디가 없습니다.");
-		}
+	//로그인 회원 정보 수정
+	@RequestMapping("/logincheck/modifyForm")
+	public String modifyForm(HttpSession session, ModelMap model)
+			throws Exception {
 
-		model.addAttribute("customer", service.findCustomerById(csId));
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+//		System.out.println(customer + " modify폼");
+		model.addAttribute("customer", customer);
 
 		return "customer/modify_form.tiles";
 	}
 
 	//수정 처리 Handler
-	@RequestMapping("modify")
+	@RequestMapping("/modify")
 	public String modify(@ModelAttribute Customer customer, Errors errors,
-			@RequestParam(defaultValue = "1") String pageNo, ModelMap model)
-					throws Exception {
+			ModelMap model, HttpSession session) throws Exception {
 		//Validator를 이용해 요청파라미터 체크
 		new CustomerValidator().validate(customer, errors);
 
@@ -161,28 +166,32 @@ public class CustomerController {
 			return "customer/modify_form.tiles";
 		}
 		service.updateCustomer(customer);
-		model.addAttribute("csId", customer.getCsId());
-		model.addAttribute("pageNo", pageNo);
-		return "redirect:/customer/findById.do";
+		Customer newCust = service.findCustomerById(customer.getCsId());
+		session.setAttribute("loginInfo", newCust);
+//		model.addAttribute("csId", customer.getCsId());
+		return "customer/customer_main.tiles";
 	}
 
 	//고객 삭제 처리 HandlerattributeValue
-	@RequestMapping("remove.do")
-	public String remove(@RequestParam(defaultValue = "") String csId,
-			@RequestParam(defaultValue = "1") String pageNo, ModelMap model)
-					throws Exception {
+	@RequestMapping("/logincheck/remove.do")
+	public String remove(HttpSession session) throws Exception {
 		//요청파라미터 검증
-		if (csId.trim().length() == 0) {
-			throw new Exception("삭제할 고객의 아이디가 없습니다.");
-		}
+//		if (((String) session.getAttribute("csId")).trim().length() == 0) {
+//			throw new Exception("삭제할 고객의 아이디가 없습니다.");
+//		}
+
+		Customer reCust = (Customer) session.getAttribute("loginInfo");
+		String id = reCust.getCsId();
+
 		//비지니스 로직 - 삭제처리(removeCustomer())
-		service.removeCustomer(csId);
-		model.addAttribute("pageNo", pageNo);
+		System.out.println(id + "삭제할 아이디*-------");
+		service.removeCustomer(id);
 		//응답
-		return "redirect:/customer/list.do";
+		session.setAttribute("loginInfo", null);
+		return "customer/byebye.tiles";
 	}
 
-	@RequestMapping("idDuplicatedCheck")
+	@RequestMapping("/idDuplicatedCheck")
 	@ResponseBody
 	public String idDuplicatedCheck(@RequestParam String csId) {
 		Customer cust = service.findCustomerById(csId);

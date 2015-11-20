@@ -24,3 +24,6 @@
 	</tr>
 </table>
 </form>
+<br>
+<a href="${initParam.rootPath}/customer/register_form.do"> <b>회원가입</b> </a> <br>
+
