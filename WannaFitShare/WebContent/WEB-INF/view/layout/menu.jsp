@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<a href="${initParam.rootPath}/index.do">
+<a href="${initParam.rootPath}/customer/logincheck/home.do">
 홈 
 </a>&nbsp;&nbsp;
 <a href="${initParam.rootPath}/customer/register_form.do">
