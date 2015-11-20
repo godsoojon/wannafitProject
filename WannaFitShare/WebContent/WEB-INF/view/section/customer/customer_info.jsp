@@ -21,7 +21,7 @@
 <p>
 <a href="${initParam.rootPath}/customer/remove.do?csId=${requestScope.customer.csId }&pageNo=${param.pageNo}">고객정보삭제</a>
 <a href="${initParam.rootPath}/customer/modifyForm.do?csId=${requestScope.customer.csId }&pageNo=${param.pageNo}">고객정보수정</a>
-<a href="${initParam.rootPath}/customer/?????csId=${requestScope.customer.csId}">친구 추가</a>
+<a href="${initParam.rootPath}/customer/addFriendList.do?friendId=${requestScope.customer.csId}&csId?=${sessionScope.customer.csId}">친구 추가</a>
  
 
 

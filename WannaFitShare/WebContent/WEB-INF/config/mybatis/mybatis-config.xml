@@ -10,8 +10,7 @@
 	<!-- package typeAliase 처리 -->
 	<typeAliases>
 		<typeAlias type="com.wannafitshare.vo.Customer" alias="customer"/>
-	<!-- #####################intercaptor alias추가 -->
-		<typeAlias type="com.spring.interceptor.Interceptor" alias ="interceptor"/>
+		<typeAlias type="com.wannafitshare.vo.FriendList" alias="friendList"/>
 	</typeAliases>
 	<!-- Mapper 설정 -->
 	<mappers>

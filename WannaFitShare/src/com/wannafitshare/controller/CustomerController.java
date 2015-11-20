@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.validator.CustomerValidator;
 
@@ -41,22 +42,16 @@ public class CustomerController {
 	public String login(@RequestParam String csId,
 			@RequestParam String csPassword, HttpSession session) {
 		String returnURL = "";
-		//웹페이지에서 받은 아이디,패스워드 일치시 customer key생성
 
-		Customer customer = service.findCustomerById(csId);
-		if (!(customer == null)) {//그아이디의  고객의 정보가 있으면
-			if (customer.getCsPassword().equals(csPassword)) {//패스워드비교
-				//패스워드도 맞으면 세션 키 정보생성
-				System.out.println(customer);
-				session.setAttribute("loginInfo", customer);
-				
-				returnURL = "redirect:/customer/customer_main.do";
-			} else {
-				returnURL = "redirect:index.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
-			}
-		}//큰 if 끝
-		else {
-			returnURL = "redirect:/";//일치하는 아이디가 없어도 로그인 페이지로 이동index.jsp
+		Customer customer = service.loginCustomer(csId, csPassword);
+
+		if (customer.getCsId().equals(csId)
+				&& customer.getCsPassword().equals(csPassword)) {//아이디,비번 비교
+			System.out.println(customer);
+			session.setAttribute("loginInfo", customer);
+			returnURL = "redirect:/customer/customer_main.do";
+		} else {
+			returnURL = "redirect:/";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
 		}
 		return returnURL;
 	}
@@ -83,7 +78,8 @@ public class CustomerController {
 	}
 
 	//고객 List 조회처리 Handler
-	@RequestMapping("list")
+
+	@RequestMapping("/logincheck//list")
 	public String list(@RequestParam(defaultValue = "1") String pageNo,
 			ModelMap model) {
 		int page = 1;
@@ -97,7 +93,8 @@ public class CustomerController {
 	}
 
 	//고객 등록 처리 Handler
-	@RequestMapping("add")
+
+	@RequestMapping("/add")
 	public String add(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model) throws DuplicatedIdException, SQLException {
 
@@ -108,6 +105,17 @@ public class CustomerController {
 		service.addCustomer(customer);
 		model.addAttribute("csId", customer.getCsId());
 		return "redirect:/customer/registerSuccess.do";
+	}
+
+	@RequestMapping("/addFriendList")
+	public String addFriendList(@RequestParam String friendId,
+			@RequestParam String csId, Error errors, ModelMap model)
+					throws DuplicatedIdException, SQLException {
+		FriendList friendList = new FriendList("1", csId, friendId);
+		service.addFriendList(friendList);
+		List<FriendList> list = service.findFriendListById(csId);
+		model.addAttribute("friendList", list);
+		return "customer/friend_list.tiles";
 	}
 
 	//등록 후 성공페이지로 이동 처리.

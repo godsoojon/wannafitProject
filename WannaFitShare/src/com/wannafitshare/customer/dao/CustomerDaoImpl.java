@@ -3,16 +3,14 @@ package com.wannafitshare.customer.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.util.PagingBean;
-
 
 /**
  * Customer테이블과 연동하는 DAO 클래스
@@ -23,17 +21,24 @@ import common.util.PagingBean;
  */
 ///////////////////////////////////////////////////////////////////////////
 
-
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
-	
 	private SqlSessionTemplate session; //no-arg생성자로 객체생성후 instance변수 
+
+	@Override
+	public Customer loginCustomer(String csId, String csPassword) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("csId", csId);
+		map.put("csPassword", csPassword);
+		return session.selectOne("customerMapper.loginCustomer", map);
+	}
 
 	@Autowired
 	public CustomerDaoImpl(SqlSessionTemplate session) {
 		this.session = session;
 	}
+
 	public CustomerDaoImpl() {
 	}
 
@@ -41,43 +46,56 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int insertCustomer(Customer customer) {
 		return session.insert("customerMapper.insertCustomer", customer);
 	}
-		
+
 	@Override
-	public int deleteCustomerById(String csId){
+	public int insertFriendList(FriendList friendList) {
+		return session.insert("customerMapper.insertFriendList", friendList);
+	}
+
+	@Override
+	public List<FriendList> selectfriendList(String csId) {
+		return session.selectList("customerMapper.selectFriendList", csId);
+	}
+
+	@Override
+	public int deleteCustomerById(String csId) {
 		return session.delete("customerMapper.deleteCustomerById", csId);
 	}
-	
+
 	@Override
-	public int updateCustomer(Customer customer){
+	public int updateCustomer(Customer customer) {
 		return session.update("customerMapper.updateCustomer", customer);
 	}
-	
+
 	@Override
-	public Customer selectCustomerById(String customerId){
-		return session.selectOne("customerMapper.selectCustomerById", customerId);
+	public Customer selectCustomerById(String customerId) {
+		return session.selectOne("customerMapper.selectCustomerById",
+				customerId);
 	}
-	
+
 	@Override
-	public List<Customer> selectCustomers(){
+	public List<Customer> selectCustomers() {
 		return session.selectList("customerMapper.selectCustomers");
 	}
-	
+
 	@Override
-	public List<Customer> selectCustomersPaging(int pageNo){
+	public List<Customer> selectCustomersPaging(int pageNo) {
 		HashMap map = new HashMap();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		map.put("pageNo", pageNo);
-		List<Customer> list = session.selectList("customerMapper.selectCustomersPaging", map);
+		List<Customer> list = session
+				.selectList("customerMapper.selectCustomersPaging", map);
 		return list;
 	}
-	
+
 	@Override
-	public List<Customer> selectCustomersByName(String customerName){
-		return session.selectList("customerMapper.selectCustomersByName", customerName);
-	}	
-	
+	public List<Customer> selectCustomersByName(String customerName) {
+		return session.selectList("customerMapper.selectCustomersByName",
+				customerName);
+	}
+
 	@Override
-	public int selectCountCustomers(){
+	public int selectCountCustomers() {
 		return session.selectOne("customerMapper.selectCountCustomers");
 	}
 }
