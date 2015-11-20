@@ -3,6 +3,7 @@ package com.wannafitshare.customer.dao;
 import java.util.List;
 
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 public interface CustomerDao {
 
@@ -22,5 +23,8 @@ public interface CustomerDao {
 	
 	int selectCountCustomers();
 	
+	int insertFriendList(FriendList friendList);
+	
+	List<FriendList> selectfriendList(String csId);
 
 }

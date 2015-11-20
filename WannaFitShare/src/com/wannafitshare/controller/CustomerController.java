@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.validator.CustomerValidator;
 
@@ -38,7 +40,7 @@ public class CustomerController {
 	private CustomerService service;
 	
 	@RequestMapping("/login")
-	public String login(HttpServletRequest request){
+	public String login(HttpServletRequest request, HttpSession session){
 		String returnURL="";
 		//웹페이지에서 받은 아이디,패스워드 일치시 customer key생성
 		
@@ -87,7 +89,7 @@ public class CustomerController {
 		return "customer/search_success.tiles";
 	}
 	//고객 List 조회처리 Handler
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="1") String pageNo, ModelMap model){
 		int page = 1;
 		try {
@@ -98,7 +100,7 @@ public class CustomerController {
 		return "customer/list.tiles";
 	}
 	//고객 등록 처리 Handler
-	@RequestMapping("add")
+	@RequestMapping("/add")
 	public String add(@ModelAttribute Customer customer, Errors errors, ModelMap model) throws DuplicatedIdException, SQLException{
 		
 		new CustomerValidator().validate(customer, errors);
@@ -109,6 +111,18 @@ public class CustomerController {
 		model.addAttribute("csId", customer.getCsId());
 		return "redirect:/customer/registerSuccess.do"; 
 	}
+	
+	@RequestMapping("/addFriendList")
+	public String addFriendList(@RequestParam String friendId,@RequestParam String csId,Error errors,ModelMap model) throws DuplicatedIdException, SQLException{
+		FriendList friendList =new FriendList("1",csId,friendId);
+		service.addFriendList(friendList);
+		List<FriendList> list =service.findFriendListById(csId);
+		model.addAttribute("friendList",list);
+		return "customer/friend_list.tiles";
+	}
+	
+	
+	
 	//등록 후 성공페이지로 이동 처리.
 	@RequestMapping("registerSuccess")
 	public String registerSuccess(@RequestParam String csId, ModelMap model){

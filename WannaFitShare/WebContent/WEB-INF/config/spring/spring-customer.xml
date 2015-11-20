@@ -19,7 +19,7 @@
 										  com.wannafitshare.customer.service"/>
 	
 	
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven/> 
 	<!-- link 설정-->
 	<!-- 메인페이지 -->
 	<mvc:view-controller path="/index.do" view-name="index.tiles"/>

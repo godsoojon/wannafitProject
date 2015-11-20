@@ -12,9 +12,9 @@ public class Interceptor extends HandlerInterceptorAdapter{
 public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		throws Exception {
 	try{
-		if(request.getSession().getAttribute("customer")==null){
+		if(request.getSession().getAttribute("")==null){
 			//customer이라는 세션key를 가진 정보가 널일경우 로그인페이지로 이동(로그인안됐을떄)
-			return false;
+			return true;
 		}
 	}catch(Exception e){
 		

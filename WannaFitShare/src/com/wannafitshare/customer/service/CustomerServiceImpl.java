@@ -14,6 +14,7 @@ import com.wannafitshare.customer.dao.CustomerDao;
 import com.wannafitshare.customer.exception.CustomerNotFoundException;
 import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.util.PagingBean;
 
@@ -64,7 +65,12 @@ public class CustomerServiceImpl implements CustomerService {
 			//DB에 insert 
 			dao.insertCustomer(customer);		
 	}
-	
+	@Override
+	public void addFriendList(FriendList friendList){
+		//여기서 이미 등록된 친구이면 exception처리
+		
+		dao.insertFriendList(friendList);
+	}
 	
 	/**
 	 * 매개변수로 받은 ID의 고객을 찾아 삭제 처리
@@ -111,6 +117,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer>  findCustomerByName(String customerName){
 			return dao.selectCustomersByName(customerName);
+	}
+	
+	@Override
+	public List<FriendList> findFriendListById(String csId){
+		return dao.selectfriendList(csId);
+		
 	}
 	
 	/**

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.wannafitshare.customer.exception.CustomerNotFoundException;
 import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 public interface CustomerService {
 	
@@ -19,7 +20,8 @@ public interface CustomerService {
 	 * @throws SQLException 
 	 */
 	void addCustomer(Customer customer) throws DuplicatedIdException,SQLException;
-
+	
+	void addFriendList(FriendList friendList)throws DuplicatedIdException,SQLException;
 	
 	/**
 	 * 매개변수로 받은 ID의 고객을 찾아 삭제 처리
@@ -52,7 +54,7 @@ public interface CustomerService {
 	 * @return customerList에서 조회된 고객들을 담아 리턴할 ArrayList
 	 */
 	List<Customer> findCustomerByName(String customerName);
-	
+	List<FriendList> findFriendListById(String csId);
 	/**
 	 * 매개변수로 받은 고객과 같은 ID를 가진 고객정보를 찾아 수정 처리.
 	 *  - 수정하려는 고객의 ID가 없는 경우 처리를 진행하지 않는다.

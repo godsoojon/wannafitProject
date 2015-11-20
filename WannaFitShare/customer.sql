@@ -1,5 +1,32 @@
 --table 삭제
 drop table customer;
+CREATE TABLE friendlist (
+	fl_key VARCHAR2(20) NOT NULL, /* 친구목록식별키 */
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+	firend_id VARCHAR2(10) /* 친구ID */
+);
+drop table friendlist;
+
+ALTER TABLE friendlist
+	ADD
+		CONSTRAINT PK_friendlist
+		PRIMARY KEY (
+			fl_key
+		);
+		
+ALTER TABLE friendlist
+	ADD
+		CONSTRAINT FK_customer_TO_friendlist
+		FOREIGN KEY (
+			cs_id
+		)
+		REFERENCES customer (
+			cs_id
+		);
+
+
+
+
 --table 생성
 create table customer(
 	cs_id 		varchar2(10) primary key, --primary key 

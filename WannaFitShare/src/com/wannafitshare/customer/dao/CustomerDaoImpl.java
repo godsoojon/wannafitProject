@@ -3,13 +3,12 @@ package com.wannafitshare.customer.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.util.PagingBean;
 
@@ -40,6 +39,14 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public int insertCustomer(Customer customer) {
 		return session.insert("customerMapper.insertCustomer", customer);
+	}
+	@Override
+	public int insertFriendList(FriendList friendList){
+		return session.insert("customerMapper.insertFriendList",friendList);
+	}
+	@Override
+	public List<FriendList> selectfriendList(String csId){
+		return session.selectList("customerMapper.selectFriendList",csId);
 	}
 		
 	@Override
