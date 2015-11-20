@@ -9,6 +9,9 @@ drop table friendlist;
 drop table customer;
 drop table party;
 
+drop sequence person_no_seq;
+
+
 
 /* 고객 */
 CREATE TABLE MY_SCHEMA.customer (
@@ -235,3 +238,6 @@ ALTER TABLE MY_SCHEMA.partylist
 		REFERENCES MY_SCHEMA.party (
 			party_id
 		);
+		
+		
+		create sequence friendlist_fl_key_seq;

@@ -8,3 +8,5 @@ drop table party;
 drop table photo;
 drop table friendlist;
 drop table customer;
+
+drop sequence person_no_seq;

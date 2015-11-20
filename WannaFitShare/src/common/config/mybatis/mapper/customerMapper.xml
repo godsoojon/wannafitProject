@@ -27,7 +27,7 @@
 		<constructor>
 			<idArg
 				column="fl_key"
-				javaType="string" />
+				javaType="int" />
 			<arg
 				column="cs_id"
 				javaType="string" />
@@ -42,8 +42,11 @@
 	<insert
 		id="insertFriendList"
 		parameterType="friendList">
+		<selectKey keyProperty="flKey" resultType="_int" order="BEFORE">
+			select friendList_fl_key_seq.nextval from dual
+		</selectKey>
 		insert into FriendList(fl_key,cs_id,friend_id)
-		values(#{fl_Key}, #{cs_id}, #{friend_id})
+		values(#{flKey}, #{csId}, #{friendId})
 
 	</insert>
 	
@@ -51,8 +54,8 @@
 	<select
 		id="selectFriendList"
 		parameterType="string"
-		resultMap="friendList-constructor-resultmap">
-		select fl_key,cs_id,friend_id
+		resultMap="friend-resultmap">
+		select friend_id
 		from friendList
 		where
 		cs_id=#{csId}
