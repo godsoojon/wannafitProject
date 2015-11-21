@@ -12,6 +12,6 @@
 <a href="${initParam.rootPath}/customer/search_name.do">친구 찾기</a>
 
 <a href="">사진올리기</a>
-<a href="">칼로리 캘린더</a>
+<a href="${initParam.rootPath}/customer/calender.do">칼로리 캘린더</a>
 
 <hr>

@@ -1,11 +1,10 @@
 package com.wannafitshare.controller;
 
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +92,31 @@ public class CustomerController {
 	}
 
 	//고객 등록 처리 Handler
-
+	@RequestMapping("/calender")
+	public String calender(ModelMap model) throws DuplicatedIdException, SQLException {
+		ArrayList<Integer> row1 = new ArrayList<Integer>();
+		ArrayList<Integer> row2 = new ArrayList<Integer>();
+		ArrayList<Integer> row3 = new ArrayList<Integer>();
+		ArrayList<Integer> row4 = new ArrayList<Integer>();
+		ArrayList<Integer> row5 = new ArrayList<Integer>();
+		ArrayList<Integer> row6 = new ArrayList<Integer>();
+		for(int i = 0; i<7; i++){
+			row1.add(i);
+			row2.add(i);
+			row3.add(i);
+			row4.add(i);
+			row5.add(i);
+			row6.add(i);
+		}
+		model.addAttribute("row1", row1);
+		model.addAttribute("row2", row2);
+		model.addAttribute("row3", row3);
+		model.addAttribute("row4", row4);
+		model.addAttribute("row5", row5);
+		model.addAttribute("row6", row6);
+		return "customer/calender.tiles";
+	}
+	
 	@RequestMapping("/add")
 	public String add(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model) throws DuplicatedIdException, SQLException {
