@@ -117,8 +117,8 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return customerList에서 조회된 고객들을 담아 리턴할 ArrayList
 	 */
 	@Override
-	public List<Customer> findCustomerByName(String customerName) {
-		return dao.selectCustomersByName(customerName);
+	public List<Customer> findCustomerByName(String csName) {
+		return dao.selectCustomersByName(csName);
 	}
 
 	@Override

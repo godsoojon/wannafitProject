@@ -81,9 +81,9 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public List<Customer> selectCustomersByName(String customerName) {
+	public List<Customer> selectCustomersByName(String csName) {
 		return session.selectList("customerMapper.selectCustomersByName",
-				customerName);
+				csName);
 	}
 
 	@Override

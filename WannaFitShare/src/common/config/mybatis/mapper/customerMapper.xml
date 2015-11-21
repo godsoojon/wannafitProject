@@ -93,9 +93,8 @@
 		parameterType="string"
 		resultMap="customer-resultmap">
 		select cs_id,cs_password,cs_name,cs_email,cs_phone
-		from
-		customer
-		where cs_name=#{csName}
+		from customer
+		where cs_name like '%'||#{csName}||'%'
 	</select>
 	
 	<!-- paging -->

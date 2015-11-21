@@ -4,7 +4,7 @@
 &nbsp;&nbsp;
 <a href="${initParam.rootPath}/friendController/logincheck/search_name.do">친구 찾기</a>
 &nbsp;&nbsp;
-<a href="">사진올리기</a>
+<a href="">앨범만들기</a>
 &nbsp;&nbsp;
 <a href="">칼로리 캘린더</a>
 &nbsp;&nbsp;
