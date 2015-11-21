@@ -12,6 +12,7 @@ drop table party;
 drop sequence person_no_seq;
 --------------------------------------------------------
 
+
 /* 고객 */
 CREATE TABLE customer (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
@@ -78,7 +79,7 @@ ALTER TABLE calorie
 /* 사진 */
 CREATE TABLE photo (
 	photo_id VARCHAR2(20) NOT NULL, /* 사진ID */
-	party_id NUMBER NOT NULL, /* 그룹id */
+	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
 	photo_name VARCHAR2(20), /* 사진이름 */
 	photo_path VARCHAR2(30) NOT NULL, /* 경로 */
 	photo_time DATE, /* 시간 */
@@ -90,7 +91,7 @@ ALTER TABLE photo
 		CONSTRAINT PK_photo
 		PRIMARY KEY (
 			photo_id,
-			party_id
+			party_name
 		);
 
 /* 댓글 */
@@ -98,9 +99,9 @@ CREATE TABLE reple (
 	reple_id VARCHAR2(20) NOT NULL, /* 댓글id */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	photo_id VARCHAR2(20), /* 사진ID */
-	party_id NUMBER, /* 그룹id */
 	replet_content VARCHAR2(50), /* 댓글내용 */
-	reple_time DATE /* 시간 */
+	reple_time DATE, /* 시간 */
+	party_name VARCHAR2(30) /* 그룹이름 */
 );
 
 ALTER TABLE reple
@@ -112,9 +113,8 @@ ALTER TABLE reple
 
 /* 그룹 */
 CREATE TABLE party (
-	party_id NUMBER NOT NULL, /* 그룹id */
-	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
+	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_date DATE NOT NULL, /* 생성날짜 */
 	party_member NUMBER /* 가입회원수 */
 );
@@ -123,13 +123,13 @@ ALTER TABLE party
 	ADD
 		CONSTRAINT PK_party
 		PRIMARY KEY (
-			party_id
+			party_name
 		);
 
 /* 그룹고객목록 */
 CREATE TABLE partylist (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	party_id NUMBER NOT NULL /* 그룹id */
+	party_name VARCHAR2(30) NOT NULL /* 그룹이름 */
 );
 
 ALTER TABLE partylist
@@ -137,7 +137,7 @@ ALTER TABLE partylist
 		CONSTRAINT PK_partylist
 		PRIMARY KEY (
 			cs_id,
-			party_id
+			party_name
 		);
 
 /* 전체 고객 */
@@ -190,10 +190,10 @@ ALTER TABLE photo
 	ADD
 		CONSTRAINT FK_party_TO_photo
 		FOREIGN KEY (
-			party_id
+			party_name
 		)
 		REFERENCES party (
-			party_id
+			party_name
 		);
 
 ALTER TABLE reple
@@ -211,11 +211,11 @@ ALTER TABLE reple
 		CONSTRAINT FK_photo_TO_reple
 		FOREIGN KEY (
 			photo_id,
-			party_id
+			party_name
 		)
 		REFERENCES photo (
 			photo_id,
-			party_id
+			party_name
 		);
 
 ALTER TABLE partylist
@@ -232,12 +232,11 @@ ALTER TABLE partylist
 	ADD
 		CONSTRAINT FK_party_TO_partylist
 		FOREIGN KEY (
-			party_id
+			party_name
 		)
 		REFERENCES party (
-			party_id
+			party_name
 		);
-
 		
 
 ---------------------------------------------------

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="partyMapper">
+
+<!-- resultMap 설정 -->
+	<resultMap
+		type="party"
+		id="party-resultmap">
+		<id
+			property="partyName"
+			column="party_name" />
+		<result
+			property="partyRight"
+			column="party_right" />
+		<result
+			property="partyDate"
+			column="party_date" />
+		<result
+			property="partyMember"
+			column="party_member" />
+	</resultMap>
+	
+	<!-- sql -->
+	<sql id="select-column-sql">
+		party_name, party_right, party_date, party_member
+	</sql>
+
+	<sql id="select-sql">
+		select
+		<include refid="select-column-sql" />
+		from party
+	</sql>
+	
+	<!-- insert party -->
+	<insert
+		id="insertParty"
+		parameterType="party">
+		insert into party (
+		<include refid="select-column-sql" />
+		)
+		values (#{partyName}, #{partyRight}, #{partyDate},#{partyMember})
+	</insert>
+
+
+
+</mapper>
