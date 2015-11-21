@@ -5,7 +5,7 @@
 
 <h2>로그인</h2>
 <spring:hasBindErrors name="customer"/>
-<form action="${initParam.rootPath}/customer/login.do" method="post" id="regForm">
+<form action="${initParam.rootPath}/loginController/login.do" method="post" id="regForm">
 <!-- 요청 처리할 Controller에 대한 구분값 -->
 <table border="1" style="width:500px">
 	<tr>

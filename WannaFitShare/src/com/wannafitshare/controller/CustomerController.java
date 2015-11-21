@@ -41,46 +41,6 @@ public class CustomerController {
 	@Autowired
 	private CustomerService service;
 
-	@RequestMapping("/login")
-	public String login(@RequestParam String csId,
-			@RequestParam String csPassword, HttpSession session) {
-		String returnURL = "";
-
-		Customer customer = service.loginCustomer(csId, csPassword);
-//		System.out.println(customer);
-
-		if (customer == null) {
-			returnURL = "/index.do";
-		} else if (customer.getCsId().equals(csId)
-				&& customer.getCsPassword().equals(csPassword)) {//아이디,비번 비교
-//			System.out.println(customer);
-			session.setAttribute("loginInfo", customer);
-//			returnURL = "redirect:/customer/customer_main.do";
-			returnURL = "customer/customer_main.tiles";
-		} else {
-			returnURL = "/index.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
-		}
-		return returnURL;
-	}
-
-	@RequestMapping("/logincheck/logout")
-	public String logout(HttpSession session) {
-		session.setAttribute("loginInfo", null);
-		return "/index.do";
-
-	}
-
-	@RequestMapping("/logincheck/home.do")
-	public String indexDo() {
-		return "customer/customer_main.tiles";
-	}
-//
-//	//고객 메인 컨트롤러 
-//	@RequestMapping("/logincheck/customer_main")
-//	public String customer_main() {
-//		return "customer/customer_main.tiles";
-//	}
-
 	//고객 ID로 고객 조회 처리 Handler
 	@RequestMapping("/findById")
 	public String findById(@RequestParam String csId, ModelMap model) {
@@ -127,19 +87,18 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/addFriendList")
-	public String addFriendList(@RequestParam String friendId,
-			 Error errors, ModelMap model ,HttpSession session)
+	public String addFriendList(@RequestParam String friendId, Error errors,
+			ModelMap model, HttpSession session)
 					throws DuplicatedIdException, SQLException {
-		
-		
-		Customer customer= (Customer) session.getAttribute("loginInfo");
-		String id =customer.getCsId();
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
 		FriendList friendList = new FriendList(id, friendId);
 		service.addFriendList(friendList);
 		System.out.println("=========================");
-		
+
 		List<String> list = service.findFriendListById(id);
-		
+
 		System.out.println("=========================");
 		model.addAttribute("friendList", list);
 		return "customer/friend_list.tiles";
