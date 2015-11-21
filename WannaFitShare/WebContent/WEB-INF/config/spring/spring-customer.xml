@@ -32,9 +32,6 @@
 	<mvc:view-controller
 		path="/customer/register_form.do"
 		view-name="customer/register_form.tiles" />
-	<mvc:view-controller
-		path="/customer/search_name.do"
-		view-name="customer/search_name.tiles" />
 		<mvc:view-controller
 		path="/customer/friend_list.do"
 		view-name="customer/friend_list.tiles" />

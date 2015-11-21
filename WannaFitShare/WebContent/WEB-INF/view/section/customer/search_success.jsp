@@ -12,13 +12,13 @@
 				<th>고객 ID</th>
 				<th>고객 이름</th>
 				<th>이메일주소</th>
-				<th>고객 번호</th>
+				<th>전화번호</th>
 			</tr>
 			<c:forEach items="${requestScope.namelist }" var="customer">
 			<tr>
 				<td>${customer.csId }</td>
 				<td>
-<a href="${initParam.rootPath}/customer/findById.do?csId=${customer.csId }">
+<a href="${initParam.rootPath}/friendController/findById.do?csId=${customer.csId }">
 						${customer.csName}
 					</a>
 				</td>

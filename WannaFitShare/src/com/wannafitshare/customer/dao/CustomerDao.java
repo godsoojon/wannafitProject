@@ -7,8 +7,6 @@ import com.wannafitshare.vo.FriendList;
 
 public interface CustomerDao {
 
-	Customer loginCustomer(String csId, String csPassword);
-
 	int insertCustomer(Customer customer);
 
 	int deleteCustomerById(String csId);

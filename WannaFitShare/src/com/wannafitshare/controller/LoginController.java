@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wannafitshare.customer.service.CustomerService;
+import com.wannafitshare.customer.service.LoginService;
 import com.wannafitshare.vo.Customer;
 
 @Controller
@@ -17,12 +18,15 @@ public class LoginController {
 	@Autowired
 	private CustomerService service;
 
+	@Autowired
+	private LoginService loginService;
+
 	@RequestMapping("/login")
 	public String login(@RequestParam String csId,
 			@RequestParam String csPassword, HttpSession session) {
 		String returnURL = "";
 
-		Customer customer = service.loginCustomer(csId, csPassword);
+		Customer customer = loginService.loginCustomer(csId, csPassword);
 //		System.out.println(customer);
 
 		if (customer == null) {
@@ -45,8 +49,9 @@ public class LoginController {
 		return "/index.do";
 
 	}
+
 	@RequestMapping("/logincheck/home.do")
-	public String indexDo() {
+	public String goHome() {
 		return "customer/customer_main.tiles";
 	}
 }

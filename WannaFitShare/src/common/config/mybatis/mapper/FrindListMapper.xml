@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="friendListMapper">
+
+
+<!-- friendList resultMap설정 -->
+	<resultMap
+		type="friendList"
+		id="friend-resultmap">
+		<id
+			property="flKey"
+			column="fl_key" />
+		<result
+			property="csId"
+			column="cs_id" />
+		<result
+			property="friendId"
+			column="friend_id" />
+
+	</resultMap>
+	<resultMap
+		type="friendList"
+		id="friendList-constructor-resultmap">
+		<constructor>
+			<idArg
+				column="fl_key"
+				javaType="int" />
+			<arg
+				column="cs_id"
+				javaType="string" />
+			<arg
+				column="friend_id"
+				javaType="string" />
+		</constructor>
+	</resultMap>
+	
+	<!-- insertFriend -->
+
+	<insert
+		id="insertFriendList"
+		parameterType="friendList">
+		<selectKey
+			keyProperty="flKey"
+			resultType="_int"
+			order="BEFORE">
+			select friendList_fl_key_seq.nextval from dual
+		</selectKey>
+		insert into FriendList(fl_key,cs_id,friend_id)
+		values(#{flKey},
+		#{csId}, #{friendId})
+
+	</insert>
+	
+<!-- select FriendList 고객아이디로 그사람의 친구 리스트를 select해옴-->
+	<select
+		id="selectFriendList"
+		parameterType="string"
+		resultMap="friend-resultmap">
+		select friend_id
+		from friendList
+		where
+		cs_id=#{csId}
+	</select>
+</mapper>

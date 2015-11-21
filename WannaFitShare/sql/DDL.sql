@@ -10,11 +10,10 @@ drop table customer;
 drop table party;
 
 drop sequence person_no_seq;
-
-
+--------------------------------------------------------
 
 /* 고객 */
-CREATE TABLE MY_SCHEMA.customer (
+CREATE TABLE customer (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	cs_password VARCHAR2(20) NOT NULL, /* 패스워드 */
 	cs_name VARCHAR2(30) NOT NULL, /* 고객이름 */
@@ -22,7 +21,7 @@ CREATE TABLE MY_SCHEMA.customer (
 	cs_phone VARCHAR2(20) NOT NULL /* 폰번호 */
 );
 
-ALTER TABLE MY_SCHEMA.customer
+ALTER TABLE customer
 	ADD
 		CONSTRAINT PK_customer
 		PRIMARY KEY (
@@ -30,7 +29,7 @@ ALTER TABLE MY_SCHEMA.customer
 		);
 
 /* 건강 */
-CREATE TABLE MY_SCHEMA.health (
+CREATE TABLE health (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	h_weight NUMBER, /* 몸무게 */
 	h_tall NUMBER, /* 키 */
@@ -42,7 +41,7 @@ CREATE TABLE MY_SCHEMA.health (
 	h_hdh NUMBER /* HDH */
 );
 
-ALTER TABLE MY_SCHEMA.health
+ALTER TABLE health
 	ADD
 		CONSTRAINT PK_health
 		PRIMARY KEY (
@@ -50,13 +49,13 @@ ALTER TABLE MY_SCHEMA.health
 		);
 
 /* 친구목록 */
-CREATE TABLE MY_SCHEMA.friendlist (
+CREATE TABLE friendlist (
 	fl_key NUMBER NOT NULL, /* 친구목록식별키 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	friend_id VARCHAR2(10) /* 친구ID */
 );
 
-ALTER TABLE MY_SCHEMA.friendlist
+ALTER TABLE friendlist
 	ADD
 		CONSTRAINT PK_friendlist
 		PRIMARY KEY (
@@ -64,12 +63,12 @@ ALTER TABLE MY_SCHEMA.friendlist
 		);
 
 /* 칼로리 */
-CREATE TABLE MY_SCHEMA.calorie (
+CREATE TABLE calorie (
 	calorie_food VARCHAR2(50) NOT NULL, /* 음식이름 */
 	calorie_calorie NUMBER /* 칼로리 */
 );
 
-ALTER TABLE MY_SCHEMA.calorie
+ALTER TABLE calorie
 	ADD
 		CONSTRAINT PK_calorie
 		PRIMARY KEY (
@@ -77,7 +76,7 @@ ALTER TABLE MY_SCHEMA.calorie
 		);
 
 /* 사진 */
-CREATE TABLE MY_SCHEMA.photo (
+CREATE TABLE photo (
 	photo_id VARCHAR2(20) NOT NULL, /* 사진ID */
 	party_id NUMBER NOT NULL, /* 그룹id */
 	photo_name VARCHAR2(20), /* 사진이름 */
@@ -86,7 +85,7 @@ CREATE TABLE MY_SCHEMA.photo (
 	photo_comment VARCHAR2(100) /* 사진설명 */
 );
 
-ALTER TABLE MY_SCHEMA.photo
+ALTER TABLE photo
 	ADD
 		CONSTRAINT PK_photo
 		PRIMARY KEY (
@@ -95,7 +94,7 @@ ALTER TABLE MY_SCHEMA.photo
 		);
 
 /* 댓글 */
-CREATE TABLE MY_SCHEMA.reple (
+CREATE TABLE reple (
 	reple_id VARCHAR2(20) NOT NULL, /* 댓글id */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	photo_id VARCHAR2(20), /* 사진ID */
@@ -104,7 +103,7 @@ CREATE TABLE MY_SCHEMA.reple (
 	reple_time DATE /* 시간 */
 );
 
-ALTER TABLE MY_SCHEMA.reple
+ALTER TABLE reple
 	ADD
 		CONSTRAINT PK_reple
 		PRIMARY KEY (
@@ -112,7 +111,7 @@ ALTER TABLE MY_SCHEMA.reple
 		);
 
 /* 그룹 */
-CREATE TABLE MY_SCHEMA.party (
+CREATE TABLE party (
 	party_id NUMBER NOT NULL, /* 그룹id */
 	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
@@ -120,7 +119,7 @@ CREATE TABLE MY_SCHEMA.party (
 	party_member NUMBER /* 가입회원수 */
 );
 
-ALTER TABLE MY_SCHEMA.party
+ALTER TABLE party
 	ADD
 		CONSTRAINT PK_party
 		PRIMARY KEY (
@@ -128,12 +127,12 @@ ALTER TABLE MY_SCHEMA.party
 		);
 
 /* 그룹고객목록 */
-CREATE TABLE MY_SCHEMA.partylist (
+CREATE TABLE partylist (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	party_id NUMBER NOT NULL /* 그룹id */
 );
 
-ALTER TABLE MY_SCHEMA.partylist
+ALTER TABLE partylist
 	ADD
 		CONSTRAINT PK_partylist
 		PRIMARY KEY (
@@ -142,12 +141,12 @@ ALTER TABLE MY_SCHEMA.partylist
 		);
 
 /* 전체 고객 */
-CREATE TABLE MY_SCHEMA.totalcustomer (
+CREATE TABLE totalcustomer (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	cs_name VARCHAR2(30) /* 고객이름 */
 );
 
-ALTER TABLE MY_SCHEMA.totalcustomer
+ALTER TABLE totalcustomer
 	ADD
 		CONSTRAINT PK_totalcustomer
 		PRIMARY KEY (
@@ -155,89 +154,93 @@ ALTER TABLE MY_SCHEMA.totalcustomer
 		);
 
 /* 전체그룹 */
-CREATE TABLE MY_SCHEMA.totalparty (
+CREATE TABLE totalparty (
 	party_id NUMBER NOT NULL, /* 그룹id */
 	party_name VARCHAR2(30) /* 그룹이름 */
 );
 
-ALTER TABLE MY_SCHEMA.totalparty
+ALTER TABLE totalparty
 	ADD
 		CONSTRAINT PK_totalparty
 		PRIMARY KEY (
 			party_id
 		);
 
-ALTER TABLE MY_SCHEMA.health
+ALTER TABLE health
 	ADD
 		CONSTRAINT FK_customer_TO_health
 		FOREIGN KEY (
 			cs_id
 		)
-		REFERENCES MY_SCHEMA.customer (
+		REFERENCES customer (
 			cs_id
 		);
 
-ALTER TABLE MY_SCHEMA.friendlist
+ALTER TABLE friendlist
 	ADD
 		CONSTRAINT FK_customer_TO_friendlist
 		FOREIGN KEY (
 			cs_id
 		)
-		REFERENCES MY_SCHEMA.customer (
+		REFERENCES customer (
 			cs_id
 		);
 
-ALTER TABLE MY_SCHEMA.photo
+ALTER TABLE photo
 	ADD
 		CONSTRAINT FK_party_TO_photo
 		FOREIGN KEY (
 			party_id
 		)
-		REFERENCES MY_SCHEMA.party (
+		REFERENCES party (
 			party_id
 		);
 
-ALTER TABLE MY_SCHEMA.reple
+ALTER TABLE reple
 	ADD
 		CONSTRAINT FK_customer_TO_reple
 		FOREIGN KEY (
 			cs_id
 		)
-		REFERENCES MY_SCHEMA.customer (
+		REFERENCES customer (
 			cs_id
 		);
 
-ALTER TABLE MY_SCHEMA.reple
+ALTER TABLE reple
 	ADD
 		CONSTRAINT FK_photo_TO_reple
 		FOREIGN KEY (
 			photo_id,
 			party_id
 		)
-		REFERENCES MY_SCHEMA.photo (
+		REFERENCES photo (
 			photo_id,
 			party_id
 		);
 
-ALTER TABLE MY_SCHEMA.partylist
+ALTER TABLE partylist
 	ADD
 		CONSTRAINT FK_customer_TO_partylist
 		FOREIGN KEY (
 			cs_id
 		)
-		REFERENCES MY_SCHEMA.customer (
+		REFERENCES customer (
 			cs_id
 		);
 
-ALTER TABLE MY_SCHEMA.partylist
+ALTER TABLE partylist
 	ADD
 		CONSTRAINT FK_party_TO_partylist
 		FOREIGN KEY (
 			party_id
 		)
-		REFERENCES MY_SCHEMA.party (
+		REFERENCES party (
 			party_id
 		);
+
 		
-		
+
+---------------------------------------------------
+----------------------------------------------------	
+----------------------------------------------------	
 		create sequence friendlist_fl_key_seq;

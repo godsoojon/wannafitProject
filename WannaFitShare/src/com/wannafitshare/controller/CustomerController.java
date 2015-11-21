@@ -41,13 +41,13 @@ public class CustomerController {
 	@Autowired
 	private CustomerService service;
 
-	//고객 ID로 고객 조회 처리 Handler
-	@RequestMapping("/findById")
-	public String findById(@RequestParam String csId, ModelMap model) {
-		Customer customer = service.findCustomerById(csId);
-		model.addAttribute("customer", customer);
-		return "customer/customer_info.tiles";
-	}
+//	//고객 ID로 고객 조회 처리 Handler
+//	@RequestMapping("/findById")
+//	public String findById(@RequestParam String csId, ModelMap model) {
+//		Customer customer = service.findCustomerById(csId);
+//		model.addAttribute("customer", customer);
+//		return "customer/customer_info.tiles";
+//	}
 
 	@RequestMapping("/logincheck/findByName")
 	public String findByName(@RequestParam String csName, ModelMap model) {
@@ -86,23 +86,6 @@ public class CustomerController {
 		return "redirect:/customer/registerSuccess.do";
 	}
 
-	@RequestMapping("/addFriendList")
-	public String addFriendList(@RequestParam String friendId, Error errors,
-			ModelMap model, HttpSession session)
-					throws DuplicatedIdException, SQLException {
-
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId();
-		FriendList friendList = new FriendList(id, friendId);
-		service.addFriendList(friendList);
-		System.out.println("=========================");
-
-		List<String> list = service.findFriendListById(id);
-
-		System.out.println("=========================");
-		model.addAttribute("friendList", list);
-		return "customer/friend_list.tiles";
-	}
 
 	//등록 후 성공페이지로 이동 처리.
 	@RequestMapping("/registerSuccess")

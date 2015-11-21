@@ -44,11 +44,6 @@ public class CustomerServiceImpl implements CustomerService {
 		this.dao = dao;
 	}
 
-	@Override
-	public Customer loginCustomer(String csId, String csPassword) {
-		return dao.loginCustomer(csId, csPassword);
-	}
-
 	/**
 	 * 고객을 등록하는 메소드.
 	 *  - 고객 id (id)는 중복될 수 없다.  

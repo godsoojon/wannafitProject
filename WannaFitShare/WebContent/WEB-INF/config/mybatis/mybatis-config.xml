@@ -15,5 +15,7 @@
 	<!-- Mapper 설정 -->
 	<mappers>
 		<mapper resource="common/config/mybatis/mapper/customerMapper.xml" />
+		<mapper resource="common/config/mybatis/mapper/FrindListMapper.xml"/>
+		<mapper resource="common/config/mybatis/mapper/loginMapper.xml"/>
 	</mappers>
 </configuration>

@@ -26,14 +26,6 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	private SqlSessionTemplate session; //no-arg생성자로 객체생성후 instance변수 
 
-	@Override
-	public Customer loginCustomer(String csId, String csPassword) {
-		HashMap<String, String> map = new HashMap<>();
-		map.put("csId", csId);
-		map.put("csPassword", csPassword);
-		return session.selectOne("customerMapper.loginCustomer", map);
-	}
-
 	@Autowired
 	public CustomerDaoImpl(SqlSessionTemplate session) {
 		this.session = session;
@@ -49,12 +41,12 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int insertFriendList(FriendList friendList) {
-		return session.insert("customerMapper.insertFriendList", friendList);
+		return session.insert("friendListMapper.insertFriendList", friendList);
 	}
 
 	@Override
 	public List<String> selectfriendList(String csId) {
-		return session.selectList("customerMapper.selectFriendList", csId);
+		return session.selectList("friendListMapper.selectFriendList", csId);
 	}
 
 	@Override

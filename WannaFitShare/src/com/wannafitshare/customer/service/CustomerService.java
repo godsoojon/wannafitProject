@@ -20,8 +20,6 @@ public interface CustomerService {
 	 * @throws SQLException 
 	 */
 
-	Customer loginCustomer(String csId, String csPassword);
-
 	void addCustomer(Customer customer)
 			throws DuplicatedIdException, SQLException;
 
