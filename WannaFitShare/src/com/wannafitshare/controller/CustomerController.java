@@ -89,7 +89,7 @@ public class CustomerController {
 		return "customer/customer_info.tiles";
 	}
 
-	@RequestMapping("/logincheck//findByName")
+	@RequestMapping("/logincheck/findByName")
 	public String findByName(@RequestParam String csName, ModelMap model) {
 		List<Customer> list = service.findCustomerByName(csName);
 		model.addAttribute("namelist", list);
