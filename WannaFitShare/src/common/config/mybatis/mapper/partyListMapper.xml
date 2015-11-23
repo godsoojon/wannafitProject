@@ -37,6 +37,7 @@
 		from partylist
 	</sql>
 
+	<!-- 파티리스트테이블에 삽입 -->
 	<insert
 		id="insertPartyList"
 		parameterType="map">
@@ -46,6 +47,7 @@
 		values (#{csId}, #{partyName})
 	</insert>
 
+	<!-- 속해있는 파티이름 리스트 -->
 	<select
 		id="belongParty"
 		parameterType="string"
@@ -55,6 +57,9 @@
 		where cs_id=#{csId}
 		order by party_name
 	</select>
+	
+	<!-- 파티 회원 수 조회 -->
+	<select id=""></select>
 	
 
 </mapper>

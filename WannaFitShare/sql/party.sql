@@ -20,4 +20,12 @@ from partylist
 where cs_id = '123';
 
 
-select party_name   from partylist   where cs_id = '123';
+select party_name
+from party;
+
+select *
+from party
+where party_name='uuu';
+
+select party_member
+

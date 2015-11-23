@@ -18,11 +18,15 @@
 		<result
 			property="partyMember"
 			column="party_member" />
+		<result
+			property="partyManager"
+			column="party_manager" />
 	</resultMap>
 	
 	<!-- sql -->
 	<sql id="select-column-sql">
-		party_name, party_right, party_date, party_member
+		party_name, party_right, party_date, party_member,
+		party_manager
 	</sql>
 
 	<sql id="select-sql">
@@ -38,10 +42,25 @@
 		insert into party (
 		<include refid="select-column-sql" />
 		)
-		values (#{partyName}, #{partyRight}, #{partyDate},#{partyMember})
+		values (#{partyName}, #{partyRight},
+		#{partyDate},#{partyMember},#{partyManager})
 	</insert>
 	
-	<!-- insert partylist -->
+	<!-- select all party list -->
+	<select
+		id="selectAllParty"
+		resultType="string">
+		select party_name
+		from party
+	</select>
+
+	<select
+		id="selectPartyByName"
+		parameterType="string"
+		resultMap="party-resultmap">
+		<include refid="select-sql" />
+		where party_name=#{partyName}
+	</select>
 
 
 
