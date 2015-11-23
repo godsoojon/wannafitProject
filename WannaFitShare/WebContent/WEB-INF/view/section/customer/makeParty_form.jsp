@@ -4,7 +4,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/formcheck.js"></script>
 
 <div id="layer"></div>
-<h2>고객등록</h2>
+<h2>앨범만들기</h2>
 <spring:hasBindErrors name="group"/>
 <form action="${initParam.rootPath}/partyController/logincheck/addParty.do" method="post" id="regForm">
 <table border="1" style="width:500px">

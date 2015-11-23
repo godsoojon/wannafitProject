@@ -40,6 +40,8 @@
 		)
 		values (#{partyName}, #{partyRight}, #{partyDate},#{partyMember})
 	</insert>
+	
+	<!-- insert partylist -->
 
 
 

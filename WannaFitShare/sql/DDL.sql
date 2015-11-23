@@ -8,6 +8,7 @@ drop table photo;
 drop table friendlist;
 drop table customer;
 drop table party;
+drop table caloriecalendar;
 
 drop sequence person_no_seq;
 --------------------------------------------------------
@@ -116,7 +117,8 @@ CREATE TABLE party (
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
 	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_date DATE NOT NULL, /* 생성날짜 */
-	party_member NUMBER /* 가입회원수 */
+	party_member NUMBER, /* 가입회원수 */
+	party_manager VARCHAR2(10) /* 관리자ID */
 );
 
 ALTER TABLE party
@@ -140,30 +142,19 @@ ALTER TABLE partylist
 			party_name
 		);
 
-/* 전체 고객 */
-CREATE TABLE totalcustomer (
+/* 칼로리캘린더 */
+CREATE TABLE caloriecalendar (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	cs_name VARCHAR2(30) /* 고객이름 */
+	calorie_date DATE NOT NULL, /* 날짜 */
+	total_calorie NUMBER /* 총칼로리 */
 );
 
-ALTER TABLE totalcustomer
+ALTER TABLE caloriecalendar
 	ADD
-		CONSTRAINT PK_totalcustomer
+		CONSTRAINT PK_caloriecalendar
 		PRIMARY KEY (
-			cs_id
-		);
-
-/* 전체그룹 */
-CREATE TABLE totalparty (
-	party_id NUMBER NOT NULL, /* 그룹id */
-	party_name VARCHAR2(30) /* 그룹이름 */
-);
-
-ALTER TABLE totalparty
-	ADD
-		CONSTRAINT PK_totalparty
-		PRIMARY KEY (
-			party_id
+			cs_id,
+			calorie_date
 		);
 
 ALTER TABLE health
@@ -237,7 +228,17 @@ ALTER TABLE partylist
 		REFERENCES party (
 			party_name
 		);
-		
+
+ALTER TABLE caloriecalendar
+	ADD
+		CONSTRAINT FK_customer_TO_caloriecalendar
+		FOREIGN KEY (
+			cs_id
+		)
+		REFERENCES customer (
+			cs_id
+		);
+
 
 ---------------------------------------------------
 ----------------------------------------------------	

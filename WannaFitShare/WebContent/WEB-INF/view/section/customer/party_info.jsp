@@ -6,6 +6,10 @@
 		<td>${requestScope.party.partyName }</td>
 	</tr>
 	<tr>
+		<th>앨범 관리자</th>
+		<td>${requestScope.party.partyManager}</td>
+	</tr>
+	<tr>
 		<th>앨범 권한</th>
 		<td>${requestScope.party.partyRight }</td>
 	</tr>

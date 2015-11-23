@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="partyListMapper">
+	
+	<!-- resultMap 설정 -->
+	<resultMap
+		type="partyList"
+		id="partyList-resultmap">
+		<id
+			property="csId"
+			column="cs_id" />
+		<result
+			property="partyName"
+			column="party_name" />
+	</resultMap>
+	<resultMap
+		type="partyList"
+		id="partyList-constructor-resultmap">
+		<constructor>
+			<idArg
+				column="cs_id"
+				javaType="string" />
+			<arg
+				column="party_name"
+				javaType="string" />
+		</constructor>
+	</resultMap>
+	
+	<!-- sql 설정 -->
+	<sql id="select-column-sql">
+		cs_id, party_name
+	</sql>
+
+	<sql id="select-sql">
+		select
+		<include refid="select-column-sql" />
+		from partylist
+	</sql>
+
+	<insert
+		id="insertPartyList"
+		parameterType="map">
+		insert into partylist (
+		<include refid="select-column-sql" />
+		)
+		values (#{csId}, #{partyName})
+	</insert>
+
+	<select
+		id="belongParty"
+		parameterType="string"
+		resultType="string">
+		select party_name
+		from partylist
+		where cs_id=#{csId}
+		order by party_name
+	</select>
+	
+
+</mapper>
