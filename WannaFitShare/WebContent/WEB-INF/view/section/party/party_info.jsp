@@ -6,8 +6,8 @@
 		<td>${requestScope.party.partyName }</td>
 	</tr>
 	<tr>
-		<th>앨범 관리자</th>
-		<td>${requestScope.party.partyManager}</td>
+		<th>앨범 만든사람</th>
+		<td>${requestScope.party.csId}</td>
 	</tr>
 	<tr>
 		<th>앨범 권한</th>
@@ -16,9 +16,5 @@
 	<tr>
 		<th>앨범 생성일</th>
 		<td>${requestScope.party.partyDate }</td>
-	</tr>
-	<tr>
-		<th>앨범 맴버수</th>
-		<td>${requestScope.party.partyMember}</td>
 	</tr>
 </table>

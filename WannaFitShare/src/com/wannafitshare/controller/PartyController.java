@@ -23,8 +23,8 @@ public class PartyController {
 	@Autowired
 	private PartyService partyService;
 
-	@Autowired
-	private PartyListService partyListservice;
+//	@Autowired
+//	private PartyListService partyListservice;
 
 	/*앨범 매뉴 클릭하면 party_index.jsp 로 이동*/
 	@RequestMapping("/logincheck/party_index.do")
@@ -45,22 +45,22 @@ public class PartyController {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
 		Date date = new Date();
-		Party party = new Party(partyName, partyRight, date, 1, id);
+		Party party = new Party(partyName, id, partyRight, date);
 		partyService.insertParty(party);
-		partyListservice.insertPartyList(id, partyName);
+//		partyListservice.insertPartyList(id, partyName);
 		model.addAttribute("party", party);
 		return "party/party_info.tiles";
 	}
 
-	/*내가 속한 앨범 목록 보기*/
-	@RequestMapping("/logincheck/belongParty.do")
-	public String belongToParty(HttpSession session, ModelMap model) {
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId();
-		List<String> list = partyListservice.belongParty(id);
-		model.addAttribute("list", list);
-		return "party/belong_party.tiles";
-	}
+//	/*내가 속한 앨범 목록 보기*/
+//	@RequestMapping("/logincheck/belongParty.do")
+//	public String belongToParty(HttpSession session, ModelMap model) {
+//		Customer customer = (Customer) session.getAttribute("loginInfo");
+//		String id = customer.getCsId();
+//		List<String> list = partyListservice.belongParty(id);
+//		model.addAttribute("list", list);
+//		return "party/belong_party.tiles";
+//	}
 
 	/*모든 앨범 보기*/
 	@RequestMapping("/logincheck/allParty.do")
@@ -82,13 +82,13 @@ public class PartyController {
 	}
 
 	/*파티 가입하기*/
-	@RequestMapping("/joinParty")
-	public String joinParty(@RequestParam String partyName,
-			HttpSession session) {
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId();
-		partyListservice.insertPartyList(id, partyName);
-		return "";
-
-	}
+//	@RequestMapping("/joinParty")
+//	public String joinParty(@RequestParam String partyName,
+//			HttpSession session) {
+//		Customer customer = (Customer) session.getAttribute("loginInfo");
+//		String id = customer.getCsId();
+//		partyListservice.insertPartyList(id, partyName);
+//		return "";
+//
+//	}
 }
