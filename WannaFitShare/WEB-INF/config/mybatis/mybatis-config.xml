@@ -11,11 +11,13 @@
 	<typeAliases>
 		<typeAlias type="com.wannafitshare.vo.Customer" alias="customer"/>
 		<typeAlias type="com.wannafitshare.vo.FriendList" alias="friendList"/>
+		<typeAlias type="com.wannafitshare.vo.Health" alias="health"/>
 	</typeAliases>
 	<!-- Mapper 설정 -->
 	<mappers>
 		<mapper resource="common/config/mybatis/mapper/customerMapper.xml" />
 		<mapper resource="common/config/mybatis/mapper/FrindListMapper.xml"/>
 		<mapper resource="common/config/mybatis/mapper/loginMapper.xml"/>
+		<mapper resource="common/config/mybatis/mapper/healthMapper.xml"/>
 	</mappers>
 </configuration>

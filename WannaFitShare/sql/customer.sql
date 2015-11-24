@@ -90,3 +90,18 @@ where page = 1;
 --					)
 --	)
 --	where page = 1
+insert into customer values('1113','1','1','1','1');
+
+insert into HEALTH values('id-001',2.2,3.2,'a',12.2,12.2,1.2,2.2,3.2); 
+
+
+			update health
+			set  h_weight=1,
+					h_tall=11, 
+					h_bloodtype='B',
+					h_bloodsugar=1,
+					h_bmi=1,
+					h_bloodpressure=1,
+					h_ldl=1,
+					h_hdh=1
+			where cs_id ='1111'	;	

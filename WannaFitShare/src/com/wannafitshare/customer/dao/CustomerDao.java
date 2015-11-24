@@ -23,8 +23,6 @@ public interface CustomerDao {
 
 	int selectCountCustomers();
 
-	int insertFriendList(FriendList friendList);
 
-	List<String> selectfriendList(String csId);
 
 }

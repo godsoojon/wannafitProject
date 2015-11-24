@@ -8,18 +8,19 @@ drop table photo;
 drop table friendlist;
 drop table customer;
 drop table party;
+drop table caloriecalendar;
 
 drop sequence person_no_seq;
-drop sequence reple_reple_id_seq;
 --------------------------------------------------------
 
-/* Í≥†Í∞ù */
+
+/* ∞Ì∞¥ */
 CREATE TABLE customer (
-	cs_id VARCHAR2(10) NOT NULL, /* Í≥†Í∞ù_id */
-	cs_password VARCHAR2(20) NOT NULL, /* Ìå®Ïä§ÏõåÎìú */
-	cs_name VARCHAR2(30) NOT NULL, /* Í≥†Í∞ùÏù¥Î¶Ñ */
-	cs_email VARCHAR2(50) NOT NULL, /* Ïù¥Î©îÏùº */
-	cs_phone VARCHAR2(20) NOT NULL /* Ìè∞Î≤àÌò∏ */
+	cs_id VARCHAR2(10) NOT NULL, /* ∞Ì∞¥_id */
+	cs_password VARCHAR2(20) NOT NULL, /* ∆–Ω∫øˆµÂ */
+	cs_name VARCHAR2(30) NOT NULL, /* ∞Ì∞¥¿Ã∏ß */
+	cs_email VARCHAR2(50) NOT NULL, /* ¿Ã∏ﬁ¿œ */
+	cs_phone VARCHAR2(20) NOT NULL /* ∆˘π¯»£ */
 );
 
 ALTER TABLE customer
@@ -29,15 +30,15 @@ ALTER TABLE customer
 			cs_id
 		);
 
-/* Í±¥Í∞ï */
+/* ∞«∞≠ */
 CREATE TABLE health (
-	cs_id VARCHAR2(10) NOT NULL, /* Í≥†Í∞ù_id */
-	h_weight NUMBER, /* Î™∏Î¨¥Í≤å */
-	h_tall NUMBER, /* ÌÇ§ */
-	h_bloodtype VARCHAR2(10), /* ÌòàÏï°Ìòï */
-	h_bloodsugar NUMBER, /* ÌòàÎãπ */
+	cs_id VARCHAR2(10) NOT NULL, /* ∞Ì∞¥_id */
+	h_weight NUMBER, /* ∏ˆπ´∞‘ */
+	h_tall NUMBER, /* ≈∞ */
+	h_bloodtype VARCHAR2(10), /* «˜æ◊«¸ */
+	h_bloodsugar NUMBER, /* «˜¥Á */
 	h_bmi NUMBER, /* BMI */
-	h_bloodpressure NUMBER, /* ÌòàÏïï */
+	h_bloodpressure NUMBER, /* «˜æ– */
 	h_ldl NUMBER, /* LDL */
 	h_hdh NUMBER /* HDH */
 );
@@ -49,11 +50,11 @@ ALTER TABLE health
 			cs_id
 		);
 
-/* ÏπúÍµ¨Î™©Î°ù */
+/* ƒ£±∏∏Ò∑œ */
 CREATE TABLE friendlist (
-	fl_key NUMBER NOT NULL, /* ÏπúÍµ¨Î™©Î°ùÏãùÎ≥ÑÌÇ§ */
-	cs_id VARCHAR2(10) NOT NULL, /* Í≥†Í∞ù_id */
-	friend_id VARCHAR2(10) /* ÏπúÍµ¨ID */
+	fl_key NUMBER NOT NULL, /* ƒ£±∏∏Ò∑œΩƒ∫∞≈∞ */
+	cs_id VARCHAR2(10) NOT NULL, /* ∞Ì∞¥_id */
+	friend_id VARCHAR2(10) /* ƒ£±∏ID */
 );
 
 ALTER TABLE friendlist
@@ -63,10 +64,10 @@ ALTER TABLE friendlist
 			fl_key
 		);
 
-/* ÏπºÎ°úÎ¶¨ */
+/* ƒÆ∑Œ∏Æ */
 CREATE TABLE calorie (
-	calorie_food VARCHAR2(50) NOT NULL, /* ÏùåÏãùÏù¥Î¶Ñ */
-	calorie_calorie NUMBER /* ÏπºÎ°úÎ¶¨ */
+	calorie_food VARCHAR2(50) NOT NULL, /* ¿ΩΩƒ¿Ã∏ß */
+	calorie_calorie NUMBER /* ƒÆ∑Œ∏Æ */
 );
 
 ALTER TABLE calorie
@@ -76,14 +77,14 @@ ALTER TABLE calorie
 			calorie_food
 		);
 
-/* ÏÇ¨ÏßÑ */
+/* ªÁ¡¯ */
 CREATE TABLE photo (
-	photo_id number(20) NOT NULL, /* ÏÇ¨ÏßÑID */
-	party_id NUMBER NOT NULL, /* Í∑∏Î£πid */
-	photo_name VARCHAR2(20), /* ÏÇ¨ÏßÑÏù¥Î¶Ñ */
-	photo_path VARCHAR2(30) NOT NULL, /* Í≤ΩÎ°ú */
-	photo_time DATE, /* ÏãúÍ∞Ñ */
-	photo_comment VARCHAR2(100) /* ÏÇ¨ÏßÑÏÑ§Î™Ö */
+	photo_id VARCHAR2(20) NOT NULL, /* ªÁ¡¯ID */
+	party_name VARCHAR2(30) NOT NULL, /* ±◊∑Ï¿Ã∏ß */
+	photo_name VARCHAR2(20), /* ªÁ¡¯¿Ã∏ß */
+	photo_path VARCHAR2(30) NOT NULL, /* ∞Ê∑Œ */
+	photo_time DATE, /* Ω√∞£ */
+	photo_comment VARCHAR2(100) /* ªÁ¡¯º≥∏Ì */
 );
 
 ALTER TABLE photo
@@ -91,17 +92,17 @@ ALTER TABLE photo
 		CONSTRAINT PK_photo
 		PRIMARY KEY (
 			photo_id,
-			party_id
+			party_name
 		);
 
-/* ÎåìÍ∏Ä */
+/* ¥Ò±€ */
 CREATE TABLE reple (
-	reple_id NUMBER(20) NOT NULL, /* ÎåìÍ∏Äid */
-	cs_id VARCHAR2(10) NOT NULL, /* Í≥†Í∞ù_id */
-	photo_id number(20), /* ÏÇ¨ÏßÑID */
-	party_id NUMBER, /* Í∑∏Î£πid */
-	reple_content VARCHAR2(50), /* ÎåìÍ∏ÄÎÇ¥Ïö© */
-	reple_time DATE /* ÏãúÍ∞Ñ */
+	reple_id VARCHAR2(20) NOT NULL, /* ¥Ò±€id */
+	cs_id VARCHAR2(10) NOT NULL, /* ∞Ì∞¥_id */
+	photo_id VARCHAR2(20), /* ªÁ¡¯ID */
+	replet_content VARCHAR2(50), /* ¥Ò±€≥ªøÎ */
+	reple_time DATE, /* Ω√∞£ */
+	party_name VARCHAR2(30) /* ±◊∑Ï¿Ã∏ß */
 );
 
 ALTER TABLE reple
@@ -111,26 +112,26 @@ ALTER TABLE reple
 			reple_id
 		);
 
-/* Í∑∏Î£π */
+/* ±◊∑Ï */
 CREATE TABLE party (
-	party_id NUMBER NOT NULL, /* Í∑∏Î£πid */
-	party_right NUMBER NOT NULL, /* Í∑∏Î£πÍ∂åÌïú */
-	party_name VARCHAR2(30) NOT NULL, /* Í∑∏Î£πÏù¥Î¶Ñ */
-	party_date DATE NOT NULL, /* ÏÉùÏÑ±ÎÇ†Ïßú */
-	party_member NUMBER /* Í∞ÄÏûÖÌöåÏõêÏàò */
+	party_name VARCHAR2(30) NOT NULL, /* ±◊∑Ï¿Ã∏ß */
+	party_right NUMBER NOT NULL, /* ±◊∑Ï±««— */
+	party_date DATE NOT NULL, /* ª˝º∫≥Ø¬• */
+	party_member NUMBER, /* ∞°¿‘»∏ø¯ºˆ */
+	party_manager VARCHAR2(10) /* ∞¸∏Æ¿⁄ID */
 );
 
 ALTER TABLE party
 	ADD
 		CONSTRAINT PK_party
 		PRIMARY KEY (
-			party_id
+			party_name
 		);
 
-/* Í∑∏Î£πÍ≥†Í∞ùÎ™©Î°ù */
+/* ±◊∑Ï∞Ì∞¥∏Ò∑œ */
 CREATE TABLE partylist (
-	cs_id VARCHAR2(10) NOT NULL, /* Í≥†Í∞ù_id */
-	party_id NUMBER NOT NULL /* Í∑∏Î£πid */
+	cs_id VARCHAR2(10) NOT NULL, /* ∞Ì∞¥_id */
+	party_name VARCHAR2(30) NOT NULL /* ±◊∑Ï¿Ã∏ß */
 );
 
 ALTER TABLE partylist
@@ -138,33 +139,22 @@ ALTER TABLE partylist
 		CONSTRAINT PK_partylist
 		PRIMARY KEY (
 			cs_id,
-			party_id
+			party_name
 		);
 
-/* Ï†ÑÏ≤¥ Í≥†Í∞ù */
-CREATE TABLE totalcustomer (
-	cs_id VARCHAR2(10) NOT NULL, /* Í≥†Í∞ù_id */
-	cs_name VARCHAR2(30) /* Í≥†Í∞ùÏù¥Î¶Ñ */
+/* ƒÆ∑Œ∏Æƒ∂∏∞¥ı */
+CREATE TABLE caloriecalendar (
+	cs_id VARCHAR2(10) NOT NULL, /* ∞Ì∞¥_id */
+	calorie_date DATE NOT NULL, /* ≥Ø¬• */
+	total_calorie NUMBER /* √—ƒÆ∑Œ∏Æ */
 );
 
-ALTER TABLE totalcustomer
+ALTER TABLE caloriecalendar
 	ADD
-		CONSTRAINT PK_totalcustomer
+		CONSTRAINT PK_caloriecalendar
 		PRIMARY KEY (
-			cs_id
-		);
-
-/* Ï†ÑÏ≤¥Í∑∏Î£π */
-CREATE TABLE totalparty (
-	party_id NUMBER NOT NULL, /* Í∑∏Î£πid */
-	party_name VARCHAR2(30) /* Í∑∏Î£πÏù¥Î¶Ñ */
-);
-
-ALTER TABLE totalparty
-	ADD
-		CONSTRAINT PK_totalparty
-		PRIMARY KEY (
-			party_id
+			cs_id,
+			calorie_date
 		);
 
 ALTER TABLE health
@@ -191,10 +181,10 @@ ALTER TABLE photo
 	ADD
 		CONSTRAINT FK_party_TO_photo
 		FOREIGN KEY (
-			party_id
+			party_name
 		)
 		REFERENCES party (
-			party_id
+			party_name
 		);
 
 ALTER TABLE reple
@@ -212,11 +202,11 @@ ALTER TABLE reple
 		CONSTRAINT FK_photo_TO_reple
 		FOREIGN KEY (
 			photo_id,
-			party_id
+			party_name
 		)
 		REFERENCES photo (
 			photo_id,
-			party_id
+			party_name
 		);
 
 ALTER TABLE partylist
@@ -233,18 +223,24 @@ ALTER TABLE partylist
 	ADD
 		CONSTRAINT FK_party_TO_partylist
 		FOREIGN KEY (
-			party_id
+			party_name
 		)
 		REFERENCES party (
-			party_id
+			party_name
 		);
-		
-		
 
-		
+ALTER TABLE caloriecalendar
+	ADD
+		CONSTRAINT FK_customer_TO_caloriecalendar
+		FOREIGN KEY (
+			cs_id
+		)
+		REFERENCES customer (
+			cs_id
+		);
+
 
 ---------------------------------------------------
 ----------------------------------------------------	
 ----------------------------------------------------	
 		create sequence friendlist_fl_key_seq;
-		create sequence reple_reple_id_seq;
