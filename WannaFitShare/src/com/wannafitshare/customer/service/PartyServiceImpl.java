@@ -36,10 +36,17 @@ public class PartyServiceImpl implements PartyService {
 
 	@Override
 	public Party selectPartyByName(String partyName) {
-		System.out.println("service : pn - "+partyName);
-		Party p = dao.selectPartyByName(partyName);
-		System.out.println(p);
-		return p;
+		return dao.selectPartyByName(partyName);
+	}
+
+	@Override
+	public List<String> belongParty(String csId) {
+		return dao.belongParty(csId);
+	}
+
+	@Override
+	public List<String> friendList(String csId) {
+		return dao.friendList(csId);
 	}
 
 }

@@ -29,3 +29,15 @@ where party_name='uuu';
 
 select party_member
 
+select party_name
+from party
+where cs_id='id-001';
+
+select friend_id
+from friendlist
+where cs_id='123';
+
+delete from customer where cs_id='id-002' ON  CASCADE;
+
+
+

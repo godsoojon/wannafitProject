@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,15 +53,15 @@ public class PartyController {
 		return "party/party_info.tiles";
 	}
 
-//	/*내가 속한 앨범 목록 보기*/
-//	@RequestMapping("/logincheck/belongParty.do")
-//	public String belongToParty(HttpSession session, ModelMap model) {
-//		Customer customer = (Customer) session.getAttribute("loginInfo");
-//		String id = customer.getCsId();
-//		List<String> list = partyListservice.belongParty(id);
-//		model.addAttribute("list", list);
-//		return "party/belong_party.tiles";
-//	}
+	/* 내가 만든 앨범 보기*/
+	@RequestMapping("/logincheck/belongParty.do")
+	public String belongToParty(HttpSession session, ModelMap model) {
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		List<String> list = partyService.belongParty(id);
+		model.addAttribute("list", list);
+		return "party/belong_party.tiles";
+	}
 
 	/*모든 앨범 보기*/
 	@RequestMapping("/logincheck/allParty.do")
@@ -73,22 +74,44 @@ public class PartyController {
 	/*가입하려는 파티 찾기*/
 	@RequestMapping("/findParty.do")
 	public String findParty(@RequestParam String partyName, ModelMap model) {
-		System.out.println(partyName);
-//		partyService.selectPartyByName(partyName);
+		partyService.selectPartyByName(partyName);
 		Party party = partyService.selectPartyByName(partyName);
-		System.out.println(party);
 		model.addAttribute("party", party);
 		return "party/party_info2.tiles";
 	}
 
-	/*파티 가입하기*/
-//	@RequestMapping("/joinParty")
-//	public String joinParty(@RequestParam String partyName,
-//			HttpSession session) {
+	/*앨범 보기*/
+	@RequestMapping("/joinParty")
+	public String joinParty(@ModelAttribute Party party, HttpSession session) {
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+
+		List<String> list = partyService.friendList(id);
+
+		for (int k = 0; k < list.size(); k++) {
+			System.out.println(list.get(k));
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).equals(party.getCsId())) {
+				return "party/test.tiles";
+			} else
+				return "/friendController/logincheck/search_name.do";
+		}
+
+		System.out.println(party);
+//		partyListservice.insertPartyList(id, partyName);
+		return "/friendController/logincheck/search_name.do";
+	}
+
+//	/*내가 속한 앨범 목록 보기*/
+//	@RequestMapping("/logincheck/belongParty.do")
+//	public String belongToParty(HttpSession session, ModelMap model) {
 //		Customer customer = (Customer) session.getAttribute("loginInfo");
 //		String id = customer.getCsId();
-//		partyListservice.insertPartyList(id, partyName);
-//		return "";
-//
+//		List<String> list = partyListservice.belongParty(id);
+//		model.addAttribute("list", list);
+//		return "party/belong_party.tiles";
 //	}
+
 }

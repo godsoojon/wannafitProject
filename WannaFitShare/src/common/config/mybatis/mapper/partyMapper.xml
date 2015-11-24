@@ -58,6 +58,31 @@
 		where party_name=#{partyName}
 	</select>
 
+	<!-- 속한 앨범 보기 -->
+	<select
+		id="belongParty"
+		parameterType="string"
+		resultType="string">
+		select party_name
+		from party
+		where cs_id=#{csId}
+		order by
+		party_name
+	</select>
+	
+	<!-- 친구 리스트 뽑기 -->
+	<select
+		id="friendList"
+		parameterType="string"
+		resultType="string">
+		select friend_id
+		from friendlist
+		where cs_id=#{csId}
+	</select>
+
+
+
+
 
 
 </mapper>
