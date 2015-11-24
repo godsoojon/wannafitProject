@@ -32,9 +32,9 @@
 	<mvc:view-controller
 		path="/customer/register_form.do"
 		view-name="customer/register_form.tiles" />
-	<mvc:view-controller
-		path="/customer/search_name.do"
-		view-name="customer/search_name.tiles" />
+		<mvc:view-controller
+		path="/customer/friend_list.do"
+		view-name="customer/friend_list.tiles" />
 	<!-- ViewResolver 등록 
 		  Cotroller가 넘긴 view이름 (view name)을 통해 알맞은 view를 찾는 전달하는 컴포넌트
 		   기본 ViewResolver : InternalResourceViewResolver 

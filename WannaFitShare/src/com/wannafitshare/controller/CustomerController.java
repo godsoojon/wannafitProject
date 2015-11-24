@@ -2,6 +2,8 @@ package com.wannafitshare.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.vo.Customer;
-import com.wannafitshare.vo.FriendList;
 
+import common.util.CalDayMonth;
 import common.validator.CustomerValidator;
 
 /**
@@ -37,39 +39,15 @@ public class CustomerController {
 	@Autowired
 	private CustomerService service;
 
-	@RequestMapping("/login")
-	public String login(@RequestParam String csId,
-			@RequestParam String csPassword, HttpSession session) {
-		String returnURL = "";
+//	//고객 ID로 고객 조회 처리 Handler
+//	@RequestMapping("/findById")
+//	public String findById(@RequestParam String csId, ModelMap model) {
+//		Customer customer = service.findCustomerById(csId);
+//		model.addAttribute("customer", customer);
+//		return "customer/customer_info.tiles";
+//	}
 
-		Customer customer = service.loginCustomer(csId, csPassword);
-
-		if (customer.getCsId().equals(csId)
-				&& customer.getCsPassword().equals(csPassword)) {//아이디,비번 비교
-			System.out.println(customer);
-			session.setAttribute("loginInfo", customer);
-			returnURL = "redirect:/customer/customer_main.do";
-		} else {
-			returnURL = "redirect:/";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
-		}
-		return returnURL;
-	}
-
-	//고객 메인 컨트롤러 
-	@RequestMapping("/customer_main")
-	public String customer_main() {
-		return "customer/customer_main.tiles";
-	}
-
-	//고객 ID로 고객 조회 처리 Handler
-	@RequestMapping("/findById")
-	public String findById(@RequestParam String csId, ModelMap model) {
-		Customer customer = service.findCustomerById(csId);
-		model.addAttribute("customer", customer);
-		return "customer/customer_info.tiles";
-	}
-
-	@RequestMapping("/findByName")
+	@RequestMapping("/logincheck/findByName")
 	public String findByName(@RequestParam String csName, ModelMap model) {
 		List<Customer> list = service.findCustomerByName(csName);
 		model.addAttribute("namelist", list);
@@ -78,7 +56,7 @@ public class CustomerController {
 
 	//고객 List 조회처리 Handler
 
-	@RequestMapping("/logincheck//list")
+	@RequestMapping("/logincheck/list")
 	public String list(@RequestParam(defaultValue = "1") String pageNo,
 			ModelMap model) {
 		int page = 1;
@@ -93,21 +71,85 @@ public class CustomerController {
 
 	//고객 등록 처리 Handler
 	@RequestMapping("/calender")
-	public String calender(ModelMap model) throws DuplicatedIdException, SQLException {
-		ArrayList<Integer> row1 = new ArrayList<Integer>();
-		ArrayList<Integer> row2 = new ArrayList<Integer>();
-		ArrayList<Integer> row3 = new ArrayList<Integer>();
-		ArrayList<Integer> row4 = new ArrayList<Integer>();
-		ArrayList<Integer> row5 = new ArrayList<Integer>();
-		ArrayList<Integer> row6 = new ArrayList<Integer>();
-		for(int i = 0; i<7; i++){
-			row1.add(i);
-			row2.add(i);
-			row3.add(i);
-			row4.add(i);
-			row5.add(i);
-			row6.add(i);
+	public String calender(@RequestParam String mode, @RequestParam String year,@RequestParam String month,@RequestParam String day, ModelMap model) throws DuplicatedIdException, SQLException {
+		ArrayList<String> row1 = new ArrayList<String>();
+		ArrayList<String> row2 = new ArrayList<String>();
+		ArrayList<String> row3 = new ArrayList<String>();
+		ArrayList<String> row4 = new ArrayList<String>();
+		ArrayList<String> row5 = new ArrayList<String>();
+		ArrayList<String> row6 = new ArrayList<String>();
+		ArrayList<String> temp = new ArrayList<String>();
+		Calendar currentCalendar = null;
+		int currentYear=0;
+		int currentMonth=0;
+		if(mode.equals("0")){
+			currentCalendar = new GregorianCalendar();
+			currentYear = currentCalendar.get(Calendar.YEAR);
+			currentMonth = currentCalendar.get(Calendar.MONTH)+1;
+			System.out.println(currentCalendar);
+		}else if(mode.equals("1")){
+			System.out.println(year+"----"+month+"----"+day);
+			currentYear = Integer.parseInt(year)-1;
+			currentMonth =  Integer.parseInt(month);
+			currentCalendar = new GregorianCalendar(currentYear,currentMonth-1,Integer.parseInt(day));
+			System.out.println(currentCalendar);
+		}else if(mode.equals("2")){
+			System.out.println(year+"----"+month+"----"+day);
+			currentYear = Integer.parseInt(year)+1;
+			currentMonth =  Integer.parseInt(month);
+			currentCalendar = new GregorianCalendar(currentYear,currentMonth-1,Integer.parseInt(day));
+			System.out.println(currentCalendar);
+		}else if(mode.equals("3")){
+			System.out.println(year+"----"+month+"----"+day);
+			currentYear = Integer.parseInt(year);
+			currentMonth =  Integer.parseInt(month)-1;
+			if(currentMonth==0){
+				currentMonth=1;
+			}
+			if(currentMonth==13){
+				currentMonth=12;
+			}
+			currentCalendar = new GregorianCalendar(currentYear,currentMonth-1,Integer.parseInt(day));
+			System.out.println(currentCalendar);
+			
+		}else if(mode.equals("4")){
+			System.out.println(year+"----"+month+"----"+day);
+			currentYear = Integer.parseInt(year);
+			currentMonth =  Integer.parseInt(month)+1;
+			if(currentMonth==0){
+				currentMonth=1;
+			}
+			if(currentMonth==13){
+				currentMonth=12;
+			}
+			currentCalendar = new GregorianCalendar(currentYear,currentMonth-1,Integer.parseInt(day));
+			System.out.println(currentCalendar);
 		}
+		
+		Calendar calCalendar = new GregorianCalendar();
+		
+		calCalendar.set(currentCalendar.get(Calendar.YEAR), currentMonth-1, 1);
+		int week = calCalendar.get(Calendar.DAY_OF_WEEK);
+		
+		for(int i = 0; i<week-1; i++ ){
+			temp.add("");
+		};
+		for(int i =1; i<=CalDayMonth.calDay(currentMonth, calCalendar.get(Calendar.YEAR)); i++){
+			temp.add(i+"");
+		}
+		for(int i = temp.size(); i<=42; i++){
+			temp.add("");
+		}
+		for(int i = 0;i<7;i++){
+			row1.add(temp.get(i));
+			row2.add(temp.get(i+7));
+			row3.add(temp.get(i+14));
+			row4.add(temp.get(i+21));
+			row5.add(temp.get(i+28));
+			row6.add(temp.get(i+35));
+		}
+		model.addAttribute("year", currentYear);
+		model.addAttribute("month", currentMonth);
 		model.addAttribute("row1", row1);
 		model.addAttribute("row2", row2);
 		model.addAttribute("row3", row3);
@@ -130,44 +172,31 @@ public class CustomerController {
 		return "redirect:/customer/registerSuccess.do";
 	}
 
-	@RequestMapping("/addFriendList")
-	public String addFriendList(@RequestParam String friendId,
-			@RequestParam String csId, Error errors, ModelMap model)
-					throws DuplicatedIdException, SQLException {
-		FriendList friendList = new FriendList("1", csId, friendId);
-		service.addFriendList(friendList);
-		List<FriendList> list = service.findFriendListById(csId);
-		model.addAttribute("friendList", list);
-		return "customer/friend_list.tiles";
-	}
 
 	//등록 후 성공페이지로 이동 처리.
-	@RequestMapping("registerSuccess")
+	@RequestMapping("/registerSuccess")
 	public String registerSuccess(@RequestParam String csId, ModelMap model) {
 
 		model.addAttribute("customer", service.findCustomerById(csId));
 		return "customer/register_success.tiles";
 	}
 
-	//수정폼 조회 처리 Handler
-	@RequestMapping("modifyForm")
-	public String modifyForm(@RequestParam(defaultValue = "") String csId,
-			ModelMap model) throws Exception {
-//		요청파라미터 검증..wjidqwi
-		if (csId.trim().length() == 0) {
-			throw new Exception("수정할 고객의 아이디가 없습니다.");
-		}
+	//로그인 회원 정보 수정
+	@RequestMapping("/logincheck/modifyForm")
+	public String modifyForm(HttpSession session, ModelMap model)
+			throws Exception {
 
-		model.addAttribute("customer", service.findCustomerById(csId));
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+//		System.out.println(customer + " modify폼");
+		model.addAttribute("customer", customer);
 
 		return "customer/modify_form.tiles";
 	}
 
 	//수정 처리 Handler
-	@RequestMapping("modify")
+	@RequestMapping("/modify")
 	public String modify(@ModelAttribute Customer customer, Errors errors,
-			@RequestParam(defaultValue = "1") String pageNo, ModelMap model)
-					throws Exception {
+			ModelMap model, HttpSession session) throws Exception {
 		//Validator를 이용해 요청파라미터 체크
 		new CustomerValidator().validate(customer, errors);
 
@@ -175,28 +204,32 @@ public class CustomerController {
 			return "customer/modify_form.tiles";
 		}
 		service.updateCustomer(customer);
-		model.addAttribute("csId", customer.getCsId());
-		model.addAttribute("pageNo", pageNo);
-		return "redirect:/customer/findById.do";
+		Customer newCust = service.findCustomerById(customer.getCsId());
+		session.setAttribute("loginInfo", newCust);
+//		model.addAttribute("csId", customer.getCsId());
+		return "customer/customer_main.tiles";
 	}
 
 	//고객 삭제 처리 HandlerattributeValue
-	@RequestMapping("remove.do")
-	public String remove(@RequestParam(defaultValue = "") String csId,
-			@RequestParam(defaultValue = "1") String pageNo, ModelMap model)
-					throws Exception {
+	@RequestMapping("/logincheck/remove.do")
+	public String remove(HttpSession session) throws Exception {
 		//요청파라미터 검증
-		if (csId.trim().length() == 0) {
-			throw new Exception("삭제할 고객의 아이디가 없습니다.");
-		}
+//		if (((String) session.getAttribute("csId")).trim().length() == 0) {
+//			throw new Exception("삭제할 고객의 아이디가 없습니다.");
+//		}
+
+		Customer reCust = (Customer) session.getAttribute("loginInfo");
+		String id = reCust.getCsId();
+
 		//비지니스 로직 - 삭제처리(removeCustomer())
-		service.removeCustomer(csId);
-		model.addAttribute("pageNo", pageNo);
+		System.out.println(id + "삭제할 아이디*-------");
+		service.removeCustomer(id);
 		//응답
-		return "redirect:/customer/list.do";
+		session.setAttribute("loginInfo", null);
+		return "customer/byebye.tiles";
 	}
 
-	@RequestMapping("idDuplicatedCheck")
+	@RequestMapping("/idDuplicatedCheck")
 	@ResponseBody
 	public String idDuplicatedCheck(@RequestParam String csId) {
 		Customer cust = service.findCustomerById(csId);

@@ -5,62 +5,6 @@
 
 
 <mapper namespace="customerMapper">
-	
-	<!-- friendList resultMap설정 -->
-	<resultMap
-		type="friendList"
-		id="friend-resultmap">
-		<id
-			property="flKey"
-			column="fl_key" />
-		<result
-			property="csId"
-			column="cs_id" />
-		<result
-			property="friendId"
-			column="friend_id" />
-
-	</resultMap>
-	<resultMap
-		type="friendList"
-		id="friendList-constructor-resultmap">
-		<constructor>
-			<idArg
-				column="fl_key"
-				javaType="string" />
-			<arg
-				column="cs_id"
-				javaType="string" />
-			<arg
-				column="friend_id"
-				javaType="string" />
-		</constructor>
-	</resultMap>
-	
-	<!-- insertFriend -->
-
-	<insert
-		id="insertFriendList"
-		parameterType="friendList">
-		insert into FriendList(fl_key,cs_id,friend_id)
-		values(#{fl_Key}, #{cs_id}, #{friend_id})
-
-	</insert>
-	
-<!-- select FriendList 고객아이디로 그사람의 친구 리스트를 select해옴-->
-	<select
-		id="selectFriendList"
-		parameterType="string"
-		resultMap="friendList-constructor-resultmap">
-		select fl_key,cs_id,friend_id
-		from friendList
-		where
-		cs_id=#{csId}
-	</select>
-
-	
-	
-	
 
 	<!-- resultMap 설정 -->
 	<resultMap
@@ -149,9 +93,8 @@
 		parameterType="string"
 		resultMap="customer-resultmap">
 		select cs_id,cs_password,cs_name,cs_email,cs_phone
-		from
-		customer
-		where cs_name=#{csName}
+		from customer
+		where cs_name like '%'||#{csName}||'%'
 	</select>
 	
 	<!-- paging -->

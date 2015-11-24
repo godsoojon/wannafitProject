@@ -20,8 +20,6 @@ public interface CustomerService {
 	 * @throws SQLException 
 	 */
 
-	Customer loginCustomer(String csId, String csPassword);
-
 	void addCustomer(Customer customer)
 			throws DuplicatedIdException, SQLException;
 
@@ -58,7 +56,7 @@ public interface CustomerService {
 	 */
 	List<Customer> findCustomerByName(String customerName);
 
-	List<FriendList> findFriendListById(String csId);
+	List<String> findFriendListById(String csId);
 
 	/**
 	 * 매개변수로 받은 고객과 같은 ID를 가진 고객정보를 찾아 수정 처리.

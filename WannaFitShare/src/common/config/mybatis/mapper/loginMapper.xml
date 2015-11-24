@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="loginMapper">
+
+<!-- resultMap 설정 -->
+	<resultMap
+		type="customer"
+		id="customer-resultmap">
+		<id
+			property="csId"
+			column="cs_id" />
+		<result
+			property="csPassword"
+			column="cs_password" />
+		<result
+			property="csName"
+			column="cs_name" />
+		<result
+			property="csEmail"
+			column="cs_email" />
+		<result
+			property="csPhone"
+			column="cs_phone" />
+	</resultMap>
+
+
+	<!-- sql 설정 -->
+	<sql id="select-column-sql">
+		cs_id,cs_password,cs_name,cs_email,cs_phone
+	</sql>
+
+	<sql id="select-sql">
+		select
+		<include refid="select-column-sql" />
+		from customer
+	</sql>
+	
+	<!-- loginCustomer -->
+	<select
+		id="loginCustomer"
+		resultMap="customer-resultmap"
+		parameterType="map">
+
+		<include refid="select-sql" />
+		where cs_id=#{csId} and cs_password=#{csPassword}
+	</select>
+
+</mapper>

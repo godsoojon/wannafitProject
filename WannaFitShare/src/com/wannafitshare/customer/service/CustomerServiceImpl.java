@@ -44,11 +44,6 @@ public class CustomerServiceImpl implements CustomerService {
 		this.dao = dao;
 	}
 
-	@Override
-	public Customer loginCustomer(String csId, String csPassword) {
-		return dao.loginCustomer(csId, csPassword);
-	}
-
 	/**
 	 * 고객을 등록하는 메소드.
 	 *  - 고객 id (id)는 중복될 수 없다.  
@@ -122,12 +117,12 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return customerList에서 조회된 고객들을 담아 리턴할 ArrayList
 	 */
 	@Override
-	public List<Customer> findCustomerByName(String customerName) {
-		return dao.selectCustomersByName(customerName);
+	public List<Customer> findCustomerByName(String csName) {
+		return dao.selectCustomersByName(csName);
 	}
 
 	@Override
-	public List<FriendList> findFriendListById(String csId) {
+	public List<String> findFriendListById(String csId) {
 		return dao.selectfriendList(csId);
 
 	}
