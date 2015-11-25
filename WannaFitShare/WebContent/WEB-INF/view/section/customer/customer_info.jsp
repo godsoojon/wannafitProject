@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+
+
+
 <h2>조회한 고객정보</h2>
 <table border="1" style="width:300px">
 	<tr>

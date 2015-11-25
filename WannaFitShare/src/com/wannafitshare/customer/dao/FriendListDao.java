@@ -10,5 +10,6 @@ public interface FriendListDao {
 
 	List<String> selectfriendList(String csId);
 	
-
+	FriendList selectFriend(FriendList friendList);
+	int deleteFriendList(FriendList friendList);
 }

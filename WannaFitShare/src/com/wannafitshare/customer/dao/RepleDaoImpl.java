@@ -19,28 +19,7 @@ private SqlSessionTemplate session;
 	}
     
 
-    public List getListCmt(String no) {
-
-          return session.selectList("reboard.listCmt", no);
-
-    }
-
-
-
-    public void createCmt(ReboardDto dto) {
-
-    	session.insert("reboard.createCmt", dto);
-
-    }
-
-
-
-    public void deleteCmt(ReboardDto dto) {
-
-    	session.delete("reboard.deleteCmt", dto);
-
-    }
-
+  
 
 	
 

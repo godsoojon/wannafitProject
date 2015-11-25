@@ -31,6 +31,12 @@ public class FriendListDaoImpl implements FriendListDao{
 	public List<String> selectfriendList(String csId) {
 		return session.selectList("friendListMapper.selectFriendList", csId);
 	}
+	
+	public FriendList selectFriend(FriendList friendList){
+		return session.selectOne("friendListMapper.selectFriend",friendList);
+	}
 
-
+	public int deleteFriendList(FriendList friendList){
+		return session.delete("friendListMapper.deleteFriend",friendList);
+	}
 }

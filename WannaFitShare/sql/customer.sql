@@ -105,3 +105,16 @@ insert into HEALTH values('id-001',2.2,3.2,'a',12.2,12.2,1.2,2.2,3.2);
 					h_ldl=1,
 					h_hdh=1
 			where cs_id ='1111'	;	
+			
+			select fl_key,cs_id,friend_id
+			from friendList
+			where cs_id='1111' AND friend_id='id-003';
+	
+
+			select fl_key,cs_id,friend_id
+			from (select * from friendList where cs_id='1111')
+			where friend_id='soojongk';
+			
+			select fl_key,cs_id,friend_id
+			from (select * from friendList where cs_id='1111')
+			where friend_id='soojongk';

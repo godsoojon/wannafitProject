@@ -14,40 +14,37 @@ public class Reple {
 	private int repleId;
 	private String csId;
 	private int photoId;
-	private int partyId;
+	
 	private String repleContent;
 	private Date repleTime;
-	public Reple(int repleId, String csId, int photoId, int partyId, String repleContent, Date repleTime) {
+	public Reple(int repleId, String csId, int photoId, String repleContent, Date repleTime) {
 		super();
 		this.repleId = repleId;
 		this.csId = csId;
 		this.photoId = photoId;
-		this.partyId = partyId;
 		this.repleContent = repleContent;
 		this.repleTime = repleTime;
 	}
 	public Reple() {
 		super();
 	}
-	public Reple(String csId, int photoId, int partyId, String repleContent, Date repleTime) {
+	@Override
+	public String toString() {
+		return "Reple [repleId=" + repleId + ", csId=" + csId + ", photoId=" + photoId + ", repleContent="
+				+ repleContent + ", repleTime=" + repleTime + "]";
+	}
+	public Reple(String csId, int photoId, String repleContent, Date repleTime) {
 		super();
 		this.csId = csId;
 		this.photoId = photoId;
-		this.partyId = partyId;
 		this.repleContent = repleContent;
 		this.repleTime = repleTime;
-	}
-	@Override
-	public String toString() {
-		return "Reple [repleId=" + repleId + ", csId=" + csId + ", photoId=" + photoId + ", partyId=" + partyId
-				+ ", repleContent=" + repleContent + ", repleTime=" + repleTime + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((csId == null) ? 0 : csId.hashCode());
-		result = prime * result + partyId;
 		result = prime * result + photoId;
 		result = prime * result + ((repleContent == null) ? 0 : repleContent.hashCode());
 		result = prime * result + repleId;
@@ -60,15 +57,13 @@ public class Reple {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Reple))
 			return false;
 		Reple other = (Reple) obj;
 		if (csId == null) {
 			if (other.csId != null)
 				return false;
 		} else if (!csId.equals(other.csId))
-			return false;
-		if (partyId != other.partyId)
 			return false;
 		if (photoId != other.photoId)
 			return false;
@@ -104,12 +99,6 @@ public class Reple {
 	public void setPhotoId(int photoId) {
 		this.photoId = photoId;
 	}
-	public int getPartyId() {
-		return partyId;
-	}
-	public void setPartyId(int partyId) {
-		this.partyId = partyId;
-	}
 	public String getRepleContent() {
 		return repleContent;
 	}
@@ -122,6 +111,6 @@ public class Reple {
 	public void setRepleTime(Date repleTime) {
 		this.repleTime = repleTime;
 	}
-
+	
 
 }

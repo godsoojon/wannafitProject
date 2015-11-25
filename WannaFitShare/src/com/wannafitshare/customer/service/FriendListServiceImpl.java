@@ -37,4 +37,12 @@ public class FriendListServiceImpl implements FriendListService{
 		return dao.selectfriendList(csId);
 
 	}
+	
+	public FriendList findFriend(FriendList friendList){
+		return dao.selectFriend(friendList);
+		
+	}
+	public int deleteFriendList(FriendList friendList){
+		return dao.deleteFriendList(friendList);
+	}
 }

@@ -13,6 +13,7 @@ public interface FriendListService {
 			throws DuplicatedIdException, SQLException;
 
 	List<String> findFriendListById(String csId);
-
-
+	
+	FriendList findFriend(FriendList friendList);
+	int deleteFriendList(FriendList friendList);
 }

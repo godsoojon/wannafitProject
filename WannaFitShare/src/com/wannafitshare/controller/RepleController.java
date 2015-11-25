@@ -18,7 +18,7 @@ public class RepleController {
 
     
 
-    @RequestMapping("/list")
+/*    @RequestMapping("/list")
     public String listCmt(@RequestParam String photoId, ModelMap map) {
     	//사진아이디를 가져와서 그아이디를 가진 댓글을 리스트로 블러옴
 
@@ -50,7 +50,7 @@ public class RepleController {
 
           writer.write("end");
 
-    }
+    }*/
 
 
 }
