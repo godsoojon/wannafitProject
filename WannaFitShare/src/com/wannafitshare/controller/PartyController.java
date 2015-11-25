@@ -114,6 +114,7 @@ public class PartyController {
 				}
 			}
 		}
+		session.setAttribute("party", party.getPartyName());
 
 //		partyListservice.insertPartyList(id, partyName);
 		return "/friendController/logincheck/search_name.do";

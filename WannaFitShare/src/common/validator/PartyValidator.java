@@ -26,8 +26,8 @@ public class PartyValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "partyName",
 				"partyRequired", new Object[] { "파티 이름" }, "필수입력사항입니다.");
 
-		if (party.getPartyRight() != 1 || party.getPartyRight() != 2
-				|| party.getPartyRight() != 3) {
+		if (party.getPartyRight() != 1 && party.getPartyRight() != 2
+				&& party.getPartyRight() != 3) {
 			error.rejectValue("partyRight", "partyRequired",
 					new Object[] { "보기 권한" }, "권한을 선택하세요");
 		}
