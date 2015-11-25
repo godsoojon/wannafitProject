@@ -19,5 +19,5 @@
 	</tr>
 </table>
 <a
-	href="${initParam.rootPath}/partyController/joinParty.do?partyName=${requestScope.party.partyName }&csId=${requestScope.party.csId}">앨범
+	href="${initParam.rootPath}/partyController/joinParty.do?partyName=${requestScope.party.partyName }&csId=${requestScope.party.csId}&partyRight=${requestScope.party.partyRight }">앨범
 	보기</a>

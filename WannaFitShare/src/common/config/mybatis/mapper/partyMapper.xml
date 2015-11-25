@@ -48,6 +48,7 @@
 		resultType="string">
 		select party_name
 		from party
+		where party_right=2 or party_right=3
 	</select>
 
 	<select

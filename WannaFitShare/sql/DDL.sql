@@ -117,10 +117,8 @@ CREATE TABLE photo (
 	photo_id NUMBER NOT NULL, /* 사진ID */
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	photo_name VARCHAR2(20), /* 사진이름 */
-	photo_path VARCHAR2(30) NOT NULL, /* 경로 */
 	photo_time DATE, /* 시간 */
-	photo_comment VARCHAR2(100), /* 사진설명 */
+	photo_content VARCHAR2(100), /* ???? */
 	constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
@@ -233,7 +231,6 @@ select * from caloriecalendar;
     	ON DELETE CASCADE;
     	
 --------------------------------------------------------
-alter table party add constraint del_cs_id_customer_fk foreign key(cs_id) references customer(cs_id) on delete cascade;
 ---------------------------------------------------
 ----------------------------------------------------
 
