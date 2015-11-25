@@ -1,17 +1,52 @@
-drop table calorie;
-drop table health;
-drop table partylist;
-drop table reple;
-drop table totalcustomer;
-drop table totalparty;
-drop table photo;
-drop table friendlist;
-drop table customer;
-drop table party;
+/* 고객 */
+DROP TABLE customer 
+	CASCADE CONSTRAINTS;
 
-drop sequence person_no_seq;
+/* 건강 */
+DROP TABLE health 
+	CASCADE CONSTRAINTS;
+
+/* 친구목록 */
+DROP TABLE friendlist 
+	CASCADE CONSTRAINTS;
+
+/* 칼로리 */
+DROP TABLE calorie 
+	CASCADE CONSTRAINTS;
+
+/* 사진 */
+DROP TABLE photo 
+	CASCADE CONSTRAINTS;
+
+/* 댓글 */
+DROP TABLE reple 
+	CASCADE CONSTRAINTS;
+
+/* 그룹 */
+DROP TABLE party 
+	CASCADE CONSTRAINTS;
+
+/* 그룹고객목록 */
+DROP TABLE partylist 
+	CASCADE CONSTRAINTS;
+
+/* 전체 고객 */
+DROP TABLE totalcustomer 
+	CASCADE CONSTRAINTS;
+
+/* 전체그룹 */
+DROP TABLE totalparty 
+	CASCADE CONSTRAINTS;
+
+/* 칼로리캘린더 */
+DROP TABLE caloriecalendar 
+	CASCADE CONSTRAINTS;
+
+
+
 --------------------------------------------------------
 
+	
 /* 고객 */
 CREATE TABLE customer (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
@@ -38,7 +73,8 @@ CREATE TABLE health (
 	h_bmi NUMBER, /* BMI */
 	h_bloodpressure NUMBER, /* 혈압 */
 	h_ldl NUMBER, /* LDL */
-	h_hdh NUMBER /* HDH */
+	h_hdh NUMBER, /* HDH */
+	constraint health_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
 ALTER TABLE health
@@ -52,7 +88,8 @@ ALTER TABLE health
 CREATE TABLE friendlist (
 	fl_key NUMBER NOT NULL, /* 친구목록식별키 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	friend_id VARCHAR2(10) /* 친구ID */
+	friend_id VARCHAR2(10), /* 친구ID */
+	constraint friendlist_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
 ALTER TABLE friendlist
@@ -77,30 +114,34 @@ ALTER TABLE calorie
 
 /* 사진 */
 CREATE TABLE photo (
-	photo_id VARCHAR2(20) NOT NULL, /* 사진ID */
-	party_id NUMBER NOT NULL, /* 그룹id */
-	photo_name VARCHAR2(20), /* 사진이름 */
-	photo_path VARCHAR2(30) NOT NULL, /* 경로 */
+	photo_id NUMBER NOT NULL, /* 사진ID */
+	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	photo_time DATE, /* 시간 */
-	photo_comment VARCHAR2(100) /* 사진설명 */
+	photo_title VARCHAR2(30)
+	photo_content VARCHAR2(100), /* ???? */
+	constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
+
 
 ALTER TABLE photo
 	ADD
 		CONSTRAINT PK_photo
 		PRIMARY KEY (
 			photo_id,
-			party_id
+			party_name,
+			cs_id
 		);
 
 /* 댓글 */
 CREATE TABLE reple (
-	reple_id VARCHAR2(20) NOT NULL, /* 댓글id */
-	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	photo_id VARCHAR2(20), /* 사진ID */
-	party_id NUMBER, /* 그룹id */
+	reple_id NUMBER NOT NULL, /* 댓글id */
+	photo_id NUMBER, /* 사진ID */
 	replet_content VARCHAR2(50), /* 댓글내용 */
-	reple_time DATE /* 시간 */
+	reple_time DATE, /* 시간 */
+	party_name VARCHAR2(30), /* 그룹이름 */
+	cs_id VARCHAR2(10), /* 고객_id */
+	constraint reple_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
 ALTER TABLE reple
@@ -112,97 +153,48 @@ ALTER TABLE reple
 
 /* 그룹 */
 CREATE TABLE party (
-	party_id NUMBER NOT NULL, /* 그룹id */
-	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_date DATE NOT NULL, /* 생성날짜 */
-	party_member NUMBER /* 가입회원수 */
+	constraint party_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
 ALTER TABLE party
 	ADD
 		CONSTRAINT PK_party
 		PRIMARY KEY (
-			party_id
+			party_name,
+			cs_id
 		);
 
-/* 그룹고객목록 */
-CREATE TABLE partylist (
+
+/* 칼로리캘린더 */
+CREATE TABLE caloriecalendar (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	party_id NUMBER NOT NULL /* 그룹id */
+	calorie_date DATE NOT NULL, /* 날짜 */
+	total_calorie NUMBER, /* 총칼로리 */
+	constraint caloriecalendar_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
-ALTER TABLE partylist
+ALTER TABLE caloriecalendar
 	ADD
-		CONSTRAINT PK_partylist
+		CONSTRAINT PK_caloriecalendar
 		PRIMARY KEY (
 			cs_id,
-			party_id
+			calorie_date
 		);
 
-/* 전체 고객 */
-CREATE TABLE totalcustomer (
-	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	cs_name VARCHAR2(30) /* 고객이름 */
-);
-
-ALTER TABLE totalcustomer
-	ADD
-		CONSTRAINT PK_totalcustomer
-		PRIMARY KEY (
-			cs_id
-		);
-
-/* 전체그룹 */
-CREATE TABLE totalparty (
-	party_id NUMBER NOT NULL, /* 그룹id */
-	party_name VARCHAR2(30) /* 그룹이름 */
-);
-
-ALTER TABLE totalparty
-	ADD
-		CONSTRAINT PK_totalparty
-		PRIMARY KEY (
-			party_id
-		);
-
-ALTER TABLE health
-	ADD
-		CONSTRAINT FK_customer_TO_health
-		FOREIGN KEY (
-			cs_id
-		)
-		REFERENCES customer (
-			cs_id
-		);
-
-ALTER TABLE friendlist
-	ADD
-		CONSTRAINT FK_customer_TO_friendlist
-		FOREIGN KEY (
-			cs_id
-		)
-		REFERENCES customer (
-			cs_id
-		);
 
 ALTER TABLE photo
 	ADD
 		CONSTRAINT FK_party_TO_photo
 		FOREIGN KEY (
-			party_id
-		)
-		REFERENCES party (
-			party_id
-		);
-
-ALTER TABLE reple
-	ADD
-		CONSTRAINT FK_customer_TO_reple
-		FOREIGN KEY (
+			party_name,
 			cs_id
 		)
-		REFERENCES customer (
+		REFERENCES party (
+			party_name,
 			cs_id
 		);
 
@@ -211,36 +203,12 @@ ALTER TABLE reple
 		CONSTRAINT FK_photo_TO_reple
 		FOREIGN KEY (
 			photo_id,
-			party_id
+			party_name,
+			cs_id
 		)
 		REFERENCES photo (
 			photo_id,
-			party_id
-		);
-
-ALTER TABLE partylist
-	ADD
-		CONSTRAINT FK_customer_TO_partylist
-		FOREIGN KEY (
-			cs_id
-		)
-		REFERENCES customer (
+			party_name,
 			cs_id
 		);
 
-ALTER TABLE partylist
-	ADD
-		CONSTRAINT FK_party_TO_partylist
-		FOREIGN KEY (
-			party_id
-		)
-		REFERENCES party (
-			party_id
-		);
-
-		
-
----------------------------------------------------
-----------------------------------------------------	
-----------------------------------------------------	
-		create sequence friendlist_fl_key_seq;
