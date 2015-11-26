@@ -119,6 +119,7 @@ CREATE TABLE photo (
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	photo_time DATE, /* 시간 */
 	photo_content VARCHAR2(100), /* ???? */
+	photo_title VARCHAR2(30),
 	constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 

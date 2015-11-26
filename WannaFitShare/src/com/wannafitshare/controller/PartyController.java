@@ -120,14 +120,15 @@ public class PartyController {
 		return "/friendController/logincheck/search_name.do";
 	}
 
-//	/*내가 속한 앨범 목록 보기*/
-//	@RequestMapping("/logincheck/belongParty.do")
-//	public String belongToParty(HttpSession session, ModelMap model) {
-//		Customer customer = (Customer) session.getAttribute("loginInfo");
-//		String id = customer.getCsId();
-//		List<String> list = partyListservice.belongParty(id);
-//		model.addAttribute("list", list);
-//		return "party/belong_party.tiles";
-//	}
+	/*내 앨범 보기*/
+	@RequestMapping("/logincheck/myparty.do")
+	public String myParty(@RequestParam String partyName, HttpSession session,
+			ModelMap model) {
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		Party party = partyService.selectPartyByName(partyName);
+		session.setAttribute("party", party.getPartyName());
+		return "party/test.tiles";
+	}
 
 }
