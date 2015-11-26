@@ -41,7 +41,7 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService service;
-
+	
 //	//고객 ID로 고객 조회 처리 Handler
 //	@RequestMapping("/findById")
 //	public String findById(@RequestParam String csId, ModelMap model) {
@@ -58,7 +58,6 @@ public class CustomerController {
 	      }
 	
 	//고객 List 조회처리 Handler
-
 	@RequestMapping("/logincheck/list")
 	public String list(@RequestParam(defaultValue = "1") String pageNo,
 			ModelMap model) {

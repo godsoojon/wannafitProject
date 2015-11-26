@@ -6,11 +6,9 @@
 		<td>${requestScope.party.partyName }</td>
 	</tr>
 	<tr>
-<<<<<<< HEAD
-		<th>앨범 관리자</th>
-=======
+
 		<th>앨범 만든이</th>
->>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
+
 		<td>${requestScope.party.csId}</td>
 	</tr>
 	<tr>
@@ -21,11 +19,7 @@
 		<th>앨범 생성일</th>
 		<td>${requestScope.party.partyDate }</td>
 	</tr>
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
+
 </table>
-<a
-	href="${initParam.rootPath}/partyController/joinParty.do?partyName=${requestScope.party.partyName }&csId=${requestScope.party.csId}&partyRight=${requestScope.party.partyRight }">앨범
-	보기</a>
+<a href="${initParam.rootPath}/partyController/joinParty.do?partyName=${requestScope.party.partyName }&csId=${requestScope.party.csId}&partyRight=${requestScope.party.partyRight }">
+	앨범보기</a>

@@ -10,4 +10,3 @@
 &nbsp;&nbsp;
 <a href="${initParam.rootPath}/customer/logincheck/list.do?pageNo=${param.pageNo}">고객목록 </a>
 &nbsp;&nbsp;
-

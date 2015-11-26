@@ -1,5 +1,9 @@
 package com.wannafitshare.controller;
+
 import javax.swing.JOptionPane;
+
+
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,7 +34,6 @@ public class FriendController {
 	@RequestMapping("/logincheck/search_name")
 	public String goSearchName(HttpSession session) {
 		return "customer/search_name.tiles";
-
 	}
 	@RequestMapping("/logincheck/findByName")
 	public String findByName(@RequestParam String csName, ModelMap model) {

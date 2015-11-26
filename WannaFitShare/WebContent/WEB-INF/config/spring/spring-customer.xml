@@ -37,9 +37,25 @@
 		<mvc:view-controller
 		path="/customer/friend_list.do"
 		view-name="customer/friend_list.tiles" />
+
 		<mvc:view-controller
 		path="/customer/health_form.do"
 		view-name="customer/health_form.tiles" />
+
+		
+	
+	<!-- 
+		multipartResolver를 Bean으로 등록
+		 - 역할 : 요청방식이 post이고 enctype이 multipart/form-data인 경우 업로드된 파일관련 처리를 해주는 Bean
+		 - 호출시점 : handler 호출 하기 전에 먼저 호출이 된다.
+		 - bean으로 등속시 빈 식별자(id/name)은 multipartResolver로 한다.
+	 -->
+	 
+	 <!-- CommonsMultipartResolver치고 class 자동완성 -->
+	 <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
+		
+		
+
 	<!-- ViewResolver 등록 
 		  Cotroller가 넘긴 view이름 (view name)을 통해 알맞은 view를 찾는 전달하는 컴포넌트
 		   기본 ViewResolver : InternalResourceViewResolver 
@@ -65,6 +81,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:order="3" />
+	
 			  
 	<!-- TilesConfigurer 빈으로 등록 : tiles 설정파일을 등록 -->
 	<bean
