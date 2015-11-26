@@ -35,8 +35,11 @@
 	<insert
 		id="insertParty"
 		parameterType="party">
-		insert into party
-		values(#{partyName}, #{csId}, #{partyRight},#{partyDate})
+		insert into party (
+		<include refid="select-column-sql" />
+		)
+		values (#{partyName}, #{csId}, #{partyRight},
+		#{partyDate})
 	</insert>
 	
 	<!-- select all party list -->
@@ -78,7 +81,12 @@
 		where cs_id=#{csId}
 	</select>
 
-
+<delete id="deleteParty" parameterType="string">
+	delete 
+	from party
+	where party_name=#{partyName}
+	
+	</delete>
 
 
 

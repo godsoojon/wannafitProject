@@ -41,6 +41,10 @@
 		<mvc:view-controller
 		path="/customer/health_form.do"
 		view-name="customer/health_form.tiles" />
+		
+			<mvc:view-controller
+		path="/party/belong_party.do"
+		view-name="/party/belong_party.tiles" />
 
 		
 	

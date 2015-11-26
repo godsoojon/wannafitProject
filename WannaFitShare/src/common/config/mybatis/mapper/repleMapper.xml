@@ -1,1 +1,85 @@
 <?xml version="1.0" encoding="ISO-2022-KR"?>
+
+<!-- reple_id NUMBER NOT NULL, 
+	photo_id NUMBER,
+	replet_content VARCHAR2(50), 
+	reple_time DATE, 
+	party_name VARCHAR2(30),
+	cs_id VARCHAR2(10), -->
+	
+	<mapper namespace="repleMapper">
+
+
+	<!-- resultMap 설정 -->
+	<resultMap
+		type="reple"
+		id="reple-resultmap">
+		<id
+			property="repleId"
+			column="reple_id" />
+		<result
+			property="photoId"
+			column="photo_id" />
+		<result
+			property="repletContent"
+			column="replet_content" />
+		<result
+			property="repleTime"
+			column="reple_time" />
+		<result
+			property="partyName"
+			column="party_name" />
+			<result
+			property="csId"
+			column="cs_id" />
+	</resultMap>
+
+	<resultMap
+		type="reple"
+		id="reple-constructor-resultmap">
+		<constructor>
+			<idArg
+				column="reple_id"
+				javaType="int" />
+			<arg
+				column="photo_id"
+				javaType="int" />
+			<arg
+				column="replet_content"
+				javaType="string" />
+			<arg
+				column="reple_time"
+				javaType="date" />
+			<arg
+				column="party_name"
+				javaType="string" />
+				<arg
+				column="cs_id"
+				javaType="string" />
+		</constructor>
+	</resultMap>
+	
+	<!-- 리플 추가 -->
+	<insert id="insertReple" parameterType="reple">
+	
+	</insert>
+	
+	<!-- 리플 수정 -->
+	<update id="updateReple" parameterType="reple">
+	
+	
+	</update>
+	<!-- 리플 삭제 -->
+	<delete id="deleteReple" parameterType="int">
+	
+	
+	</delete>
+	
+	<!-- 리플 전체 불러오기 -->
+	<select id="selectReple">
+	
+	</select>
+	
+	
+	
+	</mapper> 
