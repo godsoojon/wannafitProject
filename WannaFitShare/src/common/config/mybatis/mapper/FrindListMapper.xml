@@ -69,7 +69,7 @@
 	</select>
 	
 	<delete id="deleteFriend" parameterType="friendList" >
-		delete friendList
+		delete 
 	 	from (select * from friendList where cs_id=#{csId})
 		where friend_id=#{friendId}
 	</delete>

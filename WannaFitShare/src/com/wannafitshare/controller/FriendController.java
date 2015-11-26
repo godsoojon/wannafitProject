@@ -56,9 +56,21 @@ public class FriendController {
 		 FriendList list =new FriendList(id,friendId);
 		 friendService.deleteFriendList(list);
 		 JOptionPane.showMessageDialog(null, "삭제되었습니.다");
+		 List<String> list1 = friendService.findFriendListById(id);
+		 model.addAttribute("friendList",list1);
 		 return "customer/friend_list.tiles";
 		 
 		  
+	  }
+	 
+	  
+	  @RequestMapping("/myFriend")
+	  public String myFriend(HttpSession session,Error errors,ModelMap model){
+		  Customer customer = (Customer) session.getAttribute("loginInfo");
+			String id = customer.getCsId();
+			List<String> list =friendService.findFriendListById(id);
+			model.addAttribute("friendList",list);
+			return "customer/friend_list.tiles";
 	  }
 	@RequestMapping("/addFriendList")
 	public String addFriendList(@RequestParam String friendId, Error errors,
