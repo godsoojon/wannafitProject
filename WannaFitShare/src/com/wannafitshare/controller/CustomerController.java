@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -72,11 +73,12 @@ public class CustomerController {
 
 	//고객 등록 처리 Handler
 
-	@RequestMapping("/add")
+	@RequestMapping(value = "/add.do", method = RequestMethod.POST)
 	public String add(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model) throws DuplicatedIdException, SQLException {
-
-		new CustomerValidator().validate(customer, errors);
+		CustomerValidator validate = new CustomerValidator();
+		validate.validate(customer, errors);
+		System.out.println("총 검증 실패 개수 : " + errors.getErrorCount());
 		if (errors.hasErrors()) {
 			return "customer/register_form.tiles";
 		}
@@ -84,7 +86,6 @@ public class CustomerController {
 		model.addAttribute("csId", customer.getCsId());
 		return "redirect:/customer/registerSuccess.do";
 	}
-
 
 	//등록 후 성공페이지로 이동 처리.
 	@RequestMapping("/registerSuccess")
