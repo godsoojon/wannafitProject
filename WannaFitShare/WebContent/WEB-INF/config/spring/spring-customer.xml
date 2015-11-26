@@ -24,6 +24,7 @@
 
 
 	<mvc:annotation-driven /> 
+	
 	<!-- link 설정-->
 	<!-- 메인페이지 -->
 	<mvc:view-controller

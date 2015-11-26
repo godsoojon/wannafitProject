@@ -44,5 +44,15 @@
 		<include refid="select-sql" />
 		where cs_id=#{csId} and cs_password=#{csPassword}
 	</select>
+	
+	<!-- loginCustomer2 -->
+	<select
+		id="loginCustomer2"
+		resultMap="customer-resultmap"
+		parameterType="customer">
+
+		<include refid="select-sql" />
+		where cs_id=#{csId} and cs_password=#{csPassword}
+	</select>
 
 </mapper>

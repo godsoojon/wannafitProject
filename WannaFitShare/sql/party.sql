@@ -29,3 +29,28 @@ where party_name='uuu';
 
 select party_member
 
+select party_name
+from party
+where cs_id='id-001';
+
+select friend_id
+from friendlist
+where cs_id='123';
+
+
+
+
+
+		select party_name
+		from party
+		where party_right=2 or party_right=3;
+
+
+
+
+
+
+
+
+
+

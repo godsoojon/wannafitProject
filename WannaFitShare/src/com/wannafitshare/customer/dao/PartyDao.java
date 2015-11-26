@@ -11,4 +11,8 @@ public interface PartyDao {
 	List<String> selectAllParty();
 
 	Party selectPartyByName(String partyName);
+
+	List<String> belongParty(String csId);
+
+	List<String> friendList(String csId);
 }
