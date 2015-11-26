@@ -7,7 +7,7 @@
 		등록된 앨범이 없습니다.
 	</c:when>
 	<c:otherwise>
-		<table style="width: 500px" border="1">
+		<table style="width: 500px" border="1" class="table">
 			<tr>
 				<th>앨범 이름</th>
 			</tr>
