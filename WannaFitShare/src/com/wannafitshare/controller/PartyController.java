@@ -102,19 +102,19 @@ public class PartyController {
 		int partyR = party.getPartyRight();
 
 		if (partyR == 3) {
+			session.setAttribute("party", party.getPartyName());
 			return "party/test.tiles";
+			
 		} else if (partyR == 2) {
-			for (int k = 0; k < list.size(); k++) {
-				System.out.println(list.get(k));
-			}
 
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).equals(party.getCsId())) {
+					session.setAttribute("party", party.getPartyName());
 					return "party/test.tiles";
 				}
 			}
 		}
-		session.setAttribute("party", party.getPartyName());
+	
 
 //		partyListservice.insertPartyList(id, partyName);
 		return "/friendController/logincheck/search_name.do";
