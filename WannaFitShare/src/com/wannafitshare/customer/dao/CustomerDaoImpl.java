@@ -39,15 +39,6 @@ public class CustomerDaoImpl implements CustomerDao {
 		return session.insert("customerMapper.insertCustomer", customer);
 	}
 
-	@Override
-	public int insertFriendList(FriendList friendList) {
-		return session.insert("friendListMapper.insertFriendList", friendList);
-	}
-
-	@Override
-	public List<String> selectfriendList(String csId) {
-		return session.selectList("friendListMapper.selectFriendList", csId);
-	}
 
 	@Override
 	public int deleteCustomerById(String csId) {

@@ -48,5 +48,9 @@ public class PartyServiceImpl implements PartyService {
 	public List<String> friendList(String csId) {
 		return dao.friendList(csId);
 	}
+	
+	public int deleteParty(String partyName){
+		return dao.deleteParty(partyName);
+	}
 
 }

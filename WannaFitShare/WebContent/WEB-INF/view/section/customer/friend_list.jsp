@@ -16,8 +16,14 @@
 			<tr>
 			
 				<td>${friendList.friendId}</td>
+				<td><a href="${initParam.rootPath}/friendController/deleteFriendList.do?friendId=${friendList.friendId}">삭제</a></td>
 				
 			<tr>
+			
+			
+				
+				
+			
 			</c:forEach>
 		</table>
 	</c:otherwise>

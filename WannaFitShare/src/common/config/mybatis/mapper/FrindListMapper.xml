@@ -61,4 +61,16 @@
 		where
 		cs_id=#{csId}
 	</select>
+	
+	<select id="selectFriend" parameterType="friendList" resultMap="friend-resultmap">
+			select fl_key,cs_id,friend_id
+			from (select * from friendList where cs_id=#{csId})
+			where friend_id=#{friendId}
+	</select>
+	
+	<delete id="deleteFriend" parameterType="friendList" >
+		delete 
+	 	from (select * from friendList where cs_id=#{csId})
+		where friend_id=#{friendId}
+	</delete>
 </mapper>

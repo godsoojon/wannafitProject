@@ -17,6 +17,7 @@
  <a href="${initParam.rootPath}/customer/logincheck/modifyForm.do"> <b>회원정보수정</b> </a> <br>
  <a href="${initParam.rootPath}/loginController/logincheck/logout.do"> <b>로그아웃</b> </a> <br>
  <a href="${initParam.rootPath}/customer/logincheck/remove.do"> <b>회원탈퇴</b> </a> <br>
+ <a href="${initParam.rootPath}/health/logincheck/healthForm.do"><b>건강 정보 보기</b></a><br>
 
 </body>
 </html>

@@ -19,6 +19,7 @@
 		base-package="com.wannafitshare.controller,
 										  com.wannafitshare.customer.dao,	
 										  com.wannafitshare.customer.service,
+										  
 										  com.spring.interceptor" />
 
 
@@ -36,6 +37,15 @@
 		<mvc:view-controller
 		path="/customer/friend_list.do"
 		view-name="customer/friend_list.tiles" />
+
+		<mvc:view-controller
+		path="/customer/health_form.do"
+		view-name="customer/health_form.tiles" />
+		
+			<mvc:view-controller
+		path="/party/belong_party.do"
+		view-name="/party/belong_party.tiles" />
+
 		
 	
 	<!-- 
@@ -49,6 +59,7 @@
 	 <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
 		
 		
+
 	<!-- ViewResolver 등록 
 		  Cotroller가 넘긴 view이름 (view name)을 통해 알맞은 view를 찾는 전달하는 컴포넌트
 		   기본 ViewResolver : InternalResourceViewResolver 

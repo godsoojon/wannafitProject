@@ -49,14 +49,14 @@ public class CustomerController {
 //		model.addAttribute("customer", customer);
 //		return "customer/customer_info.tiles";
 //	}
-
-	@RequestMapping("/logincheck/findByName")
-	public String findByName(@RequestParam String csName, ModelMap model) {
-		List<Customer> list = service.findCustomerByName(csName);
-		model.addAttribute("namelist", list);
-		return "customer/search_success.tiles";
-	}
-
+		//고객 아이디로 찾기
+	   @RequestMapping("/findById")
+	   public String findById(@RequestParam String csId, ModelMap model){
+	      Customer customer = service.findCustomerById(csId);
+	      model.addAttribute("customer", customer);
+	      return "customer/customer_info.tiles";
+	      }
+	
 	//고객 List 조회처리 Handler
 	@RequestMapping("/logincheck/list")
 	public String list(@RequestParam(defaultValue = "1") String pageNo,
@@ -150,4 +150,10 @@ public class CustomerController {
 		return String.valueOf(cust != null); //중복인 경우 "true" 리턴
 	}
 
+	@RequestMapping("/logincheck/findByName")
+	public String findByName(@RequestParam String csName, ModelMap model) {
+		List<Customer> list = service.findCustomerByName(csName);
+		model.addAttribute("namelist", list);
+		return "customer/search_success.tiles";
+	}
 }
