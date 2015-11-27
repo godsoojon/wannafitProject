@@ -100,17 +100,15 @@ public class PartyController {
 		List<String> list = partyService.friendList(id);
 
 		int partyR = party.getPartyRight();
-		session.setAttribute("party", party.getPartyName());
+		
 		if (partyR == 3) {
+			session.setAttribute("party", party.getPartyName());
 			return "/album/logincheck/see.do";
 		} else if (partyR == 2) {
-			for (int k = 0; k < list.size(); k++) {
-				System.out.println(list.get(k));
-			}
 
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).equals(party.getCsId())) {
-					
+					session.setAttribute("party", party.getPartyName());
 					return "/album/logincheck/see.do";
 				}
 			}
@@ -119,6 +117,16 @@ public class PartyController {
 
 //		partyListservice.insertPartyList(id, partyName);
 		return "/friendController/logincheck/search_name.do";
+	}
+	
+	
+
+	@RequestMapping("/deleteParty.do")
+	public String deleteParty(@RequestParam String partyName){
+		partyService.deleteParty(partyName);
+		
+		return "/partyController/logincheck/belongParty.do";
+		
 	}
 
 //	/*내가 속한 앨범 목록 보기*/
