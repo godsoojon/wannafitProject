@@ -100,9 +100,9 @@ public class PartyController {
 		List<String> list = partyService.friendList(id);
 
 		int partyR = party.getPartyRight();
-
+		session.setAttribute("party", party.getPartyName());
 		if (partyR == 3) {
-			return "party/test.tiles";
+			return "/album/logincheck/see.do";
 		} else if (partyR == 2) {
 			for (int k = 0; k < list.size(); k++) {
 				System.out.println(list.get(k));
@@ -110,11 +110,12 @@ public class PartyController {
 
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).equals(party.getCsId())) {
-					return "party/test.tiles";
+					
+					return "/album/logincheck/see.do";
 				}
 			}
 		}
-		session.setAttribute("party", party.getPartyName());
+		
 
 //		partyListservice.insertPartyList(id, partyName);
 		return "/friendController/logincheck/search_name.do";

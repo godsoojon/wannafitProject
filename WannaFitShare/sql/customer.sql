@@ -1,4 +1,5 @@
 --table 삭제
+delete from PHOTO
 drop table customer;
 CREATE TABLE friendlist (
 	fl_key VARCHAR2(20) NOT NULL, /* 친구목록식별키 */
@@ -41,7 +42,7 @@ create table customer(
 --insert
 insert into customer values ('id-001','1111','유재석', 'ryujs@abc.com','010-6363-0844');
 --table customer DB 전체 삭제
-delete from customer
+delete from photo
 --table customer 전체 조회
 select * from customer
 
