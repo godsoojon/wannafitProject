@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +29,8 @@ import com.wannafitshare.vo.PhotoUpload;
 @Controller
 @RequestMapping("/album")
 public class AlbumController {
-	/*
-	private static final String String = null;
+	
+
 	@Autowired
 	private PhotoUploadService service;
 	
@@ -39,7 +40,6 @@ public class AlbumController {
 		return "picture/write2.tiles";
 	}
 	
-
 	@RequestMapping("/logincheck/submit")
 	public String submit(@RequestParam String content , @RequestParam String title ,ModelMap model, HttpSession session) throws SQLException{ 
 	
@@ -48,12 +48,40 @@ public class AlbumController {
 		int num=0; // photo_id
 		String name = (String) session.getAttribute("party"); //party_name		
 		Date date = new Date(); 
-	
+		num=service.photoNum(); //photo_id 중복피하여 생성 
+				
 	    //vo를 DB insert에 추가 
 	    service.addPhotoUpload(new PhotoUpload(title,num,name,id,date,content)); 
-	    model.addAttribute("content",content);
-	    return "picture/picture.tiles";
+	    //model.addAttribute("content",content);
+	    return "/album/logincheck/see.do";
 	}
+	
+	
+	/* 내가 올린 사진 보기*/
+	@RequestMapping("/logincheck/see.do")
+	public String see(HttpSession session, ModelMap model) {
+		
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String csId = customer.getCsId(); //cs_id
+		List <PhotoUpload> listPhotoUpload = service.listPhotoUpload(csId);
+		model.addAttribute("listPhotoUpload", listPhotoUpload);
+		return "party/test.tiles";
+	}
+	
+	
+	//사진 삭제 처리 
+	@RequestMapping("/logincheck/delete.do")
+	public String delete(HttpSession session ,@RequestParam int deletephotoId) throws Exception {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId(); //cs_id
+		
+		//비지니스 로직 - 삭제처리
+		service.deletePhotoUploadByPhotoId(deletephotoId);
+		//응답
+		return "/album/logincheck/see.do";
+	}
+	
 	
 	
 	//단일파일업로드
@@ -156,5 +184,5 @@ public class AlbumController {
 	}
 
 
-*/
+
 }//class

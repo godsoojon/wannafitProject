@@ -4,60 +4,95 @@ import java.util.Date;
 
 public class PhotoUpload {
 	
-	private String photo_title;
-	private int photo_id; //사진 ID
-	private String party_name; //그룹 이름
+	private String photoTitle;
+	private int photoId; //사진 ID
+	private String partyName; //그룹 이름
 	private String csId; //고객 ID 
-	private Date photo_time; //날짜
-	private String photo_content; //사진 HTML
-	public PhotoUpload(String photo_title, int photo_id, String party_name, String csId, Date photo_time,
-			String photo_content) {
+	private Date photoTime; //날짜
+	private String photoContent; //사진 HTML
+	
+	
+	public PhotoUpload(String photoTitle, int photoId, String partyName, String csId, Date photoTime,
+			String photoContent) {
 		super();
-		this.photo_title = photo_title;
-		this.photo_id = photo_id;
-		this.party_name = party_name;
+		this.photoTitle = photoTitle;
+		this.photoId = photoId;
+		this.partyName = partyName;
 		this.csId = csId;
-		this.photo_time = photo_time;
-		this.photo_content = photo_content;
+		this.photoTime = photoTime;
+		this.photoContent = photoContent;
 	}
+
+
 	public PhotoUpload() {
 		super();
 	}
-	public String getPhoto_title() {
-		return photo_title;
+
+
+	public String getPhotoTitle() {
+		return photoTitle;
 	}
-	public void setPhoto_title(String photo_title) {
-		this.photo_title = photo_title;
+
+
+	public void setPhotoTitle(String photoTitle) {
+		this.photoTitle = photoTitle;
 	}
-	public int getPhoto_id() {
-		return photo_id;
+
+
+	public int getPhotoId() {
+		return photoId;
 	}
-	public void setPhoto_id(int photo_id) {
-		this.photo_id = photo_id;
+
+
+	public void setPhotoId(int photoId) {
+		this.photoId = photoId;
 	}
-	public String getParty_name() {
-		return party_name;
+
+
+	public String getPartyName() {
+		return partyName;
 	}
-	public void setParty_name(String party_name) {
-		this.party_name = party_name;
+
+
+	public void setPartyName(String partyName) {
+		this.partyName = partyName;
 	}
+
+
 	public String getCsId() {
 		return csId;
 	}
+
+
 	public void setCsId(String csId) {
 		this.csId = csId;
 	}
-	public Date getPhoto_time() {
-		return photo_time;
+
+
+	public Date getPhotoTime() {
+		return photoTime;
 	}
-	public void setPhoto_time(Date photo_time) {
-		this.photo_time = photo_time;
+
+
+	public void setPhotoTime(Date photoTime) {
+		this.photoTime = photoTime;
 	}
-	public String getPhoto_content() {
-		return photo_content;
+
+
+	public String getPhotoContent() {
+		return photoContent;
 	}
-	public void setPhoto_content(String photo_content) {
-		this.photo_content = photo_content;
+
+
+	public void setPhotoContent(String photoContent) {
+		this.photoContent = photoContent;
+	}
+
+
+	@Override
+	public String toString() {
+		return "PhotoUpload [photoTitle=" + photoTitle + ", photoId=" + photoId + ", partyName=" + partyName + ", csId="
+				+ csId + ", photoTime=" + photoTime + ", photoContent=" + photoContent + "]";
 	}
 	
 	
