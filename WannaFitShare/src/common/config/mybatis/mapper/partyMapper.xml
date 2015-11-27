@@ -10,19 +10,19 @@
 			property="partyName"
 			column="party_name" />
 		<result
+			property="csId"
+			column="cs_id" />
+		<result
 			property="partyRight"
 			column="party_right" />
 		<result
 			property="partyDate"
 			column="party_date" />
-		<result
-			property="partyMember"
-			column="party_member" />
 	</resultMap>
 	
 	<!-- sql -->
 	<sql id="select-column-sql">
-		party_name, party_right, party_date, party_member
+		party_name, cs_id, party_right, party_date
 	</sql>
 
 	<sql id="select-sql">
@@ -38,8 +38,50 @@
 		insert into party (
 		<include refid="select-column-sql" />
 		)
-		values (#{partyName}, #{partyRight}, #{partyDate},#{partyMember})
+		values (#{partyName}, #{csId}, #{partyRight},
+		#{partyDate})
 	</insert>
+	
+	<!-- select all party list -->
+	<select
+		id="selectAllParty"
+		resultType="string">
+		select party_name
+		from party
+	</select>
+
+	<select
+		id="selectPartyByName"
+		parameterType="string"
+		resultMap="party-resultmap">
+		<include refid="select-sql" />
+		where party_name=#{partyName}
+	</select>
+
+	<!-- 속한 앨범 보기 -->
+	<select
+		id="belongParty"
+		parameterType="string"
+		resultType="string">
+		select party_name
+		from party
+		where cs_id=#{csId}
+		order by
+		party_name
+	</select>
+	
+	<!-- 친구 리스트 뽑기 -->
+	<select
+		id="friendList"
+		parameterType="string"
+		resultType="string">
+		select friend_id
+		from friendlist
+		where cs_id=#{csId}
+	</select>
+
+
+
 
 
 

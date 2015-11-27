@@ -27,16 +27,18 @@ function submit_data(){
 <body>
 <form  name="f" method="post">
 
+${param.csId }님<br>
 ${param.year }년${param.month }월${param.day }일<br>
+현재 칼로리는 ${param.printcal } 입니다.<br>
 식단입력<br>
 <input id="year" type="hidden" name="year" value=${param.year }>
 <input id="month" type="hidden" name="month" value=${param.month }>
 <input id="day" type="hidden" name="day" value=${param.day }>
-<input id="csId" type="hidden" name="csId" value="son">
+<input id="csId" type="hidden" name="csId" value=${param.csId }>
+<input id="totalCalorie" type="hidden" name="totalCalorie" value="">
 <label>밥-<input id="rice" type="checkbox" name="rice" ></label><input id="ricecount" type="text" name="ricecount" value="0"><br>
 <label>고기-<input id="meet" type="checkbox" name="meet" ></label><input id="meetcount" type="text" name="meetcount"value="0"><br>
-<input id="totalCalorie" type ="text" name="totalCalorie" readonly="readonly">
-<input type="button" value="계산" onClick="submit_data()">
+<input type="button" value="저장" onClick="submit_data()">
 <a href="javascript:window.close()">닫기</a>
 </form>
 </body>

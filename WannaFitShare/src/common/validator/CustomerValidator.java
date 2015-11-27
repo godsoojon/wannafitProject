@@ -6,7 +6,6 @@ import org.springframework.validation.Validator;
 
 import com.wannafitshare.vo.Customer;
 
-
 public class CustomerValidator implements Validator {
 
 	@Override
@@ -16,14 +15,15 @@ public class CustomerValidator implements Validator {
 	}
 
 	@Override
-	//등록/수정 공통 체크.
+	// 등록/수정 공통 체크.
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csId", "required", new Object[]{"고객 ID"}, "필수입력사항입니다.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csPassword", "requried", new Object[]{"패스워드"}, "필수입력사항입니다.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csName", "requried", new Object[]{"고객 이름"}, "필수입력사항입니다.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csEmail", "requried", new Object[]{"이메일주소"}, "필수입력사항입니다.");
-		
-		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csId", "required", new Object[] { "고객 ID" }, "필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csPassword", "requried", new Object[] { "패스워드" },
+				"필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csName", "requried", new Object[] { "고객 이름" }, "필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "csEmail", "requried", new Object[] { "이메일주소" },
+				"필수입력사항입니다.");
+
 	}
 
 }

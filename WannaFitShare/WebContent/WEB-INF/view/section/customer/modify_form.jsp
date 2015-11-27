@@ -42,7 +42,7 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th>고객 번호</th>
+		<th>핸드폰 번호</th>
 		<td>
 			<input type="text" id="csPhone" name="csPhone" size="25" value="${requestScope.customer.csPhone }">
 			<span class="errorMessage"><form:errors path="customer.csPhone" delimiter=" | "/></span>

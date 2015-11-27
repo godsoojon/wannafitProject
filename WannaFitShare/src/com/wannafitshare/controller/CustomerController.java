@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wannafitshare.customer.exception.DuplicatedIdException;
+import com.wannafitshare.customer.service.CalorieCalendarService;
+import com.wannafitshare.customer.service.CalorieCalendarServiceImpl;
 import com.wannafitshare.customer.service.CustomerService;
+import com.wannafitshare.vo.CalorieCalendar;
 import com.wannafitshare.vo.Customer;
 
 import common.util.CalDayMonth;
@@ -70,8 +73,9 @@ public class CustomerController {
 	}
 
 	//고객 등록 처리 Handler
-	@RequestMapping("/calender")
-	public String calender(@RequestParam String mode, @RequestParam String year,@RequestParam String month,@RequestParam String day, ModelMap model) throws DuplicatedIdException, SQLException {
+	@RequestMapping("/logincheck/calender")
+	public String calender(@RequestParam String mode, @RequestParam String year,@RequestParam String month,@RequestParam String day,
+			ModelMap model, HttpSession session) throws DuplicatedIdException, SQLException {
 		ArrayList<String> row1 = new ArrayList<String>();
 		ArrayList<String> row2 = new ArrayList<String>();
 		ArrayList<String> row3 = new ArrayList<String>();
@@ -80,6 +84,8 @@ public class CustomerController {
 		ArrayList<String> row6 = new ArrayList<String>();
 		ArrayList<String> temp = new ArrayList<String>();
 		Calendar currentCalendar = null;
+		CalorieCalendarService service1 = new CalorieCalendarServiceImpl();
+		//List<CalorieCalendar> cc = service1.selectAll();
 		int currentYear=0;
 		int currentMonth=0;
 		if(mode.equals("0")){
@@ -148,6 +154,9 @@ public class CustomerController {
 			row5.add(temp.get(i+28));
 			row6.add(temp.get(i+35));
 		}
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		model.addAttribute("csId",id);
 		model.addAttribute("year", currentYear);
 		model.addAttribute("month", currentMonth);
 		model.addAttribute("row1", row1);

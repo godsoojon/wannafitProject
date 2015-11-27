@@ -6,29 +6,29 @@ import java.util.Date;
 public class Party implements Serializable {
 	/*
 	CREATE TABLE party (
-	party_name VARCHAR2(30) NOT NULL,  그룹이름 
+	party_name VARCHAR2(30) NOT NULL, 그룹이름 
+	cs_id VARCHAR2(10) NOT NULL,  고객_id 
 	party_right NUMBER NOT NULL,  그룹권한 
-	party_date DATE NOT NULL,  생성날짜 
-	party_member NUMBER  가입회원수 
+	party_date DATE NOT NULL  생성날짜 
 	);
 	 */
 
 	private String partyName;
+	private String csId;
 	private int partyRight;
 	private Date partyDate;
-	private int partyMember;
 
 	public Party() {
 		super();
 	}
 
-	public Party(String partyName, int partyRight, Date partyDate,
-			int partyMember) {
+	public Party(String partyName, String csId, int partyRight,
+			Date partyDate) {
 		super();
 		this.partyName = partyName;
+		this.csId = csId;
 		this.partyRight = partyRight;
 		this.partyDate = partyDate;
-		this.partyMember = partyMember;
 	}
 
 	public String getPartyName() {
@@ -37,6 +37,14 @@ public class Party implements Serializable {
 
 	public void setPartyName(String partyName) {
 		this.partyName = partyName;
+	}
+
+	public String getCsId() {
+		return csId;
+	}
+
+	public void setCsId(String csId) {
+		this.csId = csId;
 	}
 
 	public int getPartyRight() {
@@ -55,18 +63,10 @@ public class Party implements Serializable {
 		this.partyDate = partyDate;
 	}
 
-	public int getPartyMember() {
-		return partyMember;
-	}
-
-	public void setPartyMember(int partyMember) {
-		this.partyMember = partyMember;
-	}
-
 	@Override
 	public String toString() {
-		return "Party [partyName=" + partyName + ", partyRight=" + partyRight
-				+ ", partyDate=" + partyDate + ", partyMember=" + partyMember
+		return "Party [partyName=" + partyName + ", csId=" + csId
+				+ ", partyRight=" + partyRight + ", partyDate=" + partyDate
 				+ "]";
 	}
 
@@ -74,9 +74,9 @@ public class Party implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((csId == null) ? 0 : csId.hashCode());
 		result = prime * result
 				+ ((partyDate == null) ? 0 : partyDate.hashCode());
-		result = prime * result + partyMember;
 		result = prime * result
 				+ ((partyName == null) ? 0 : partyName.hashCode());
 		result = prime * result + partyRight;
@@ -92,12 +92,15 @@ public class Party implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Party other = (Party) obj;
+		if (csId == null) {
+			if (other.csId != null)
+				return false;
+		} else if (!csId.equals(other.csId))
+			return false;
 		if (partyDate == null) {
 			if (other.partyDate != null)
 				return false;
 		} else if (!partyDate.equals(other.partyDate))
-			return false;
-		if (partyMember != other.partyMember)
 			return false;
 		if (partyName == null) {
 			if (other.partyName != null)
@@ -108,5 +111,4 @@ public class Party implements Serializable {
 			return false;
 		return true;
 	}
-
 }
