@@ -8,6 +8,13 @@ $(document).ready(function(){
 	$("#modifyForm").on("submit", modifyFormCheck);
 });
 </script>
+
+<hr>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="${initParam.rootPath}/customer/logincheck/modifyForm.do"">회원정보수정</a></li>
+  <li role="presentation"><a href="${initParam.rootPath}/loginController/logincheck/logout.do">로그아웃</a></li>
+  <li role="presentation"><a href="${initParam.rootPath}/customer/logincheck/remove.do">회원탈퇴</a></li>
+</ul>
 <h2>고객 정보 수정</h2>
 <spring:hasBindErrors name="customer"/>
 <form action="${initParam.rootPath}/customer/modify.do" method="post" id="modifyForm">

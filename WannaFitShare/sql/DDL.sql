@@ -114,6 +114,7 @@ ALTER TABLE calorie
 
 /* 사진 */
 CREATE TABLE photo (
+	photo_title VARCHAR2(30) , /* 그룹이름 */
 	photo_id NUMBER NOT NULL, /* 사진ID */
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
@@ -213,36 +214,3 @@ ALTER TABLE reple
 		);
 
 
-	
----------------------------------------------------
-insert into customer values('id-001','1111', '이름', '이메일@a.com','010-111-2222');
-select * from customer;
-insert into caloriecalendar values('dd','20151010',22);
-insert into caloriecalendar values('id-001','20151010',22);
-select * from caloriecalendar;
-		
-----------------------------------------------------
-
-		ALTER TABLE party
-		ADD
-		CONSTRAINT del_csId_customer
-		FOREIGN KEY (cs_id)
-		REFERENCES customer ( cs_id)
-
-    	ON DELETE CASCADE;
-    	
---------------------------------------------------------
----------------------------------------------------
-----------------------------------------------------
-
-select * from customer
-
-insert into customer values('id-001','1111', '이름', '이메일@a.com','010-111-2222');
-
-
-
-drop sequence person_no_seq;
----------------------------------------------------
-----------------------------------------------------	
-----------------------------------------------------	
-		create sequence friendlist_fl_key_seq;

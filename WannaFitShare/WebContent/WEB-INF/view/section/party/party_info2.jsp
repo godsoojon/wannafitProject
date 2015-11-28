@@ -18,6 +18,5 @@
 		<td>${requestScope.party.partyDate }</td>
 	</tr>
 </table>
-<a
-	href="${initParam.rootPath}/partyController/joinParty.do?partyName=${requestScope.party.partyName }&csId=${requestScope.party.csId}&partyRight=${requestScope.party.partyRight }">앨범
-	보기</a>
+<a href="${initParam.rootPath}/partyController/joinParty.do?partyName=${requestScope.party.partyName }&csId=${requestScope.party.csId}&partyRight=${requestScope.party.partyRight }">
+	앨범보기</a>

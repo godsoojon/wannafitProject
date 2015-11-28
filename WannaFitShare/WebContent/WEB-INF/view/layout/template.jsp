@@ -7,27 +7,80 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
-<!-- jQuery Library import -->
- <script type="text/javascript"
-	src="${initParam.rootPath }/script/jquery.js"></script>
 
 <style type="text/css">
+body {
+	padding-top: 70px;
+}
+
 /*메세지 스타일*/
 .errorMessage {
 	font-size: 12px;
 	color: red
 }
+
+a {
+	text-decoration: none;
+}
+
+div.template {
+	margin-top: 50px;
+	margin-right: auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left: auto;
+	width: 1024px;
+}
+
+
+nav.template {
+	height: 50px;
+	line-height: 50px;
+	background-color: red;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
+
+nav.template a:link {
+	text-decoration: none;
+	color: white;
+}
+
+nav.template a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+nav.template a:active {
+	text-decoration: none;
+	color: white;
+}
+
+nav.template a:hover {
+	text-decoration: underline;
+	color: blue;
+}
+}
+</style>
+<!-- jQuery Library import -->
+<%--  <script type="text/javascript"
+	src="${initParam.rootPath }/script/jquery.js"></script> --%>
+
+<!-- <style type="text/css">
+
 
 .normalMessage {
 	font-size: 12px;
@@ -61,6 +114,7 @@ div.template {
 	width: 1024px;
 }
 
+
 nav.template {
 	height: 50px;
 	line-height: 50px;
@@ -90,17 +144,12 @@ nav.template a:hover {
 	color: blue;
 }
 
-section.template {
-	margin: 10px;
-	height: auto;
-	overflow: auto; /*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-}
-</style> 
+</style>  -->
 
 </head>
 <body>
 	<div class="template">
-		<nav class="template">
+		<nav class="navbar">
 			<tiles:insertAttribute name="menu" />
 		</nav>
 		<section class="template">
