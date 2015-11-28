@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="caloriecalendarMapper">
+
+<!-- resultMap 설정 -->
+	<resultMap
+		type="caloriecalendar"
+		id="caloriecalendar-resultmap">
+		<id
+			property="csId"
+			column="cs_id" />
+		<result
+			property="calorieDate"
+			column="calorie_date" />
+		<result
+			property="totalCalorie"
+			column="total_calorie" />
+	</resultMap>
+
+
+	<!-- sql 설정 -->
+	<sql id="select-column-sql">
+		cs_id,calorie_date,total_calorie
+	</sql>
+
+	<sql id="select-sql">
+		select
+		<include refid="select-column-sql" />
+		from caloriecalendar
+	</sql>
+	<insert
+		id="insert-sql"
+		parameterType="caloriecalendar">
+		insert into caloriecalendar (
+		<include refid="select-column-sql"/>
+		)
+		values(#{csId},#{calorieDate},#{totalCalorie})
+	</insert>
+	<!-- insert-caloriecalendar -->
+		<select
+		id="select-cal"
+		parameterType="caloriecalendar"
+		resultMap="caloriecalendar-resultmap">
+		select <include refid="select-column-sql"/>
+		from caloriecalendar
+		where cs_id=#{csId} and calorie_date=#{calorieDate}
+	</select>
+</mapper>
