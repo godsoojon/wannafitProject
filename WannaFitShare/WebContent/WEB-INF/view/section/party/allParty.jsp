@@ -9,12 +9,12 @@
 		href="${initParam.rootPath}/partyController/logincheck/allParty.do">모든
 			앨범 보기</a></li>
 	<li role="presentation"><a
-		href="${initParam.rootPath}/partyController/logincheck/belongParty.do">내가
-			만든 앨범 보기</a></li>
+		href="${initParam.rootPath}/partyController/logincheck/belongParty.do">나의 앨범 목록</a></li>
 	<li role="presentation"><a
 		href="${initParam.rootPath}/partyController/logincheck/makeParty_form.do">앨범
 			만들기</a></li>
 </ul>
+
 <h2>모든 앨범 목록</h2>
 <c:choose>
 	<c:when test="${fn:length(requestScope.list)==0 }">
@@ -29,7 +29,7 @@
 				<tr>
 					<td style="color: darkblue">${partyList}</td>
 					<td><a
-						href="${initParam.rootPath}/partyController/findParty.do?partyName=${partyList}">
+						href="${initParam.rootPath}/partyController/goParty.do?partyName=${partyList}">
 							<button class="btn btn-warning">보러가기</button>
 					</a></td>
 				<tr>

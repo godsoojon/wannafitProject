@@ -50,7 +50,6 @@ public class PartyController {
 		Date date = new Date();
 		party.setCsId(id);
 		party.setPartyDate(date);
-		System.out.println(party + "-----파티 추가 컨드롤러");
 
 		PartyValidator validate = new PartyValidator();
 		validate.validate(party, errors);
@@ -82,8 +81,8 @@ public class PartyController {
 		return "party/allParty.tiles";
 	}
 
-	/*가입하려는 파티 찾기*/
-	@RequestMapping("/findParty.do")
+	/*다른사람 파티 보러가기 -정보 출력*/
+	@RequestMapping("/goParty.do")
 	public String findParty(@RequestParam String partyName, ModelMap model) {
 		partyService.selectPartyByName(partyName);
 		Party party = partyService.selectPartyByName(partyName);
