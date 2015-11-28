@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.wannafitshare.customer.service.CalorieCalendarService;
+import com.wannafitshare.vo.CalorieCalendar;
+
 @Controller
 @RequestMapping("/CalorieCalendarController")
 public class CalorieCalendarController {

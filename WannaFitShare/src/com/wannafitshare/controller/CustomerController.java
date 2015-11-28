@@ -25,14 +25,14 @@ import com.wannafitshare.customer.service.CalorieCalendarServiceImpl;
 import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.vo.Customer;
 
+import common.util.CalDayMonth;
 import common.validator.CustomerValidator;
 
 /**
-  * @RequestMapping - 요청 URL 등록
-  * 				- 요청 url 등록  value="url" 
-  * 			    - 요청 방식 등록 : method=GET/POST : RequestMethod 선언된 상수이용
-  * 				- 생략 : get/post 모두 처리.	
-  * hello.do로 url 경로로 post방식의 요청을 처리하는 handler(controller)메소드 ......
+ * @RequestMapping - 요청 URL 등록 - 요청 url 등록 value="url" - 요청 방식 등록 :
+ *                 method=GET/POST : RequestMethod 선언된 상수이용 - 생략 : get/post 모두
+ *                 처리. hello.do로 url 경로로 post방식의 요청을 처리하는 handler(controller)메소드
+ *                 ......
  */
 @Controller
 @RequestMapping("/customer")
@@ -57,103 +57,20 @@ public class CustomerController {
 	}
 
 	//고객 List 조회처리 Handler
+
+	// 고객 List 조회처리 Handler
 	@RequestMapping("/logincheck/list")
 	public String list(@RequestParam(defaultValue = "1") String pageNo,
 			ModelMap model) {
 		int page = 1;
 		try {
-			page = Integer.parseInt(pageNo); //null일 경우 예외처리를 통해 page를 1로 처리한다..
+			page = Integer.parseInt(pageNo); // null일 경우 예외처리를 통해 page를 1로
+											// 처리한다..
 		} catch (NumberFormatException e) {
 		}
 		Map attributes = service.getAllCustomersPaging(page);
 		model.addAllAttributes(attributes);
 		return "customer/list.tiles";
-	}
-
-	//고객 등록 처리 Handler
-
-	@RequestMapping(value = "/add.do", method = RequestMethod.POST)
-	public String add(@ModelAttribute Customer customer, Errors errors,
-			ModelMap model) throws DuplicatedIdException, SQLException {
-		CustomerValidator validate = new CustomerValidator();
-		validate.validate(customer, errors);
-		System.out.println("총 검증 실패 개수 : " + errors.getErrorCount());
-		if (errors.hasErrors()) {
-			return "customer/register_form.tiles";
-		}
-		service.addCustomer(customer);
-		model.addAttribute("csId", customer.getCsId());
-		return "redirect:/customer/registerSuccess.do";
-	}
-
-	//등록 후 성공페이지로 이동 처리.
-	@RequestMapping("/registerSuccess")
-	public String registerSuccess(@RequestParam String csId, ModelMap model) {
-
-		model.addAttribute("customer", service.findCustomerById(csId));
-		return "customer/register_success.tiles";
-	}
-
-	//로그인 회원 정보 수정
-	@RequestMapping("/logincheck/modifyForm")
-	public String modifyForm(HttpSession session, ModelMap model)
-			throws Exception {
-
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-//		System.out.println(customer + " modify폼");
-		model.addAttribute("customer", customer);
-
-		return "customer/modify_form.tiles";
-	}
-
-	//수정 처리 Handler
-	@RequestMapping("/modify")
-	public String modify(@ModelAttribute Customer customer, Errors errors,
-			ModelMap model, HttpSession session) throws Exception {
-		//Validator를 이용해 요청파라미터 체크
-		new CustomerValidator().validate(customer, errors);
-
-		if (errors.hasErrors()) {
-			return "customer/modify_form.tiles";
-		}
-		service.updateCustomer(customer);
-		Customer newCust = service.findCustomerById(customer.getCsId());
-		session.setAttribute("loginInfo", newCust);
-//		model.addAttribute("csId", customer.getCsId());
-		return "customer/customer_main.tiles";
-	}
-
-	//고객 삭제 처리 HandlerattributeValue
-	@RequestMapping("/logincheck/remove.do")
-	public String remove(HttpSession session) throws Exception {
-		//요청파라미터 검증
-//		if (((String) session.getAttribute("csId")).trim().length() == 0) {
-//			throw new Exception("삭제할 고객의 아이디가 없습니다.");
-//		}
-
-		Customer reCust = (Customer) session.getAttribute("loginInfo");
-		String id = reCust.getCsId();
-
-		//비지니스 로직 - 삭제처리(removeCustomer())
-		System.out.println(id + "삭제할 아이디*-------");
-		service.removeCustomer(id);
-		//응답
-		session.setAttribute("loginInfo", null);
-		return "customer/byebye.tiles";
-	}
-
-	@RequestMapping("/idDuplicatedCheck")
-	@ResponseBody
-	public String idDuplicatedCheck(@RequestParam String csId) {
-		Customer cust = service.findCustomerById(csId);
-		return String.valueOf(cust != null); //중복인 경우 "true" 리턴
-	}
-
-	@RequestMapping("/logincheck/findByName")
-	public String findByName(@RequestParam String csName, ModelMap model) {
-		List<Customer> list = service.findCustomerByName(csName);
-		model.addAttribute("namelist", list);
-		return "customer/search_success.tiles";
 	}
 
 	@RequestMapping("/logincheck/calender")
@@ -259,4 +176,90 @@ public class CustomerController {
 		model.addAttribute("row6", row6);
 		return "customer/calender.tiles";
 	}
+
+	// 고객 등록 처리 Handler
+	@RequestMapping(value = "/add.do", method = RequestMethod.POST)
+	public String add(@ModelAttribute Customer customer, Errors errors,
+			ModelMap model) throws DuplicatedIdException, SQLException {
+		CustomerValidator validate = new CustomerValidator();
+		validate.validate(customer, errors);
+		System.out.println("총 검증 실패 개수 : " + errors.getErrorCount());
+		if (errors.hasErrors()) {
+			return "customer/register_form.tiles";
+		}
+		service.addCustomer(customer);
+		model.addAttribute("csId", customer.getCsId());
+		return "redirect:/customer/registerSuccess.do";
+	}
+
+	// 등록 후 성공페이지로 이동 처리.
+	@RequestMapping("/registerSuccess")
+	public String registerSuccess(@RequestParam String csId, ModelMap model) {
+
+		model.addAttribute("customer", service.findCustomerById(csId));
+		return "customer/register_success.tiles";
+	}
+
+	// 로그인 회원 정보 수정
+	@RequestMapping("/logincheck/modifyForm")
+	public String modifyForm(HttpSession session, ModelMap model)
+			throws Exception {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		// System.out.println(customer + " modify폼");
+		model.addAttribute("customer", customer);
+
+		return "customer/modify_form.tiles";
+	}
+
+	// 수정 처리 Handler
+	@RequestMapping("/modify")
+	public String modify(@ModelAttribute Customer customer, Errors errors,
+			ModelMap model, HttpSession session) throws Exception {
+		// Validator를 이용해 요청파라미터 체크
+		new CustomerValidator().validate(customer, errors);
+
+		if (errors.hasErrors()) {
+			return "customer/modify_form.tiles";
+		}
+		service.updateCustomer(customer);
+		Customer newCust = service.findCustomerById(customer.getCsId());
+		session.setAttribute("loginInfo", newCust);
+		// model.addAttribute("csId", customer.getCsId());
+		return "customer/customer_main.tiles";
+	}
+
+	// 고객 삭제 처리 HandlerattributeValue
+	@RequestMapping("/logincheck/remove.do")
+	public String remove(HttpSession session) throws Exception {
+		// 요청파라미터 검증
+		// if (((String) session.getAttribute("csId")).trim().length() == 0) {
+		// throw new Exception("삭제할 고객의 아이디가 없습니다.");
+		// }
+
+		Customer reCust = (Customer) session.getAttribute("loginInfo");
+		String id = reCust.getCsId();
+
+		// 비지니스 로직 - 삭제처리(removeCustomer())
+		System.out.println(id + "삭제할 아이디*-------");
+		service.removeCustomer(id);
+		// 응답
+		session.setAttribute("loginInfo", null);
+		return "customer/byebye.tiles";
+	}
+
+	@RequestMapping("/idDuplicatedCheck")
+	@ResponseBody
+	public String idDuplicatedCheck(@RequestParam String csId) {
+		Customer cust = service.findCustomerById(csId);
+		return String.valueOf(cust != null); // 중복인 경우 "true" 리턴
+	}
+
+	@RequestMapping("/logincheck/findByName")
+	public String findByName(@RequestParam String csName, ModelMap model) {
+		List<Customer> list = service.findCustomerByName(csName);
+		model.addAttribute("namelist", list);
+		return "customer/search_success.tiles";
+	}
+
 }
