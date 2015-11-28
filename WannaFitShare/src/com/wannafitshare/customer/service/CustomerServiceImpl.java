@@ -65,13 +65,12 @@ public class CustomerServiceImpl implements CustomerService {
 		//DB에 insert 
 		dao.insertCustomer(customer);
 	}
-
 	@Override
-	public void addFriendList(FriendList friendList) {
-		//여기서 이미 등록된 친구이면 exception처리
-
-		dao.insertFriendList(friendList);
+	public List<Customer> findCustomerByName(String csName) {
+		return dao.selectCustomersByName(csName);
 	}
+
+	
 
 	/**
 	 * 매개변수로 받은 ID의 고객을 찾아 삭제 처리
@@ -116,16 +115,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param name 조회할 고객의 이름
 	 * @return customerList에서 조회된 고객들을 담아 리턴할 ArrayList
 	 */
-	@Override
-	public List<Customer> findCustomerByName(String csName) {
-		return dao.selectCustomersByName(csName);
-	}
 
-	@Override
-	public List<String> findFriendListById(String csId) {
-		return dao.selectfriendList(csId);
-
-	}
 
 	/**
 	 * 매개변수로 받은 고객과 같은 ID를 가진 고객정보를 찾아 수정 처리.

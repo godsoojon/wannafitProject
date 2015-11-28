@@ -30,6 +30,13 @@
 					<td><a
 						href="${initParam.rootPath}/partyController/logincheck/myparty.do?partyName=${partyList}"><button
 								class="btn btn-warning">보러가기</button></a></td>
+
+					<td><a
+						href="${initParam.rootPath}/partyController/findParty.do?partyName=${partyList}"><button
+								class="btn btn-warning">보러가기</button></a></td>
+					<td><a
+						href="${initParam.rootPath}/partyController/deleteParty.do?partyName=${partyList}"><button
+								class="btn btn-warning">앨범삭제</button></a></td>
 				<tr>
 			</c:forEach>
 		</table>

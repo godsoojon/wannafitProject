@@ -3,6 +3,7 @@
 
 <hr>
 <ul class="nav nav-tabs">
+	<li role="presentation" class="active"><a href="${initParam.rootPath}/health/logincheck/healthForm.do">건강정보 보기</a></li>
   <li role="presentation" class="active"><a href="${initParam.rootPath}/customer/logincheck/modifyForm.do">회원정보수정</a></li>
   <li role="presentation"><a href="${initParam.rootPath}/loginController/logincheck/logout.do">로그아웃</a></li>
   <li role="presentation"><a href="${initParam.rootPath}/customer/logincheck/remove.do">회원탈퇴</a></li>

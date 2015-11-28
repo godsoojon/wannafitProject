@@ -63,6 +63,7 @@
 <%-- <a href="${initParam.rootPath}/loginController/logincheck/home.do"> 홈 </a>
 &nbsp;&nbsp; 
 <a href="${initParam.rootPath}/friendController/logincheck/search_name.do">친구 찾기</a>
+<<<<<<< HEAD
  &nbsp;&nbsp;
 <a href="${initParam.rootPath}/partyController/logincheck/party_index.do">앨범</a>
 &nbsp;&nbsp; 
@@ -72,8 +73,6 @@
  &nbsp;&nbsp;
 
 <a href="${initParam.rootPath}/test.do">부트스트랩 </a> --%>
-
-
 
 
 
