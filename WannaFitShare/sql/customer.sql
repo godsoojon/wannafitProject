@@ -1,5 +1,6 @@
 --table 삭제
-delete from PHOTO
+delete from PARTY;
+delete from PHOTO;
 drop table customer;
 CREATE TABLE friendlist (
 	fl_key VARCHAR2(20) NOT NULL, /* 친구목록식별키 */

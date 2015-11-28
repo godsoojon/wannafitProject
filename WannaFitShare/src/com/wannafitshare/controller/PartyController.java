@@ -69,7 +69,9 @@ public class PartyController {
 	public String belongToParty(HttpSession session, ModelMap model) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-		List<String> list = partyService.belongParty(id);
+		String name = customer.getCsName();
+		//리턴값 id가 가진  party(앨범)들
+		List <String> list = partyService.belongParty(id);
 		model.addAttribute("list", list);
 		return "party/belong_party.tiles";
 	}
@@ -139,4 +141,15 @@ public class PartyController {
 //		return "party/belong_party.tiles";
 //	}
 
+	
+	   /*내 앨범  보기*/	
+	   @RequestMapping("/logincheck/myparty.do")
+	   public String myParty(@RequestParam String partyName, HttpSession session,
+	         ModelMap model) {
+	      Customer customer = (Customer) session.getAttribute("loginInfo");
+	      String id = customer.getCsId();
+	      Party party = partyService.selectPartyByName(partyName);
+	      session.setAttribute("party", party.getPartyName());
+	      return "party/test.tiles";
+	   }
 }

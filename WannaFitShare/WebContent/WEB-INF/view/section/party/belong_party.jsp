@@ -10,11 +10,12 @@
 		<table style="width: 500px" border="1">
 			<tr>
 				<th>앨범 이름</th>
+				<th>앨범 삭제</th>
 			</tr>
 			<c:forEach items="${requestScope.list }" var="partyList">
 				<tr>
-					<td><a href="${initParam.rootPath}/partyController/findParty.do?partyName=${partyList}"> ${partyList} </a></td>
-					<td><a href="${initParam.rootPath}/partyController/deleteParty.do?partyName=${partyList}"> 앨범삭제</a></td>
+					<td><a href="${initParam.rootPath}/partyController/myParty.do?partyName=${partyList}"> ${partyList} </a></td>
+					<td><a href="${initParam.rootPath}/partyController/deleteParty.do?partyName=${partyList}"> 삭제</a></td>
 				<tr>
 			</c:forEach>
 		</table>
