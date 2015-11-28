@@ -30,5 +30,10 @@ public class LoginDaoImpl implements LoginDao {
 		map.put("csPassword", csPassword);
 		return session.selectOne("loginMapper.loginCustomer", map);
 	}
+	
+	@Override
+	public Customer loginCustomer2(Customer customer) {
+		return session.selectOne("loginMapper.loginCustomer2", customer);
+	}
 
 }

@@ -4,12 +4,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.customer.service.LoginService;
 import com.wannafitshare.vo.Customer;
+
+import common.validator.LoginValidator;
 
 @Controller
 @RequestMapping("/loginController")
@@ -21,20 +26,28 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@RequestMapping("/login")
-	public String login(@RequestParam String csId,
-			@RequestParam String csPassword, HttpSession session) {
+	@Autowired
+	private CustomerService custService;
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute Customer customer, Errors errors,
+			HttpSession session) {
 		String returnURL = "";
+		LoginValidator validate = new LoginValidator();
+		validate.validate(customer, errors);
+		if (errors.hasErrors()) {//true - 오류가 있다
+			return "/index.do";
+		}
 
-		Customer customer = loginService.loginCustomer(csId, csPassword);
-//		System.out.println(customer);
+		Customer findCustomer = custService
+				.findCustomerById(customer.getCsId());
 
-		if (customer == null) {
+		if (findCustomer == null) {
 			returnURL = "/index.do";
-		} else if (customer.getCsId().equals(csId)
-				&& customer.getCsPassword().equals(csPassword)) {//아이디,비번 비교
-//			System.out.println(customer);
-			session.setAttribute("loginInfo", customer);
+		} else if (findCustomer.getCsId().equals(customer.getCsId())
+				&& findCustomer.getCsPassword()
+						.equals(customer.getCsPassword())) {//아이디,비번 비교
+			session.setAttribute("loginInfo", findCustomer);
 //			returnURL = "redirect:/customer/customer_main.do";
 			returnURL = "customer/customer_main.tiles";
 		} else {

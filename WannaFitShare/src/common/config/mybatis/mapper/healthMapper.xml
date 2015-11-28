@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-2022-KR"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="healthMapper">
+<!-- health resultMap설정
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+	h_weight NUMBER, /* 몸무게 */
+	h_tall NUMBER, /* 키 */
+	h_bloodtype VARCHAR2(10), /* 혈액형 */
+	h_bloodsugar NUMBER, /* 혈당 */
+	h_bmi NUMBER, /* BMI */
+	h_bloodpressure NUMBER, /* 혈압 */
+	h_ldl NUMBER, /* LDL */
+	h_hdh NUMBER /* HDH */
+
+
+ -->
+
+
+	<resultMap
+		type="health"
+		id="health">
+		<id
+			property="csId"
+			column="cs_id" />
+		<result
+			property="hWeight"
+			column="h_weight" />
+		<result
+			property="hTall"
+			column="h_tall" />
+			<result
+			property="hBloodType"
+			column="h_bloodtype" />
+			<result
+			property="hBloodSugar"
+			column="h_bloodsugar" />
+			<result
+			property="hBmi"
+			column="h_bmi" />
+			
+			<result
+			property="hBloodPressure"
+			column="h_bloodpressure" />
+			<result
+			property="hLdl"
+			column="h_ldl" />
+			<result
+			property="hHdh"
+			column="h_hdh" />
+
+	</resultMap>
+	<resultMap
+		type="health"
+		id="health-constructor-resultmap">
+		<constructor>
+			<idArg
+				column="cs_id"
+				javaType="string" />
+			<arg
+				column="h_weight"
+				javaType="double" />
+			<arg
+				column="h_tall"
+				javaType="double" />
+					<arg
+				column="h_bloodtype"
+				javaType="string" />
+					<arg
+				column="h_bloodsugar"
+				javaType="double" />
+					<arg
+				column="h_bmi"
+				javaType="double" />
+					<arg
+				column="h_bloodpressure"
+				javaType="double" />
+					<arg
+				column="h_ldl"
+				javaType="double" />
+					<arg
+				column="h_hdh"
+				javaType="double" />
+		</constructor>
+	</resultMap>
+	
+	<insert id="insertHealth" parameterType="health">
+	insert into health
+	values(#{csId},#{hWeight},#{hTall},#{hBloodType},#{hBloodSugar},#{hBmi},#{hBloodPressure},#{hLdl},#{hHdh})
+	
+	</insert>
+	
+	<select id="selectHealthById" parameterType="string" resultMap="health">
+		select cs_id,h_weight,h_tall,h_bloodtype,h_bloodsugar,h_bmi,h_bloodpressure,h_ldl,h_hdh
+		from health
+		where cs_id=#{csId}
+	
+	</select>
+	
+	<update id="updateHealth" parameterType="health">
+			update health
+			set  h_weight=#{hWeight},
+					h_tall=#{hTall}, 
+					h_bloodtype=#{hBloodType},
+					h_bloodsugar=#{hBloodSugar},
+					h_bmi=#{hBmi},
+					h_bloodpressure=#{hBloodPressure},
+					h_ldl=#{hLdl},
+					h_hdh=#{hHdh}
+			where cs_id =#{csId}		
+			
+	</update>
+	
+	
+	
+	
+	
+
+</mapper>

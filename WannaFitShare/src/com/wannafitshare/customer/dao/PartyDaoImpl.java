@@ -47,5 +47,9 @@ public class PartyDaoImpl implements PartyDao {
 	public List<String> friendList(String csId) {
 		return session.selectList("partyMapper.friendList", csId);
 	}
+	
+	public int deleteParty(String partyName){
+		return session.delete("partyMapper.deleteParty",partyName);
+	}
 
 }

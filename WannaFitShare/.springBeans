@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>WebContent/WEB-INF/config/spring/spring-customer.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

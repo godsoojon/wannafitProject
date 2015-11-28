@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <h2>고객 목록</h2>
 <c:choose>
 	<c:when test="${fn:length(requestScope.namelist)==0 }">
 		등록된 고객이 없습니다.
 	</c:when>
 	<c:otherwise>
-		<table style="width: 500px" border="1">
+		<table style="width:500px" border="1">
 			<tr>
 				<th>고객 ID</th>
 				<th>고객 이름</th>
@@ -15,25 +15,27 @@
 				<th>전화번호</th>
 			</tr>
 			<c:forEach items="${requestScope.namelist }" var="customer">
-				<tr>
-					<td>${customer.csId }</td>
-					<td><a
-						href="${initParam.rootPath}/friendController/findById.do?csId=${customer.csId }">
-							${customer.csName} </a></td>
-					<td>${customer.csEmail}</td>
-					<td>${customer.csPhone}</td>
-				<tr>
+			<tr>
+				<td>${customer.csId }</td>
+				<td>
+<a href="${initParam.rootPath}/friendController/findById.do?csId=${customer.csId }">
+						${customer.csName}
+					</a>
+				</td>
+				<td>${customer.csEmail}</td>
+				<td>${customer.csPhone}</td>
+			<tr>
 			</c:forEach>
 		</table>
 	</c:otherwise>
 </c:choose>
-<p />
+<p/>
 <!-- Paging 처리 -->
 <!-- 
 1. 이전 페이지 그룹으로 이동 처리
   이전페이지 그룹이 있으면 링크처리 없으면 <- 모양만 나오도록 처리.
  -->
-<%-- <c:choose>
+ <%-- <c:choose>
  	<c:when test="${requestScope.pagingBean.previousPageGroup }">
  		<a href="${initParam.rootPath }/customer/list.do?pageNo=${requestScope.pagingBean.startPageOfPageGroup-1}">
  			◀

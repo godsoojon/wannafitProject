@@ -37,7 +37,20 @@ select friend_id
 from friendlist
 where cs_id='123';
 
-delete from customer where cs_id='id-002' ON  CASCADE;
+
+
+
+
+		select party_name
+		from party
+		where party_right=2 or party_right=3;
+
+
+
+
+
+
+
 
 
 

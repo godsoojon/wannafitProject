@@ -15,4 +15,5 @@ public interface PartyDao {
 	List<String> belongParty(String csId);
 
 	List<String> friendList(String csId);
+	 int deleteParty(String partyName);
 }

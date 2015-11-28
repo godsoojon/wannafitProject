@@ -29,4 +29,9 @@ public class LoginServiceImpl implements LoginService {
 		return dao.loginCustomer(csId, csPassword);
 	}
 
+	@Override
+	public Customer loginCustomer2(Customer customer) {
+		return dao.loginCustomer2(customer);
+	}
+
 }
