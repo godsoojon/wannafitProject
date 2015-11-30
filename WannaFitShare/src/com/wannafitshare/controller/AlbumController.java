@@ -35,11 +35,20 @@ public class AlbumController {
 	@Autowired
 	private PhotoUploadService service;
 	
+	@RequestMapping("/photoMain")
+	public String photoMain(){
+		return "photo/photo_main.tiles";
+	}
 	
 	@RequestMapping("/logincheck/write")
 	public String write(HttpSession session) {
 
 		return "picture/write2.tiles"; 
+	}
+	
+	@RequestMapping("/photoSee.do")
+	public String photoSee(HttpSession session){
+		return  "picture/photo_see.tiles";
 	}
 	
 	@RequestMapping("/logincheck/submit")

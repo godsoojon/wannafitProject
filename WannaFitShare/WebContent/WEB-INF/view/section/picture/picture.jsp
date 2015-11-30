@@ -27,7 +27,7 @@
 				</tr>
 				<c:forEach items="${requestScope.contents }" var="contentList">
 					<tr>
-						<td><a href=""> ${contentList} </a></td>
+						<td><a href="${initParam.rootPath}/reple/findReple.do?photoId=${contentList.photoId}"> ${contentList} </a></td>
 					<tr>
 				</c:forEach>
 			</table>

@@ -2,7 +2,7 @@
 
 <!-- reple_id NUMBER NOT NULL, 
 	photo_id NUMBER,
-	replet_content VARCHAR2(50), 
+	reple_content VARCHAR2(50), 
 	reple_time DATE, 
 	party_name VARCHAR2(30),
 	cs_id VARCHAR2(10), -->
@@ -75,8 +75,13 @@
 	
 	</delete>
 	
-	<!-- 리플 전체 불러오기 -->
-	<select id="selectReple">
+	<!-- 리플 전체 불러오기 
+	사진 아이디로 저장되어있는 리플들 리스트로 리턴
+	-->
+	<select id="selectReple" parameType ="int" resultmap="reple-resultmap">
+	select reple_id,photo_id,reple_content,reple_time,party_Name,cs_id
+	from reple
+	where photo_id=#{photoId}
 	
 	</select>
 	
