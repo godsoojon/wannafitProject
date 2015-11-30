@@ -38,6 +38,12 @@ public class PartyServiceImpl implements PartyService {
 	public Party selectPartyByName(String partyName) {
 		return dao.selectPartyByName(partyName);
 	}
+	
+	@Override
+	public List <Party> selectPartyBycsId(String csId) {
+		return dao.selectPartyBycsId(csId);
+	}
+	
 
 	@Override
 	public List<String> belongParty(String csId) {

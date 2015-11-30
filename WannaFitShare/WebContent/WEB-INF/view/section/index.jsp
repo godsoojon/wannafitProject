@@ -3,32 +3,36 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<h2>로그인</h2>
 <spring:hasBindErrors name="customer" />
-<form action="${initParam.rootPath}/loginController/login.do"
-	method="post" id="regForm">
-	<!-- 요청 처리할 Controller에 대한 구분값 -->
-	<table border="1" style="width: 500px">
-		<tr>
-			<th>고객 ID</th>
-			<td><input type="text" id="csId" name="csId" size="25">
-				<span class="errorMessage" id="idErrorMessage">
-				<form:errors path="customer.csId" /></span></td>
-		</tr>
-		<tr>
-			<th>패스워드</th>
-			<td><input type="password" id="csPassword" name="csPassword"
-				size="25"> <span class="errorMessage">
-				<form:errors path="customer.csPassword" /></span></td>
-		</tr>
 
-		<tr>
-			<td colspan="2"><input type="submit" value="로그인"></td>
-		</tr>
-	</table>
+<form class="form-horizontal"
+	action="${initParam.rootPath}/loginController/login.do" method="post">
+	<div class="control-group">
+		<label class="control-label" for="inputEmail">ID</label>
+		<div class="controls">
+			<input type="text" id="csId" name="csId" placeholder="ID를 입력하세요">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="inputPassword">P/W</label>
+		<div class="controls">
+			<input type="password" id="csPassword" name="csPassword" placeholder="비밀번호를 입력하세요">
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+		<br>
+			<button class="btn btn-success" type="submit" class="btn">로그인</button>
+		</div>
+	</div>
 </form>
+
+
 <br>
-<a href="${initParam.rootPath}/customer/register_form.do"> <b>회원가입</b>
+<a class="btn btn-info" href="${initParam.rootPath}/customer/register_form.do"> <b>회원가입</b>
 </a>
 <br>
+
+
+
 

@@ -66,6 +66,8 @@
 	</select>
 	
 	
+
+	
 	<!-- listPhotoUpload -->
 	<select
 		id="listPhotoUpload"
@@ -73,6 +75,15 @@
 		resultMap="photoUpload-resultmap">
 		<include refid="select-sql"/>
 		where cs_id=#{csId}
+	</select>
+	
+	<!-- 	listPhotoUploadBypartyName -->
+	<select
+		id="listPhotoUploadBypartyName"
+		parameterType="string"
+		resultMap="photoUpload-resultmap">
+		<include refid="select-sql"/>
+		where party_name=#{partyName}
 	</select>
 	
 </mapper>

@@ -32,6 +32,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute Customer customer, Errors errors,
 			HttpSession session) {
+		System.out.println(customer);
 		String returnURL = "";
 		LoginValidator validate = new LoginValidator();
 		validate.validate(customer, errors);

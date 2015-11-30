@@ -16,7 +16,6 @@
 		<result
 			property="friendId"
 			column="friend_id" />
-
 	</resultMap>
 	<resultMap
 		type="friendList"

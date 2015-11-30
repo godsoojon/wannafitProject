@@ -13,4 +13,7 @@ public interface PhotoUploadDao {
 	List <PhotoUpload> listPhotoUpload (String csId);
 	
 	int deletePhotoUploadByPhotoId(int deletePhotoId);
+	
+	
+	List <PhotoUpload> listPhotoUploadBypartyName (String partyName);
 }

@@ -15,16 +15,13 @@ public class CustomerValidator implements Validator {
 	}
 
 	@Override
-	//등록/수정 공통 체크.
+	// 등록/수정 공통 체크.
 	public void validate(Object target, Errors error) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csId", "required",
-				new Object[]{"고객 ID"}, "필수입력사항입니다.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csPassword",
-				"requried", new Object[]{"패스워드"}, "필수입력사항입니다.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csName", "required",
-				new Object[]{"고객 이름"}, "필수입력사항입니다.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csEmail", "required",
-				new Object[]{"이메일주소"}, "필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csId", "required", new Object[] { "고객 ID" }, "필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csPassword", "requried", new Object[] { "패스워드" },
+				"필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csName", "required", new Object[] { "고객 이름" }, "필수입력사항입니다.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csEmail", "required", new Object[] { "이메일주소" }, "필수입력사항입니다.");
 
 	}
 

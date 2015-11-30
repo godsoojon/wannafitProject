@@ -116,12 +116,12 @@ ALTER TABLE calorie
 
 /* 사진 */
 CREATE TABLE photo (
-	photo_title VARCHAR2(30) , /* 그룹이름 */
 	photo_id NUMBER NOT NULL, /* 사진ID */
 	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	photo_time DATE, /* 시간 */
 	photo_content VARCHAR2(1000), /* ???? */
+	photo_title varchar2(30),
 	constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
