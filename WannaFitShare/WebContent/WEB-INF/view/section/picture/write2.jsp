@@ -64,6 +64,10 @@ $(function(){
 <form action="${initParam.rootPath}/album/logincheck/submit.do" id="frm"  method="post" >
 
 <table width="100%">
+		<tr>
+
+			<td>앨범 이름 : partyName</td>
+		</tr>
         <tr>
             <td>제목</td>
             <td><input type="text" id="title" name="title" style="width:650px"/></td>

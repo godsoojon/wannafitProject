@@ -1,10 +1,8 @@
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>WnnaFitShare</groupId>
-	<artifactId>WnnaFitShare</artifactId>
+	<artifactId>WannaFitShare</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
@@ -28,7 +26,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<!-- Spring 모듈 추가 -->
 		<dependency>
@@ -36,14 +34,14 @@
 			<artifactId>spring-context</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
-		
+
 		<!-- Spring MVC - spring-webmvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
-		
+
 		<!-- Spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -57,7 +55,7 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.3.0</version>
 		</dependency>
-		
+
 		<!-- mybatis-spring 연결 모듈 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -77,6 +75,12 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<!-- tiles api 설정 tiles 로 검색 후 tiles jsp suports와 tiles core library 설정을 
 			사용. -->
 		<dependency>

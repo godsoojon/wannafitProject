@@ -30,19 +30,23 @@
 	<mvc:view-controller
 		path="/index.do"
 		view-name="index.tiles" />
+
+	<mvc:view-controller
+		path="/test.do"
+		view-name="test/test.tiles" />
 	<!-- 등록페이지 -->
 	<mvc:view-controller
 		path="/customer/register_form.do"
 		view-name="customer/register_form.tiles" />
-		<mvc:view-controller
+	<mvc:view-controller
 		path="/customer/friend_list.do"
 		view-name="customer/friend_list.tiles" />
 
-		<mvc:view-controller
+	<mvc:view-controller
 		path="/customer/health_form.do"
 		view-name="customer/health_form.tiles" />
-		
-			<mvc:view-controller
+
+	<mvc:view-controller
 		path="/party/belong_party.do"
 		view-name="/party/belong_party.tiles" />
 
@@ -56,7 +60,9 @@
 	 -->
 	 
 	 <!-- CommonsMultipartResolver치고 class 자동완성 -->
-	 <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
+	<bean
+		name="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />	
 		
 		
 
