@@ -17,6 +17,6 @@ public interface PhotoUploadService {
 	
 	void deletePhotoUploadByPhotoId(int deletePhotoId); 
 	
-	 int photoNum();
+	int photoNum();
 }
 
