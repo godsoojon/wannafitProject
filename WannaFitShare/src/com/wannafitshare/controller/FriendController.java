@@ -72,35 +72,37 @@ public class FriendController {
 			model.addAttribute("friendList",list);
 			return "customer/friend_list.tiles";
 	  }
-	@RequestMapping("/addFriendList")
-	public String addFriendList(@RequestParam String friendId, Error errors,
-			ModelMap model, HttpSession session)
-					throws DuplicatedIdException, SQLException {
-		String URL="";
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId();
-		System.out.println(friendId);
-		FriendList friendList = new FriendList(id, friendId);
-		FriendList friendList2=new FriendList(friendId,id);
-		FriendList fl=friendService.findFriend(friendList);
-		FriendList fl2=friendService.findFriend(friendList2);
-		if(fl==null){
-			friendService.addFriendList(friendList);
-			List<String> list = friendService.findFriendListById(id);
-			model.addAttribute("friendList", list);
-			URL ="customer/friend_list.tiles";
-			System.out.println(fl);
-		}else{
-			//이미친구일때 팝업창.
-			System.out.println(fl);
-			JOptionPane.showMessageDialog(null, "이미친구입니다..");
-			List<String> list = friendService.findFriendListById(id);
-			model.addAttribute("friendList", list);
-			URL ="customer/friend_list.tiles";
-		}
-		
-		return URL;
-	
-	}
+	  
+	  
+	  @RequestMapping("/addFriendList")
+	   public String addFriendList(@RequestParam String friendId, Error errors,
+	         ModelMap model, HttpSession session)
+	               throws DuplicatedIdException, SQLException {
+	      String URL="";
+	      Customer customer = (Customer) session.getAttribute("loginInfo");
+	      String id = customer.getCsId();
+	      System.out.println(friendId);
+	      FriendList friendList = new FriendList(id, friendId);
+	      FriendList friendList2=new FriendList(friendId,id);
+	      FriendList fl=friendService.findFriend(friendList);
+	      FriendList fl2=friendService.findFriend(friendList2);
+	      if(fl==null){
+	         friendService.addFriendList(friendList);
+	         List<String> list = friendService.findFriendListById(id);
+	         model.addAttribute("friendList", list);
+	         URL ="customer/friend_list.tiles";
+	         System.out.println(fl);
+	      }else{
+	         //이미친구일때 팝업창.
+	         System.out.println(fl);
+	         JOptionPane.showMessageDialog(null, "이미친구입니다..");
+	         List<String> list = friendService.findFriendListById(id);
+	         model.addAttribute("friendList", list);
+	         URL ="customer/friend_list.tiles";
+	      }
+	      
+	      return URL;
+	   
+	   }
 
 }
