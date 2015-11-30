@@ -13,7 +13,8 @@
 			</tr>
 			<c:forEach items="${requestScope.list }" var="partyList">
 				<tr>
-					<td><a href="${initParam.rootPath}"> ${partyList} </a></td>
+
+					<td><a href="${initParam.rootPath}/partyController/logincheck/myparty.do?partyName=${partyList}"> ${partyList} </a></td>
 					<td><a href="${initParam.rootPath}/partyController/deleteParty.do?partyName=${partyList}"> 앨범삭제</a></td>
 				<tr>
 			</c:forEach>

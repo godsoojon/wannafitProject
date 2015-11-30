@@ -96,41 +96,47 @@ public class PartyController {
 	public String joinParty(@ModelAttribute Party party, HttpSession session) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-
+		String URL ="";
 		List<String> list = partyService.friendList(id);
 
 		int partyR = party.getPartyRight();
-
+		
 		if (partyR == 3) {
 			session.setAttribute("party", party.getPartyName());
-			return "party/test.tiles";
-			
+			return "/album/logincheck/see.do";
+
 		} else if (partyR == 2) {
 
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).equals(party.getCsId())) {
 					session.setAttribute("party", party.getPartyName());
-					return "party/test.tiles";
+					return "/album/logincheck/see.do";
+
 				}
 			}
+		
+			return "/friendController/logincheck/search_name.do";
 		}
+
 	
+
+		
+
 
 //		partyListservice.insertPartyList(id, partyName);
 		return "/friendController/logincheck/search_name.do";
 	}
-
-	/*내 앨범 보기*/
-	@RequestMapping("/logincheck/myparty.do")
-	public String myParty(@RequestParam String partyName, HttpSession session,
-			ModelMap model) {
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId();
-		Party party = partyService.selectPartyByName(partyName);
-		session.setAttribute("party", party.getPartyName());
-		return "party/test.tiles";
-	}
 	
+	@RequestMapping("/logincheck/myparty.do")
+	   public String myParty(@RequestParam String partyName, HttpSession session,
+	         ModelMap model) {
+	      Customer customer = (Customer) session.getAttribute("loginInfo");
+	      String id = customer.getCsId();
+	      Party party = partyService.selectPartyByName(partyName);
+	      session.setAttribute("party", party.getPartyName());
+	      return "party/test.tiles";
+	   }
+
 	@RequestMapping("/deleteParty.do")
 	public String deleteParty(@RequestParam String partyName){
 		partyService.deleteParty(partyName);
@@ -138,5 +144,15 @@ public class PartyController {
 		return "/partyController/logincheck/belongParty.do";
 		
 	}
+
+//	/*내가 속한 앨범 목록 보기*/
+//	@RequestMapping("/logincheck/belongParty.do")
+//	public String belongToParty(HttpSession session, ModelMap model) {
+//		Customer customer = (Customer) session.getAttribute("loginInfo");
+//		String id = customer.getCsId();
+//		List<String> list = partyListservice.belongParty(id);
+//		model.addAttribute("list", list);
+//		return "party/belong_party.tiles";
+//	}
 
 }

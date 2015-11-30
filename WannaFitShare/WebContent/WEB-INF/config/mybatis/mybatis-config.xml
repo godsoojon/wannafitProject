@@ -13,6 +13,8 @@
 		<typeAlias type="com.wannafitshare.vo.FriendList" alias="friendList"/>
 		<typeAlias type="com.wannafitshare.vo.Health" alias="health"/>
 		<typeAlias type="com.wannafitshare.vo.Party" alias="party"/>
+		<typeAlias type="com.wannafitshare.vo.Photo" alias="photo"/>
+		<typeAlias type="com.wannafitshare.vo.PhotoUpload" alias="photoUpload"/>
 	</typeAliases>
 	<!-- Mapper 설정 -->
 	<mappers>
@@ -21,5 +23,6 @@
 		<mapper resource="common/config/mybatis/mapper/loginMapper.xml"/>
 		<mapper resource="common/config/mybatis/mapper/healthMapper.xml"/>
 		<mapper resource="common/config/mybatis/mapper/partyMapper.xml"/>
+		<mapper resource="common/config/mybatis/mapper/PhotoUploadMapper.xml"/>
 	</mappers>
 </configuration>
