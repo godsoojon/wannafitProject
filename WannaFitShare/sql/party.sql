@@ -38,14 +38,18 @@ from friendlist
 where cs_id='123';
 
 
+select party_name
+from party
+where party_right=2 or party_right=3;
 
+update party
+set party_right =1
+where party_name ='123모두보기'
 
-
-		select party_name
-		from party
-		where party_right=2 or party_right=3;
-
-
+party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+	party_right NUMBER NOT NULL, /* 그룹권한 */
+	party_date DATE NOT NULL, /* 생성날짜 */
 
 
 

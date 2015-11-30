@@ -36,13 +36,14 @@
 						href="${initParam.rootPath}/partyController/logincheck/myparty.do?partyName=${partyList.partyName}">
 							<button class="btn btn-info">보러가기</button>
 					</a></td>
-					<td><a href=""><button class="btn btn-warning">수정하기</button></a></td>
+					<td><a
+						href="${initParam.rootPath}/partyController/logincheck/goUpdateParty.do?partyName=${partyList.partyName}"><button
+								class="btn btn-warning">수정하기</button></a></td>
 					<td><a
 						href="${initParam.rootPath}/partyController/deleteParty.do?partyName=${partyList.partyName}">
 							<button class="btn btn-danger">앨범삭제</button>
 					</a></td>
-				<tr>
-			</c:forEach>
+				<tr></c:forEach>
 		</table>
 	</c:otherwise>
 </c:choose>

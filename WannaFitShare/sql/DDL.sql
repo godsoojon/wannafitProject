@@ -117,7 +117,7 @@ ALTER TABLE calorie
 /* 사진 */
 CREATE TABLE photo (
 	photo_id NUMBER NOT NULL, /* 사진ID */
-	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
+	party_name VARCHAR2(30) NOT NULL, /* 앨범 이름 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	photo_time DATE, /* 시간 */
 	photo_content VARCHAR2(1000), /* ???? */
@@ -141,7 +141,7 @@ CREATE TABLE reple (
 	photo_id NUMBER, /* 사진ID */
 	replet_content VARCHAR2(50), /* 댓글내용 */
 	reple_time DATE, /* 시간 */
-	party_name VARCHAR2(30), /* 그룹이름 */
+	party_name VARCHAR2(30), /* 앨범 이름 */
 	cs_id VARCHAR2(10), /* 고객_id */
 	constraint reple_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
@@ -155,7 +155,7 @@ ALTER TABLE reple
 
 /* 그룹 */
 CREATE TABLE party (
-	party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
+	party_name VARCHAR2(30) NOT NULL, /* 앨범이름 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	party_right NUMBER NOT NULL, /* 그룹권한 */
 	party_date DATE NOT NULL, /* 생성날짜 */

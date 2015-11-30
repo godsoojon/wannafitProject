@@ -48,7 +48,8 @@
 		resultType="string">
 		select party_name
 		from party
-		where party_right=2 or party_right=3
+		where party_right=2 or
+		party_right=3
 	</select>
 
 	<select
@@ -58,7 +59,7 @@
 		<include refid="select-sql" />
 		where party_name=#{partyName}
 	</select>
-	
+
 	<select
 		id="selectPartyBycsId"
 		parameterType="string"
@@ -90,12 +91,20 @@
 		where cs_id=#{csId}
 	</select>
 
-<delete id="deleteParty" parameterType="string">
-	delete 
-	from party
-	where party_name=#{partyName}
-	
+	<delete
+		id="deleteParty"
+		parameterType="string">
+		delete
+		from party
+		where party_name=#{partyName}
+
 	</delete>
+
+	<update id="updateParty">
+		update party
+		set party_right = 1
+		where party_name ='123모두보기'
+	</update>
 
 
 
