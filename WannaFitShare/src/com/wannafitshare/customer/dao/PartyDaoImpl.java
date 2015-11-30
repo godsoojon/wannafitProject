@@ -37,7 +37,14 @@ public class PartyDaoImpl implements PartyDao {
 	public Party selectPartyByName(String partyName) {
 		return session.selectOne("partyMapper.selectPartyByName", partyName);
 	}
+	
 
+	@Override
+	public List <Party> selectPartyBycsId (String csId) {
+		return session.selectList("partyMapper.selectPartyBycsId",csId);
+	}
+	
+	
 	@Override
 	public List<String> belongParty(String csId) {
 		return session.selectList("partyMapper.belongParty", csId);

@@ -45,7 +45,7 @@
 		<tr>
 			<th>고객 ID</th>
 			<td><input type="text" id="csId" name="csId" size="25">
-				<span class="errors" id="idErrorMessage"><form:errors
+				<span class="errorMessage" id="idErrorMessage"><form:errors
 						path="customer.csId" /></span></td>
 		</tr>
 		<tr>
@@ -57,19 +57,19 @@
 		<tr>
 			<th>고객 이름</th>
 			<td><input type="text" id="csName" name="csName" size="25">
-				<span class="error"><form:errors path="customer.csName"
+				<span class="errorMessage"><form:errors path="customer.csName"
 						delimiter=" | " /></span></td>
 		</tr>
 		<tr>
 			<th>고객 Email</th>
 			<td><input type="text" id="csEmail" name="csEmail" size="25">
-				<span class="error"><form:errors path="customer.csEmail"
+				<span class="errorMessage"><form:errors path="customer.csEmail"
 						delimiter=" | " /></span></td>
 		</tr>
 		<tr>
 			<th>고객 번호</th>
 			<td><input type="text" id="csPhone" name="csPhone" size="25">
-				<span class="error"><form:errors path="customer.csPhone"
+				<span class="errorMessage"><form:errors path="customer.csPhone"
 						delimiter=" | " /></span></td>
 		</tr>
 		<tr>

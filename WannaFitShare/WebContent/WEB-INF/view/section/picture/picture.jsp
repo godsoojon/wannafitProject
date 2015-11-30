@@ -17,7 +17,7 @@
 	</table>
 
 	<c:choose>
-		<c:when test="${fn:length(requestScope.contents)==0 }">
+		<c:when test="${fn:length(requestScope.contents)==0}">
 		등록된 앨범이 없습니다.
 	</c:when>
 		<c:otherwise>

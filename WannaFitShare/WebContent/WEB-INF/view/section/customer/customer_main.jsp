@@ -1,23 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
+
+<hr>
+<ul class="nav nav-tabs">
+	<li role="presentation" class="active"><a href="${initParam.rootPath}/health/logincheck/healthForm.do">건강정보 보기</a></li>
+  <li role="presentation" class="active"><a href="${initParam.rootPath}/customer/logincheck/modifyForm.do">회원정보수정</a></li>
+  <li role="presentation"><a href="${initParam.rootPath}/loginController/logincheck/logout.do">로그아웃</a></li>
+  <li role="presentation"><a href="${initParam.rootPath}/customer/logincheck/remove.do">회원탈퇴</a></li>
+</ul>
+
 <h3>고객 메인페이지</h3>
- <p>안녕하세요 ${sessionScope.loginInfo.csName }님 환영합니다</p>
+<br>
+<p class="lead" >안녕하세요 ${sessionScope.loginInfo.csName }님 환영합니다</p>
  
- id : ${sessionScope.loginInfo.csId}<br>
+ id : <strong> ${sessionScope.loginInfo.csId}<br></strong>
  e-mail : ${sessionScope.loginInfo.csEmail }<br>
  휴대폰 : ${sessionScope.loginInfo.csPhone }
  
- <br><br>
- <a href="${initParam.rootPath}/customer/logincheck/modifyForm.do"> <b>회원정보수정</b> </a> <br>
- <a href="${initParam.rootPath}/loginController/logincheck/logout.do"> <b>로그아웃</b> </a> <br>
- <a href="${initParam.rootPath}/customer/logincheck/remove.do"> <b>회원탈퇴</b> </a> <br>
- <a href="${initParam.rootPath}/health/logincheck/healthForm.do"><b>건강 정보 보기</b></a><br>
-
-</body>
-</html>

@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,7 +42,8 @@ public class AlbumController {
 	
 	@RequestMapping("/logincheck/write")
 	public String write(HttpSession session) {
-		return "picture/write2.tiles";
+
+		return "picture/write2.tiles"; 
 	}
 	
 	@RequestMapping("/photoSee.do")
@@ -54,7 +56,7 @@ public class AlbumController {
 	
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId(); //cs_id
-		int num=0; // photo_id
+		int num=0; // photo_id	
 		String name = (String) session.getAttribute("party"); //party_name		
 		Date date = new Date(); 
 		num=service.photoNum(); //photo_id 중복피하여 생성 
@@ -64,19 +66,58 @@ public class AlbumController {
 	    //model.addAttribute("content",content);
 	    return "/album/logincheck/see.do";
 	}
-	
-	
+			
 	/* 내가 올린 사진 보기*/
 	@RequestMapping("/logincheck/see.do")
 	public String see(HttpSession session, ModelMap model) {
 		
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String csId = customer.getCsId(); //cs_id
-		List <PhotoUpload> listPhotoUpload = service.listPhotoUpload(csId);
+		String partyName= (String) session.getAttribute("party");
+		
+		List <PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(partyName);
+	/*	
 		model.addAttribute("listPhotoUpload", listPhotoUpload);
+		return "party/test.tiles";*/
+		
+/*		List <PhotoUpload> list = service.listPhotoUpload(csId); 
+		List <PhotoUpload> listBypartyName=null;
+		//사용자가 만든 모든 사진 리스트들에서 partyName에 해당하는 사진들을 뽑아야한다. 
+		Iterator  itr = list.iterator();
+		while(itr.hasNext()){
+			PhotoUpload o = (PhotoUpload)itr.next();
+			if(o.getPartyName().equals(partyName)){
+				listBypartyName.add(o);
+			}
+		}*/
+		//session.setAttribute("party", partyName);
+		model.addAttribute("listPhotoUpload",listPhotoUpload);
+		//model.addAttribute("partyName", partyName);
+		//System.out.println(listBypartyName);
 		return "party/test.tiles";
 	}
 	
+	/* 나만의 앨범에서 사진 보기 
+	@RequestMapping("/logincheck/mysee.do")
+	public String mysee(@RequestParam String partyName, ModelMap model, HttpSession session) {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String csId = customer.getCsId(); //cs_id
+		List <PhotoUpload> list = service.listPhotoUpload(csId); 
+		List <PhotoUpload> listBypartyName=null;
+		//사용자가 만든 모든 사진 리스트들에서 partyName에 해당하는 사진들을 뽑아야한다. 
+		Iterator  itr = list.iterator();
+		while(itr.hasNext()){
+			PhotoUpload o = (PhotoUpload)itr.next();
+			if(o.getPartyName().equals(partyName)){
+				listBypartyName.add(o);
+			}
+		}
+		model.addAttribute("listPhotoUpload", listBypartyName);
+		System.out.println(listBypartyName);
+		return "party/test.tiles";
+	}
+	*/
 	
 	//사진 삭제 처리 
 	@RequestMapping("/logincheck/delete.do")
@@ -90,6 +131,7 @@ public class AlbumController {
 		//응답
 		return "/album/logincheck/see.do";
 	}
+	
 	
 	
 	
@@ -121,7 +163,7 @@ public class AlbumController {
 	            vo.getFiledata().transferTo(new File(path+realname));
 	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=/photo_upload/"+realname;
 	            
-	        } else {
+	        } else { 
 	            file_result += "&errstr=error";
 	        }
 	    } catch (Exception e) {

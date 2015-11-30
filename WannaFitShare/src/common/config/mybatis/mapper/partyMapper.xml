@@ -58,6 +58,15 @@
 		<include refid="select-sql" />
 		where party_name=#{partyName}
 	</select>
+	
+	<select
+		id="selectPartyBycsId"
+		parameterType="string"
+		resultMap="party-resultmap">
+		<include refid="select-sql" />
+		where cs_id=#{csId}
+	</select>
+	
 
 	<!-- 속한 앨범 보기 -->
 	<select
