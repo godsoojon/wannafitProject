@@ -59,10 +59,10 @@
 	<!-- selectPhotoUploadById -->
 	<select
 		id="selectPhotoUploadById"
-		parameterType="int"
+		parameterType="string"
 		resultMap="photoUpload-resultmap">
 		<include refid="select-sql" />
-		where photo_id=#{photoId}
+		where party_name=#{partyName}
 	</select>
 	
 	

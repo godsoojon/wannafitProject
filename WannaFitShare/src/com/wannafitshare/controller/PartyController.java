@@ -81,6 +81,8 @@ public class PartyController {
 		return "party/allParty.tiles";
 	}
 
+	
+	
 	/*다른사람 파티 보러가기 -정보 출력*/
 	@RequestMapping("/goParty.do")
 	public String findParty(@RequestParam String partyName, ModelMap model) {

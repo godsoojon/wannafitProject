@@ -5,14 +5,32 @@
 		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <!-- Definitions for Tiles documentation   -->
 <tiles-definitions>
-	<definition name="template" template="/WEB-INF/view/layout/template.jsp">
-		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp"/>
+	<definition
+		name="template"
+		template="/WEB-INF/view/layout/template.jsp">
+		<put-attribute
+			name="menu"
+			value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute
+			name="side"
+			value="/WEB-INF/view/layout/side.jsp"></put-attribute>
 	</definition>
-	<definition name="*.tiles" extends="template">
-		<put-attribute name="body" value="/WEB-INF/view/section/{1}.jsp"/>
+
+
+
+	<definition
+		name="*.tiles"
+		extends="template">
+		<put-attribute
+			name="body"
+			value="/WEB-INF/view/section/{1}.jsp" />
 	</definition>
-	<definition name="*/*.tiles" extends="template">
-		<put-attribute name="body" value="/WEB-INF/view/section/{1}/{2}.jsp"/>
-	</definition>	
-	
+	<definition
+		name="*/*.tiles"
+		extends="template">
+		<put-attribute
+			name="body"
+			value="/WEB-INF/view/section/{1}/{2}.jsp" />
+	</definition>
+
 </tiles-definitions>
