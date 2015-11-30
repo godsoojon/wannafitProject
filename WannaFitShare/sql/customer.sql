@@ -1,7 +1,8 @@
 --table 삭제
-delete from PHOTO
+delete from PARTY;
+delete from PHOTO;
 drop table customer;
-CREATE TABLE friendlist (
+CREATE TABLE friendlist (``
 	fl_key VARCHAR2(20) NOT NULL, /* 친구목록식별키 */
 	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
 	firend_id VARCHAR2(10) /* 친구ID */

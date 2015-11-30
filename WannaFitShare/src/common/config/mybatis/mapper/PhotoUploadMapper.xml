@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="photoUploadMapper">
 
-	<!-- sql 설정 -->
+   <!-- sql 설정 -->
 	<sql id="select-column-sql">
 		photo_title,photo_id,party_name,cs_id,photo_time,photo_content
 	</sql>
-	
+
 	<sql id="select-sql">
 		select
 		<include refid="select-column-sql" />
 		from photo
 	</sql>
-	
-	<!-- resultMap 설정 -->
+   
+   <!-- resultMap 설정 -->
 	<resultMap
 		type="photoUpload"
 		id="photoUpload-resultmap">
@@ -36,43 +36,55 @@
 			property="photoContent"
 			column="photo_content" />
 	</resultMap>
-	
-	<!-- deletePhotoUploadByPhotoId -->
+   
+   <!-- deletePhotoUploadByPhotoId -->
 	<delete
 		id="deletePhotoUploadByPhotoId"
 		parameterType="int">
 		delete from photo where photo_id=#{deletePhotoId}
 	</delete>
-	
-	
-	
-	<!-- insertPhotoUpload -->
+   
+   
+   
+   <!-- insertPhotoUpload -->
 	<insert
 		id="insertPhotoUpload"
 		parameterType="PhotoUpload">
 		insert into PHOTO (
 		<include refid="select-column-sql" />
 		)
-		values (#{photoTitle}, #{photoId}, #{partyName}, #{csId},#{photoTime}, #{photoContent})
+		values (#{photoTitle}, #{photoId}, #{partyName}, #{csId},#{photoTime},
+		#{photoContent})
 	</insert>
-	
-	<!-- selectPhotoUploadById -->
+   
+   <!-- selectPhotoUploadById -->
 	<select
 		id="selectPhotoUploadById"
+		parameterType="int"
+		resultMap="photoUpload-resultmap">
+		<include refid="select-sql" />
+		where photo_id=#{photoId}
+	</select>
+   
+   
+
+   
+   <!-- listPhotoUpload -->
+	<select
+		id="listPhotoUpload"
+		parameterType="string"
+		resultMap="photoUpload-resultmap">
+		<include refid="select-sql" />
+		where cs_id=#{csId}
+	</select>
+   
+   <!--    listPhotoUploadBypartyName -->
+	<select
+		id="listPhotoUploadBypartyName"
 		parameterType="string"
 		resultMap="photoUpload-resultmap">
 		<include refid="select-sql" />
 		where party_name=#{partyName}
 	</select>
-	
-	
-	<!-- listPhotoUpload -->
-	<select
-		id="listPhotoUpload"
-		parameterType="string"
-		resultMap="photoUpload-resultmap">
-		<include refid="select-sql"/>
-		where cs_id=#{csId}
-	</select>
-	
+
 </mapper>

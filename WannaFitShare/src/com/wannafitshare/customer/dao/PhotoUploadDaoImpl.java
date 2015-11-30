@@ -38,6 +38,13 @@ public class PhotoUploadDaoImpl implements PhotoUploadDao {
 		return session.selectList("photoUploadMapper.listPhotoUpload", csId);
 	}
 	
+	
+	
+	@Override
+	public List<PhotoUpload> listPhotoUploadBypartyName(String partyName) {
+		return session.selectList("photoUploadMapper.listPhotoUploadBypartyName", partyName);
+	}
+
 	@Override
 	public int deletePhotoUploadByPhotoId(int deletePhotoId) {
 		return session.delete("photoUploadMapper.deletePhotoUploadByPhotoId", deletePhotoId);

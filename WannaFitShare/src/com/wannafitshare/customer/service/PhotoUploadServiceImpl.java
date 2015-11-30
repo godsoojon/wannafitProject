@@ -67,4 +67,11 @@ public class PhotoUploadServiceImpl implements PhotoUploadService{
 		
 		dao.deletePhotoUploadByPhotoId(deletePhotoId);
 	}
+
+	@Override
+	public List<PhotoUpload> listPhotoUploadBypartyName(String partyName) {
+		return dao.listPhotoUploadBypartyName(partyName);
+	}
+	
+	
 }

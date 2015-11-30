@@ -11,8 +11,13 @@
 		href="${initParam.rootPath}/friendController/logincheck/search_name.do">친구찾기</a></li>
 	<li role="presentation"><a
 		href="${initParam.rootPath}/partyController/logincheck/party_index.do">앨범</a></li>
-	<li role="presentation"><a href="${initParam.rootPath}/customer/logincheck/calender.do?mode=0&year=-1&month=0&day&=0">칼로리 캘린더</a></li>
+	<li role="presentation"><a href="${initParam.rootPath}/customer/logincheck/calender.do?mode=0&year=-1&month=0&day&=0">
+	칼로리 캘린더</a></li>
+		<li role="presentation"><a
+		href="${initParam.rootPath}/friendController/myFriend.do">친구목록</a></li>
 </ul>
+
+
 
 
 

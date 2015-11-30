@@ -13,8 +13,10 @@ public interface PhotoUploadService {
 	
 	List <PhotoUpload> listPhotoUpload(String csId);
 	
+	List <PhotoUpload> listPhotoUploadBypartyName (String partyName);
+	
 	void deletePhotoUploadByPhotoId(int deletePhotoId); 
 	
-	 int photoNum();
+	int photoNum();
 }
 

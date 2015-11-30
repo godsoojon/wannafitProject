@@ -17,7 +17,7 @@
 	</table>
 
 	<c:choose>
-		<c:when test="${fn:length(requestScope.contents)==0 }">
+		<c:when test="${fn:length(requestScope.contents)==0}">
 		등록된 앨범이 없습니다.
 	</c:when>
 		<c:otherwise>
@@ -27,7 +27,7 @@
 				</tr>
 				<c:forEach items="${requestScope.contents }" var="contentList">
 					<tr>
-						<td><a href=""> ${contentList} </a></td>
+						<td><a href="${initParam.rootPath}/reple/findReple.do?photoId=${contentList.photoId}"> ${contentList} </a></td>
 					<tr>
 				</c:forEach>
 			</table>
