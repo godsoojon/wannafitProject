@@ -44,20 +44,13 @@ div.template {
 	width: 1024px;
 }
 
-
-nav.template a:hover {
-	text-decoration: underline;
-	background-color: darkblue;
-}
-
-.template {
+section.template {
 	position: relative;
 }
 
 .sidebar {
 	position: relative;
 	float: right;
-	top: -250px;
 	/* bottom: 20px;
 	left:-200px;
 	background-color: white;
@@ -147,12 +140,14 @@ nav.template a:hover {
 		<nav class="navbar">
 			<tiles:insertAttribute name="menu" />
 		</nav>
-		<section class="template">
-			<tiles:insertAttribute name="body" />
-		</section>
-		<section class="sidebar">
-			<tiles:insertAttribute name="side" />
-		</section>
+		<div>
+			<section class="template">
+				<tiles:insertAttribute name="body" />
+			</section>
+			<section class="sidebar">
+				<tiles:insertAttribute name="side" />
+			</section>
+		</div>
 	</div>
 </body>
 </html>

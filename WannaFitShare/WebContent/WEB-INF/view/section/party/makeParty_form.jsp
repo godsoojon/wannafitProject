@@ -7,13 +7,13 @@
 
 <hr>
 <ul class="nav nav-tabs">
-	<li role="presentation" class="active"><a
+	<li role="presentation"><a
 		href="${initParam.rootPath}/partyController/logincheck/allParty.do">모든
 			앨범 보기</a></li>
 	<li role="presentation"><a
 		href="${initParam.rootPath}/partyController/logincheck/belongParty.do">나의
 			앨범 목록</a></li>
-	<li role="presentation"><a
+	<li role="presentation" class="active"><a
 		href="${initParam.rootPath}/partyController/logincheck/makeParty_form.do">앨범
 			만들기</a></li>
 </ul>
