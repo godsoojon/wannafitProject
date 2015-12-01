@@ -36,7 +36,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	 */
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		System.out.println("Interceptor.preHandle() 실행-------------");
+//		System.out.println("Interceptor.preHandle() 실행-------------");
 
 		//로그인 체크 - session attribute : loginFlag 속성 유무
 		HttpSession session = request.getSession();

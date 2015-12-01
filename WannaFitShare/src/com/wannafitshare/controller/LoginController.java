@@ -43,7 +43,6 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute Customer customer, Errors errors,
 			HttpSession session) {
-		System.out.println(customer);
 		String returnURL = "";
 		validate.validate(customer, errors);
 		if (errors.hasErrors()) {//true - 오류가 있다
@@ -82,7 +81,6 @@ public class LoginController {
 	public String goHome(HttpSession session, ModelMap model) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-		System.out.println(id);
 		List<String> list = friendService.findFriendListById(id);
 
 		session.setAttribute("seionFriendList", list);

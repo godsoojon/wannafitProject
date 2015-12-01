@@ -26,9 +26,7 @@ public class PartyValidator implements Validator {
 	public void validate(Object target, Errors error) {
 
 		Party party = (Party) target;
-		System.out.println("party -- " + party);
 		Party findParty = service.selectPartyByName(party.getPartyName());
-		System.out.println("findParty -- " + findParty);
 
 		if (!supports(target.getClass())) {
 			error.reject("notsupport", "검증할수 없는 객체 입니다.");
@@ -36,18 +34,18 @@ public class PartyValidator implements Validator {
 		}
 
 		if (findParty != null) {
-			if (findParty == party) {
+			if (findParty.getPartyName().equals(party.getPartyName())) {
 				error.rejectValue("partyName", "existParty");
 			}
 		}
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "partyName",
-				"partyRequired", new Object[] { "파티 이름" }, "필수입력사항입니다.");
+				"partyRequired", new Object[] { "파티이름" }, "필수입력사항입니다.");
 
 		if (party.getPartyRight() != 1 && party.getPartyRight() != 2
 				&& party.getPartyRight() != 3) {
 			error.rejectValue("partyRight", "partyRequired",
-					new Object[] { "보기 권한" }, "권한을 선택하세요");
+					new Object[] { "보기권한" }, "권한을 선택하세요");
 		}
 
 	}
