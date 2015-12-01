@@ -16,12 +16,7 @@
 		 c:session-ref="sqlSessionTemplate"/> 
 	-->
 	<context:component-scan
-		base-package="com.wannafitshare.controller,
-										  com.wannafitshare.customer.dao,	
-										  com.wannafitshare.customer.service,
-										  
-										  com.spring.interceptor" />
-
+		base-package="com.wannafitshare.controller,com.wannafitshare.customer.dao,com.wannafitshare.customer.service,common.validator,com.spring.interceptor" />
 
 	<mvc:annotation-driven /> 
 	

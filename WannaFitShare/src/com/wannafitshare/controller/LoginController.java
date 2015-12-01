@@ -26,6 +26,9 @@ import common.validator.LoginValidator;
 public class LoginController {
 
 	@Autowired
+	private LoginValidator validate;
+
+	@Autowired
 	private CustomerService service;
 
 	@Autowired
@@ -42,7 +45,6 @@ public class LoginController {
 			HttpSession session) {
 		System.out.println(customer);
 		String returnURL = "";
-		LoginValidator validate = new LoginValidator();
 		validate.validate(customer, errors);
 		if (errors.hasErrors()) {//true - 오류가 있다
 			return "/index.do";
@@ -53,6 +55,7 @@ public class LoginController {
 
 		if (findCustomer == null) {
 			returnURL = "/index.do";
+
 		} else if (findCustomer.getCsId().equals(customer.getCsId())
 				&& findCustomer.getCsPassword()
 						.equals(customer.getCsPassword())) {//아이디,비번 비교

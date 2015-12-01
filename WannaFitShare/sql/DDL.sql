@@ -101,7 +101,7 @@ CREATE TABLE photo (
 	cs_id VARCHAR2(10), /* 고객_id */
 	party_name VARCHAR2(30), /* 그룹이름 */
 	photo_time DATE, /* 시간 */
-	photo_content VARCHAR2(100), /* 내용 */
+	photo_content VARCHAR2(500), /* 내용 */
 	photo_title VARCHAR2(30), /* 사진타이틀 */
 constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
 );

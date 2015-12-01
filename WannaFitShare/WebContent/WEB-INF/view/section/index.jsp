@@ -11,12 +11,14 @@
 		<label class="control-label" for="inputEmail">ID</label>
 		<div class="controls">
 			<input type="text" id="csId" name="csId" placeholder="ID를 입력하세요">
+			<span class="errorMessage"><form:errors path="customer.csId" delimiter=" | " /></span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label" for="inputPassword">P/W</label>
 		<div class="controls">
 			<input type="password" id="csPassword" name="csPassword" placeholder="비밀번호를 입력하세요">
+			<span class="errorMessage"><form:errors path="customer.csPassword" delimiter=" | " /></span>
 		</div>
 	</div>
 	<div class="control-group">

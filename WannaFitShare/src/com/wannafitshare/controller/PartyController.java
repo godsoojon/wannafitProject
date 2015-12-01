@@ -19,11 +19,15 @@ import com.wannafitshare.customer.service.PartyService;
 import com.wannafitshare.vo.Customer;
 import com.wannafitshare.vo.Party;
 
+import common.validator.LoginValidator;
 import common.validator.PartyValidator;
 
 @Controller
 @RequestMapping("/partyController")
 public class PartyController {
+
+	@Autowired
+	private PartyValidator validate;
 
 	@Autowired
 	private PartyService partyService;
@@ -53,7 +57,6 @@ public class PartyController {
 		party.setCsId(id);
 		party.setPartyDate(date);
 
-		PartyValidator validate = new PartyValidator();
 		validate.validate(party, errors);
 		if (errors.hasErrors()) {
 			return "party/makeParty_form.tiles";
