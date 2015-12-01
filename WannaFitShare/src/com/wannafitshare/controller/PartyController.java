@@ -140,10 +140,20 @@ public class PartyController {
 
 	/*파티 수정폼으로 가기*/
 	@RequestMapping("/logincheck/goUpdateParty.do")
-	public String updateParty(@RequestParam String partyName,
+	public String goUpdateParty(@RequestParam String partyName,
 			HttpSession session) {
-
+		System.out.println(partyName + "---- goUpdateParty.do");
+		session.setAttribute("party", partyName);
 		return "party/modify_fiorm.tiles";
 	}
 
+	@RequestMapping("/logincheck/updateParty.do")
+	public String updateParty(@RequestParam int partyRight,
+			HttpSession session) {
+		String partyName = (String) session.getAttribute("party");
+		System.out.println(partyName + " ---- updateParty.do");
+		System.out.println(partyRight + " ---- updateParty.do");
+		partyService.updatePartyRight(partyName, partyRight);
+		return "/partyController/logincheck/belongParty.do";
+	}
 }
