@@ -22,12 +22,25 @@ public class RepleDaoImpl implements RepleDao{
 	}
     
 
-  public List<Reple> findReple(String photoId){
+  public List<Reple> findReple(int photoId){
 	  return session.selectList("repleMapper.selectReple",photoId);
 	  
   }
   
+  public void updateReple(Reple reple){
+	  	session.update("repleMapper.updateReple",reple);
+  }
+  public void insertReple(Reple reple){
+	  session.insert("repleMapper.insertReple",reple);
+  }
 
+  public Reple findRepleByRepleId(int repleId){
+	  return session.selectOne("repleMapper.selectRepleOne",repleId);
+	  
+  }
+  public void deleteReple(int repleId){
+	  session.delete("repleMapper.deleteReple",repleId);
+  }
 	
 
 }

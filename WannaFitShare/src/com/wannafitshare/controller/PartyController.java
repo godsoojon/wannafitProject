@@ -50,6 +50,7 @@ public class PartyController {
       Date date = new Date();
       party.setCsId(id);
       party.setPartyDate(date);
+      
 
       PartyValidator validate = new PartyValidator();
       validate.validate(party, errors);

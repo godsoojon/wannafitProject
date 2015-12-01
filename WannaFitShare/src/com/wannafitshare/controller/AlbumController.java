@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wannafitshare.customer.service.PhotoUploadService;
+import com.wannafitshare.customer.service.RepleService;
 import com.wannafitshare.vo.Customer;
 import com.wannafitshare.vo.Photo;
 import com.wannafitshare.vo.PhotoUpload;
@@ -31,7 +32,8 @@ import com.wannafitshare.vo.PhotoUpload;
 @RequestMapping("/album")
 public class AlbumController {
 	
-
+	@Autowired
+	private RepleService repleService;
 	@Autowired
 	private PhotoUploadService service;
 	
@@ -46,8 +48,9 @@ public class AlbumController {
 		return "picture/write2.tiles"; 
 	}
 	
-	@RequestMapping("/photoSee.do")
+     @RequestMapping("/photoSee.do")
 	public String photoSee(HttpSession session){
+		
 		return  "picture/photo_see.tiles";
 	}
 	
