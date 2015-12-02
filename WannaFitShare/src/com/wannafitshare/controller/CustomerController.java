@@ -26,6 +26,7 @@ import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.vo.Customer;
 
 import common.util.CalDayMonth;
+import common.validator.CustomerModifyValidator;
 import common.validator.CustomerValidator;
 
 /**
@@ -40,6 +41,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerValidator validate;
+
+	@Autowired
+	private CustomerModifyValidator validateModify;
 
 	@Autowired
 	private CustomerService service;
@@ -210,11 +214,14 @@ public class CustomerController {
 	@RequestMapping("/modify")
 	public String modify(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model, HttpSession session) throws Exception {
+
+		System.out.println("modify 컨트롤러 들어옴");
 		// Validator를 이용해 요청파라미터 체크
-		validate.validate(customer, errors);
+		validateModify.validate(customer, errors);
 		if (errors.hasErrors()) {
 			return "customer/modify_form.tiles";
 		}
+		System.out.println("modify 컨트롤러 validate 끝남");
 		service.updateCustomer(customer);
 		Customer newCust = service.findCustomerById(customer.getCsId());
 		session.setAttribute("loginInfo", newCust);
@@ -238,7 +245,7 @@ public class CustomerController {
 		service.removeCustomer(id);
 		// 응답
 		session.setAttribute("loginInfo", null);
-		return "customer/byebye.tiles";
+		return "WannaFitShare/login.do";
 	}
 
 	@RequestMapping("/idDuplicatedCheck")

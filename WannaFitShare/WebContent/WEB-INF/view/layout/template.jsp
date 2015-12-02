@@ -15,13 +15,17 @@
 <title>DASHGUM - Bootstrap Admin Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="${initParam.rootPath}/assets/css/bootstrap.css" rel="stylesheet">
+<link href="${initParam.rootPath}/assets/css/bootstrap.css"
+	rel="stylesheet">
 <!--external css-->
-<link href="${initParam.rootPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link
+	href="${initParam.rootPath}/assets/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
 
 <!-- Custom styles for this template -->
 <link href="${initParam.rootPath}/assets/css/style.css" rel="stylesheet">
-<link href="${initParam.rootPath}/assets/css/style-responsive.css" rel="stylesheet">
+<link href="${initParam.rootPath}/assets/css/style-responsive.css"
+	rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

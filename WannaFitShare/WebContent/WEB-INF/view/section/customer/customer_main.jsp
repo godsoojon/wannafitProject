@@ -5,7 +5,7 @@
 		<!-- JUSTIFIED BUTTONS -->
 		<div class="showback">
 			<h4>
-				<i class="fa fa-angle-right"></i> Justified Buttons
+				<i class="fa fa-angle-right"></i> 회원 메뉴
 			</h4>
 			<div class="btn-group btn-group-justified">
 				<div class="btn-group">

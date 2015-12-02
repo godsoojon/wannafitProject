@@ -41,7 +41,8 @@
 					</button>
 				</div>
 				<div class="registration">
-					Don't have an account yet?<br /> <a class="" href="#"> Create
+					Don't have an account yet?<br /> <a class=""
+						href="${initParam.rootPath}/customer/register_form.do"> Create
 						an account </a>
 				</div>
 
