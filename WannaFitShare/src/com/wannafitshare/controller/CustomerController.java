@@ -39,15 +39,11 @@ import common.validator.CustomerValidator;
 public class CustomerController {
 
 	@Autowired
+	private CustomerValidator validate;
+
+	@Autowired
 	private CustomerService service;
 
-//	//고객 ID로 고객 조회 처리 Handler
-//	@RequestMapping("/findById")
-//	public String findById(@RequestParam String csId, ModelMap model) {
-//		Customer customer = service.findCustomerById(csId);
-//		model.addAttribute("customer", customer);
-//		return "customer/customer_info.tiles";
-//	}
 	//고객 아이디로 찾기
 	@RequestMapping("/findById")
 	public String findById(@RequestParam String csId, ModelMap model) {
@@ -55,8 +51,6 @@ public class CustomerController {
 		model.addAttribute("customer", customer);
 		return "customer/customer_info.tiles";
 	}
-
-	//고객 List 조회처리 Handler
 
 	// 고객 List 조회처리 Handler
 	@RequestMapping("/logincheck/list")
@@ -178,15 +172,15 @@ public class CustomerController {
 	}
 
 	// 고객 등록 처리 Handler
+	//TODO 
 	@RequestMapping(value = "/add.do", method = RequestMethod.POST)
 	public String add(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model) throws DuplicatedIdException, SQLException {
-		CustomerValidator validate = new CustomerValidator();
 		validate.validate(customer, errors);
-		System.out.println("총 검증 실패 개수 : " + errors.getErrorCount());
 		if (errors.hasErrors()) {
 			return "customer/register_form.tiles";
 		}
+
 		service.addCustomer(customer);
 		model.addAttribute("csId", customer.getCsId());
 		return "redirect:/customer/registerSuccess.do";
