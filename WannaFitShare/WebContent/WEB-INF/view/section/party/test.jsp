@@ -31,11 +31,13 @@
 				</tr>
 				<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
 					<tr>
-						<td><a href="${initParam.rootPath}/album/photoSee.do">${photoList.photoContent}</a><br>
-							<a
-							href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
-								삭제 </a></td>
-					<tr>
+
+						<td><a href="${initParam.rootPath}/reple/findReple.do?photoId=${photoList.photoId}">${photoList.photoContent}</a><br>
+						<a href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진 삭제 </a>
+					
+						</td>
+
+					</tr>
 				</c:forEach>
 			</table>
 		</c:otherwise>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wannafitshare.customer.service.PhotoUploadService;
+import com.wannafitshare.customer.service.RepleService;
 import com.wannafitshare.vo.Customer;
 import com.wannafitshare.vo.Photo;
 import com.wannafitshare.vo.PhotoUpload;
@@ -30,19 +31,86 @@ import com.wannafitshare.vo.PhotoUpload;
 @Controller
 @RequestMapping("/album")
 public class AlbumController {
+
+	
+	@Autowired
+	private RepleService repleService;
+	@Autowired
+	private PhotoUploadService service;
+	
+	@RequestMapping("/photoMain")
+	public String photoMain(){
+		return "photo/photo_main.tiles";
+	}
+	
+
+
+   
    
 
-   @Autowired
-   private PhotoUploadService service;
-   
-   @RequestMapping("/photoMain")
-   public String photoMain(){
-      return "photo/photo_main.tiles";
-   }
    
    @RequestMapping("/logincheck/write")
    public String write(HttpSession session) {
 
+		return "picture/write2.tiles"; 
+	}
+	
+     @RequestMapping("/photoSee.do")
+	public String photoSee(HttpSession session){
+		
+		return  "picture/photo_see.tiles";
+	}
+	
+	@RequestMapping("/logincheck/submit")
+	public String submit(@RequestParam String content , @RequestParam String title ,ModelMap model, HttpSession session) throws SQLException{ 
+	
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId(); //cs_id
+		int num=0; // photo_id	
+		String name = (String) session.getAttribute("party"); //party_name		
+		Date date = new Date(); 
+		num=service.photoNum(); //photo_id 중복피하여 생성 
+				
+	    //vo를 DB insert에 추가 
+	    service.addPhotoUpload(new PhotoUpload(title,num,name,id,date,content)); 
+	    //model.addAttribute("content",content);
+	    return "/album/logincheck/see.do";
+	}
+			
+	/* 내가 올린 사진 보기*/
+	@RequestMapping("/logincheck/see.do")
+	public String see(HttpSession session, ModelMap model) {
+		
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String csId = customer.getCsId(); //cs_id
+		String partyName= (String) session.getAttribute("party");
+		
+		List <PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(partyName);
+	/*	
+		model.addAttribute("listPhotoUpload", listPhotoUpload);
+		return "party/test.tiles";*/
+		
+/*		List <PhotoUpload> list = service.listPhotoUpload(csId); 
+		List <PhotoUpload> listBypartyName=null;
+		//사용자가 만든 모든 사진 리스트들에서 partyName에 해당하는 사진들을 뽑아야한다. 
+		Iterator  itr = list.iterator();
+		while(itr.hasNext()){
+			PhotoUpload o = (PhotoUpload)itr.next();
+			if(o.getPartyName().equals(partyName)){
+				listBypartyName.add(o);
+			}
+		}*/
+		//session.setAttribute("party", partyName);
+		model.addAttribute("listPhotoUpload",listPhotoUpload);
+		//model.addAttribute("partyName", partyName);
+		//System.out.println(listBypartyName);
+		return "party/test.tiles";
+	}
+	
+	/* 나만의 앨범에서 사진 보기 
+	@RequestMapping("/logincheck/mysee.do")
+	public String mysee(@RequestParam String partyName, ModelMap model, HttpSession session) {
+=======
       return "picture/write2.tiles"; 
    }
    
@@ -67,7 +135,7 @@ public class AlbumController {
        return "/album/logincheck/see.do";
    }
          
-   /* 내가 올린 사진 보기*/
+   /* 내가 올린 사진 보기
    @RequestMapping("/logincheck/see.do")
    public String see(HttpSession session, ModelMap model) {
       
@@ -76,11 +144,11 @@ public class AlbumController {
       String partyName= (String) session.getAttribute("party");
       
       List <PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(partyName);
-   /*   
-      model.addAttribute("listPhotoUpload", listPhotoUpload);
-      return "party/test.tiles";*/
       
-/*      List <PhotoUpload> list = service.listPhotoUpload(csId); 
+      model.addAttribute("listPhotoUpload", listPhotoUpload);
+      return "party/test.tiles";
+      
+      List <PhotoUpload> list = service.listPhotoUpload(csId); 
       List <PhotoUpload> listBypartyName=null;
       //사용자가 만든 모든 사진 리스트들에서 partyName에 해당하는 사진들을 뽑아야한다. 
       Iterator  itr = list.iterator();
@@ -89,17 +157,18 @@ public class AlbumController {
          if(o.getPartyName().equals(partyName)){
             listBypartyName.add(o);
          }
-      }*/
+      }
       //session.setAttribute("party", partyName);
       model.addAttribute("listPhotoUpload",listPhotoUpload);
       //model.addAttribute("partyName", partyName);
       //System.out.println(listBypartyName);
       return "party/test.tiles";
-   }
+   }*/
    
    /* 나만의 앨범에서 사진 보기 
    @RequestMapping("/logincheck/mysee.do")
    public String mysee(@RequestParam String partyName, ModelMap model, HttpSession session) {
+>>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
 
       Customer customer = (Customer) session.getAttribute("loginInfo");
       String csId = customer.getCsId(); //cs_id

@@ -47,6 +47,10 @@ public class PartyController {
 		return "party/makeParty_form.tiles";
 	}
 
+
+
+      
+
 	/*앨범 만들기*/
 	@RequestMapping("/logincheck/addParty.do")
 	public String addParty(@ModelAttribute Party party, Errors errors,
@@ -56,6 +60,7 @@ public class PartyController {
 		Date date = new Date();
 		party.setCsId(id);
 		party.setPartyDate(date);
+
 
 		validate.validate(party, errors);
 		if (errors.hasErrors()) {
