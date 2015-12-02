@@ -57,11 +57,10 @@ public class RepleController {
     	String url="";
     	Customer customer =(Customer)session.getAttribute("loginInfo");
     	String id1=customer.getCsId();
+    	Reple reple=rService.findRepleOne(repleId);
+    	String id2 =reple.getCsId();    	
     	
-    	
-    	
-    	
-    	if(id1.equals(repleId)){
+    	if(id1.equals(id2)){
     		url="picture/reple_register.tiles";
     		model.addAttribute("repleId",repleId);
     		
@@ -96,6 +95,11 @@ public class RepleController {
     	PhotoUpload photo=(PhotoUpload)session.getAttribute("photo");
     	
     	String repleContent=repletxt;
+    	repleContent.trim();
+    	if(repletxt.length()==0){
+    		JOptionPane.showMessageDialog(null, "댓글 내용이 없습니다.");
+    		return "/reple/return.do";
+    	}else{
     	int photoId=photo.getPhotoId();
     	System.out.println(photoId);
     	
@@ -103,7 +107,7 @@ public class RepleController {
     	rService.addReple(reple);
     	model.addAttribute("reple",reple);
     	return "/reple/return.do";
-    	
+    	}
     	
     }
     

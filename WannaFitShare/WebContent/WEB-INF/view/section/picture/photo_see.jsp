@@ -21,9 +21,10 @@
 			<table style="width: 500px" border="1">
 				<tr>
 					<th>사진들</th>
-					<td>사진 뿌리는 곳 세션에 사진 정보 있어야함. 이페이지에오는 컨트롤러에서
-					세션에 정보 담아줘야함
+					<td>
 					${sessionScope.photo.photoContent}
+					</td>
+					<td>
 					</td>
 				</tr>	
 				
@@ -31,12 +32,17 @@
 				<c:if test="${requestScope.reple!='' ||requestScope.reple ne null}">
 				<c:forEach items="${requestScope.repleList }" var="repleList">
 					<tr>
-					<th>댓글 쓴사람 id :${repleList.csId}  </th>
-							<td>${repleList.repleContent }
+					<th><h4>${repleList.csId}</h4>  </th>
+					<td>${repleList.repleContent }
 					
 						<a href="${initParam.rootPath}/reple/updateReple.do?repleId=${repleList.repleId}">수정</a>
 						<a href="${initParam.rootPath}/reple/deleteReple.do?repleId=${repleList.repleId}">삭제</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						
 						</td>
+						
+						<td>${repleList.repleTime}</td>
+						
 					</tr>
 				</c:forEach>
 				</c:if>
@@ -44,9 +50,10 @@
 				<th></th>
 				       <td><form action="${initParam.rootPath}/reple/addReple.do">
 				       <input type="text" id="repletxt" name="repletxt">
-				       <input type="submit" value="전송">
+				       <input type="submit" value="댓글 달기">
 				       </form></td>
-				
+					<td>
+					</td>
 				</tr>
 					
 						

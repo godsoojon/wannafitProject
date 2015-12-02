@@ -27,7 +27,7 @@ public class LoginValidator implements Validator {
 		Customer findcust = service.findCustomerById(customer.getCsId());
 
 		if (!supports(target.getClass())) {
-			error.reject("notsupport", "검등할수 없는 객체 입니다.");
+			error.reject("notsupport", "검증할수 없는 객체 입니다.");
 		}
 
 		if (customer.getCsId().length() >= 1 && findcust == null) {
