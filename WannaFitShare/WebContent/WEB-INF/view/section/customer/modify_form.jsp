@@ -26,7 +26,7 @@
 <spring:hasBindErrors name="customer" />
 <form action="${initParam.rootPath}/customer/modify.do" method="post"
 	id="modifyForm">
-	<table border="1" style="width: 500px">
+	<table border="1" style="width: 550px">
 		<tr>
 			<th>고객 ID</th>
 			<td>${requestScope.customer.csId }<input type="hidden"

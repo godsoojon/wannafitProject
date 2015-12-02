@@ -4,11 +4,20 @@
 <script type="text/javascript"
 	src="${initParam.rootPath }/script/formcheck.js"></script>
 <script type="text/javascript">
-	function cick() {
-		var flag = confirm("수정할까요?");
+	function checkRadio() {
+		var radioBtn = document.partyFrom.partyRight;
+		var flag = false;
+		for (var i = 0; i < radioBtn.length; i++) {
+			if (radioBtn[i].checked) {
+				flag = true;
+				break;
+			}
+		}
 		if (!flag) {
+			alert("권한을 선택하세요");
 			return false;
 		}
+
 	}
 </script>
 
@@ -31,7 +40,7 @@
 <spring:hasBindErrors name="party" />
 <form
 	action="${initParam.rootPath}/partyController/logincheck/updateParty.do"
-	method="post" name="partyFrom" onsubmit="return checkRadio();return cick()">
+	method="post" name="partyFrom" onsubmit="return checkRadio();">
 
 	<div class="form-group">
 		<label for="exampleInputEmail1">앨범 이름 : </label> <b>${sessionScope.party }</b>
@@ -48,5 +57,5 @@
 		</span>
 	</div>
 
-	<button type="submit" class="btn btn-info" >수정</button>
+	<button type="submit" class="btn btn-info">수정</button>
 </form>

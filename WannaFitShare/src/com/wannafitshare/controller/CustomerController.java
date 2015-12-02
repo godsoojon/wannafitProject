@@ -211,8 +211,7 @@ public class CustomerController {
 	public String modify(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model, HttpSession session) throws Exception {
 		// Validator를 이용해 요청파라미터 체크
-		new CustomerValidator().validate(customer, errors);
-
+		validate.validate(customer, errors);
 		if (errors.hasErrors()) {
 			return "customer/modify_form.tiles";
 		}
