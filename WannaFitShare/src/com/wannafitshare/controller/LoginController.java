@@ -46,14 +46,14 @@ public class LoginController {
 		String returnURL = "";
 		validate.validate(customer, errors);
 		if (errors.hasErrors()) {//true - 오류가 있다
-			return "/index.do";
+			return "/login.do";
 		}
 
 		Customer findCustomer = custService
 				.findCustomerById(customer.getCsId());
 
 		if (findCustomer == null) {
-			returnURL = "/index.do";
+			returnURL = "/login.do";
 
 		} else if (findCustomer.getCsId().equals(customer.getCsId())
 				&& findCustomer.getCsPassword()
@@ -63,7 +63,7 @@ public class LoginController {
 //			returnURL = "customer/customer_main.tiles";
 			returnURL = "/loginController/logincheck/home.do";
 		} else {
-			returnURL = "/index.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
+			returnURL = "/login.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
 		}
 		return returnURL;
 	}
@@ -73,7 +73,7 @@ public class LoginController {
 		session.setAttribute("loginInfo", null);
 		session.setAttribute("seionFriendList", null);
 		session.setAttribute("party", null);
-		return "/index.do";
+		return "/login.do";
 
 	}
 
