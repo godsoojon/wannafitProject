@@ -53,8 +53,9 @@ party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
 
 
 
-
-
-
+select party_name, cs_id, party_right, party_date
+from party
+where party_right=2 or
+		party_right=3;
 
 

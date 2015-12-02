@@ -24,7 +24,7 @@
 <spring:hasBindErrors name="party" />
 <form
 	action="${initParam.rootPath}/partyController/logincheck/addParty.do"
-	method="post" name="partyFrom" onsubmit="return checkRadio();">
+	method="post" name="partyFrom">
 
 	<div class="form-group">
 		<label for="exampleInputEmail1">앨범 이름</label> <input type="text"

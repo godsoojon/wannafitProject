@@ -34,6 +34,11 @@ public class LoginValidator implements Validator {
 
 			error.rejectValue("csId", "nullID");
 		}
+		if (findcust != null) {
+			if (!customer.getCsPassword().equals(findcust.getCsPassword())) {
+				error.rejectValue("csPassword", "wrongPwd");
+			}
+		}
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csId",
 				"loginRequired", new Object[] { "ID" }, "ID를 확인하세요");

@@ -8,7 +8,7 @@ public interface PartyService {
 
 	void insertParty(Party party);
 
-	List<String> selectAllParty();
+	List<Party> selectAllParty();
 
 	public Party selectPartyByName(String partyName);
 
