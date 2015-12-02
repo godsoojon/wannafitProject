@@ -30,7 +30,7 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public List<String> selectAllParty() {
+	public List<Party> selectAllParty() {
 		return dao.selectAllParty();
 	}
 

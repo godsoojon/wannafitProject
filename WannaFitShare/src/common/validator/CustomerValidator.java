@@ -36,6 +36,13 @@ public class CustomerValidator implements Validator {
 			error.rejectValue("csId", "existCsId");
 		}
 
+		if (customer.getCsId().length() < 5) {
+			error.rejectValue("csId", "shortCsId");
+		}
+		if (customer.getCsPassword().length() < 6) {
+			error.rejectValue("csPassword", "shortCsPassword");
+		}
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csId", "required",
 				new Object[] { "고객 ID" }, "필수입력사항입니다.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csPassword",

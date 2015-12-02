@@ -47,10 +47,6 @@ public class PartyController {
 		return "party/makeParty_form.tiles";
 	}
 
-
-
-      
-
 	/*앨범 만들기*/
 	@RequestMapping("/logincheck/addParty.do")
 	public String addParty(@ModelAttribute Party party, Errors errors,
@@ -60,7 +56,6 @@ public class PartyController {
 		Date date = new Date();
 		party.setCsId(id);
 		party.setPartyDate(date);
-
 
 		validate.validate(party, errors);
 		if (errors.hasErrors()) {
@@ -86,7 +81,10 @@ public class PartyController {
 	/*모든 앨범 보기*/
 	@RequestMapping("/logincheck/allParty.do")
 	public String allParty(ModelMap model) {
-		List<String> list = partyService.selectAllParty();
+		List<Party> list = partyService.selectAllParty();
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.println(list.get(i));
+//		}
 		model.addAttribute("list", list);
 		return "party/allParty.tiles";
 	}
@@ -105,7 +103,7 @@ public class PartyController {
 	public String joinParty(@ModelAttribute Party party, HttpSession session) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-
+		System.out.println(party);
 		List<String> list = partyService.friendList(id);
 
 		int partyR = party.getPartyRight();

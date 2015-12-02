@@ -8,7 +8,7 @@ public interface PartyDao {
 
 	void insertParty(Party party);
 
-	List<String> selectAllParty();
+	List<Party> selectAllParty();
 
 	Party selectPartyByName(String partyName);
 

@@ -30,7 +30,7 @@ public class PartyDaoImpl implements PartyDao {
 	}
 
 	@Override
-	public List<String> selectAllParty() {
+	public List<Party> selectAllParty() {
 		return session.selectList("partyMapper.selectAllParty");
 	}
 
