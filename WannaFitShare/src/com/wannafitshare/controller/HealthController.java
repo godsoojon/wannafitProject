@@ -1,20 +1,22 @@
 package com.wannafitshare.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wannafitshare.customer.service.HealthService;
 import com.wannafitshare.vo.Customer;
-
 import com.wannafitshare.vo.Health;
+
+import common.validator.HealthValidator;
+
 
 @Controller
 @RequestMapping("/health")
@@ -23,7 +25,7 @@ public class HealthController {
 	@Autowired
 	private HealthService hService;
 	
-	
+
 	
 	
 	@RequestMapping("/logincheck/healthForm")
@@ -45,16 +47,23 @@ public class HealthController {
 	
 	
 	@RequestMapping("/addHealth")
-	public String addHealth(HttpSession session, ModelMap model ,@ModelAttribute Health health){
-	
-	
-		hService.addHealth(health);
+	public String addHealth(HttpSession session, ModelMap model,@ModelAttribute Health health,Errors errors){
 		
+		
+		int hTall =(int)health.gethTall();
+		int hWeight=(int)health.gethWeight();
+	    double weight=health.gethWeight();
+		double hBmi =0;
+		if(hTall!=0&&hWeight!=0){
+			hBmi=weight/(health.gethTall()*health.gethTall());
+		
+			health.sethBmi(hBmi);
+			
+		}
+		
+		hService.addHealth(health);
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-		
-		
-		
 		Health h = hService.findHealthById(id);
 		model.addAttribute("friendList",h);
 		return "customer/health_success.tiles";
@@ -75,9 +84,18 @@ public class HealthController {
 	}
 	@RequestMapping("/modifyHealth")
 	public String modifyHealth(HttpSession session,ModelMap model, @ModelAttribute Health health){
-		System.out.println("---------등록전");
+		int hTall =(int)health.gethTall();
+		int hWeight=(int)health.gethWeight();
+	    double weight=health.gethWeight();
+		double hBmi =0;
+		if(hTall!=0&&hWeight!=0){
+			hBmi=weight/(health.gethTall()*health.gethTall());
+		
+			health.sethBmi(hBmi);
+			
+		}
 		hService.updateHealth(health);
-		System.out.println("---------등록후");
+		
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
 		Health h = hService.findHealthById(id);
