@@ -214,14 +214,11 @@ public class CustomerController {
 	@RequestMapping("/modify")
 	public String modify(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model, HttpSession session) throws Exception {
-
-		System.out.println("modify 컨트롤러 들어옴");
 		// Validator를 이용해 요청파라미터 체크
 		validateModify.validate(customer, errors);
 		if (errors.hasErrors()) {
 			return "customer/modify_form.tiles";
 		}
-		System.out.println("modify 컨트롤러 validate 끝남");
 		service.updateCustomer(customer);
 		Customer newCust = service.findCustomerById(customer.getCsId());
 		session.setAttribute("loginInfo", newCust);

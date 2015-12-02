@@ -2,7 +2,6 @@
 
 <section id="main-content">
 	<section class="wrapper">
-		<!-- JUSTIFIED BUTTONS -->
 		<div class="showback">
 			<h4>
 				<i class="fa fa-angle-right"></i> 회원 메뉴
