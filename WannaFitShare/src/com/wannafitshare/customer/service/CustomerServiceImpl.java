@@ -148,4 +148,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return map;
 	}
 
+	@Override
+	public Customer findCustomerByPhone(String csPhone) {
+		
+		return dao.selectCustomerByPhone(csPhone);
+	}
+
+	
 }//class

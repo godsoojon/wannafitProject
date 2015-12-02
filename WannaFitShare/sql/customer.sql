@@ -1,4 +1,5 @@
 --table 삭제
+	create sequence friendlist_fl_key_seq;
 delete from PARTY;
 delete from PHOTO;
 delete from CUSTOMER;

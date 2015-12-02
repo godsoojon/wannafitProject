@@ -20,7 +20,7 @@
 	<!-- Mapper 설정 -->
 	<mappers>
 		<mapper resource="common/config/mybatis/mapper/customerMapper.xml" />
-		<mapper resource="common/config/mybatis/mapper/FrindListMapper.xml"/>
+		<mapper resource="common/config/mybatis/mapper/FriendListMapper.xml"/>
 		<mapper resource="common/config/mybatis/mapper/loginMapper.xml"/>
 		<mapper resource="common/config/mybatis/mapper/caloriecalendarMapper.xml"/>
 		<mapper resource="common/config/mybatis/mapper/healthMapper.xml"/>

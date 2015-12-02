@@ -149,10 +149,7 @@ nav.template a:hover {
 		</nav>
 		<section class="template">
 			<tiles:insertAttribute name="body" />
-		</section>
-		<section class="sidebar">
-			<tiles:insertAttribute name="side" />
-		</section>
+		</section> 
 	</div>
 </body>
 </html>

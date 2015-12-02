@@ -29,7 +29,7 @@
 	<!-- 메인페이지 -->
 	<mvc:view-controller
 		path="/index.do"
-		view-name="index.tiles" />
+		view-name="/WEB-INF/view/section/index.jsp" />
 
 	<mvc:view-controller
 		path="/test.do"
