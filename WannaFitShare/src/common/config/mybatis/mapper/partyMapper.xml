@@ -100,10 +100,12 @@
 
 	</delete>
 
-	<update id="updateParty">
+	<update
+		id="updateParty"
+		parameterType="map">
 		update party
-		set party_right = 1
-		where party_name ='123모두보기'
+		set party_right = #{partyRight}
+		where party_name =#{partyName}
 	</update>
 
 

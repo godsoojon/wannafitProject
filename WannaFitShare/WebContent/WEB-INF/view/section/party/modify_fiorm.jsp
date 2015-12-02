@@ -3,7 +3,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript"
 	src="${initParam.rootPath }/script/formcheck.js"></script>
-
+<script type="text/javascript">
+	function cick() {
+		var flag = confirm("수정할까요?");
+		if (!flag) {
+			return false;
+		}
+	}
+</script>
 
 <hr>
 <ul class="nav nav-tabs">
@@ -24,25 +31,22 @@
 <spring:hasBindErrors name="party" />
 <form
 	action="${initParam.rootPath}/partyController/logincheck/updateParty.do"
-	method="post" name="partyFrom" onsubmit="return checkRadio();">
+	method="post" name="partyFrom" onsubmit="return checkRadio();return cick()">
 
 	<div class="form-group">
-		<label for="exampleInputEmail1">앨범 이름</label>
-		${requestScope.party.partyName }<input type="hidden" name="partyName"
-			id="partyName" value="${requestScope.party.partyName }">
+		<label for="exampleInputEmail1">앨범 이름 : </label> <b>${sessionScope.party }</b>
 	</div>
 
 	<div class="form-group">
 		<label for="exampleInputPassword1">권한</label> <br> <label
-			class="radio-inline"> <input type="radio" name="partyRight"
-			value="1" />나만보기
-		</label> <label class="radio-inline"><input type="radio"
-			name="partyRight" value="2" />친구만 보기</label> <label class="radio-inline"><input
-			type="radio" name="partyRight" value="3" />모두 보기</label> <span
-			class="errorMessage" id="idErrorMessage"> <form:errors
-				path="party.partyRight" /></span>
-
+			class="radio-inline"><input type="radio" name="partyRight"
+			value="1" />나만보기 </label> <label class="radio-inline"><input
+			type="radio" name="partyRight" value="2" />친구만 보기</label> <label
+			class="radio-inline"><input type="radio" name="partyRight"
+			value="3" />모두 보기</label> <span class="errorMessage" id="idErrorMessage">
+			<form:errors path="party.partyRight" />
+		</span>
 	</div>
 
-	<button type="submit" class="btn btn-info">수정</button>
+	<button type="submit" class="btn btn-info" >수정</button>
 </form>

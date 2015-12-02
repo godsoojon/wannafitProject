@@ -26,6 +26,9 @@ import common.validator.LoginValidator;
 public class LoginController {
 
 	@Autowired
+	private LoginValidator validate;
+
+	@Autowired
 	private CustomerService service;
 
 	@Autowired
@@ -40,9 +43,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute Customer customer, Errors errors,
 			HttpSession session) {
-		System.out.println(customer);
 		String returnURL = "";
-		LoginValidator validate = new LoginValidator();
 		validate.validate(customer, errors);
 		if (errors.hasErrors()) {//true - 오류가 있다
 			return "/index.do";
@@ -53,6 +54,7 @@ public class LoginController {
 
 		if (findCustomer == null) {
 			returnURL = "/index.do";
+
 		} else if (findCustomer.getCsId().equals(customer.getCsId())
 				&& findCustomer.getCsPassword()
 						.equals(customer.getCsPassword())) {//아이디,비번 비교
@@ -79,7 +81,6 @@ public class LoginController {
 	public String goHome(HttpSession session, ModelMap model) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-		System.out.println(id);
 		List<String> list = friendService.findFriendListById(id);
 
 		session.setAttribute("seionFriendList", list);

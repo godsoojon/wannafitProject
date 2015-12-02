@@ -19,11 +19,15 @@ import com.wannafitshare.customer.service.PartyService;
 import com.wannafitshare.vo.Customer;
 import com.wannafitshare.vo.Party;
 
+import common.validator.LoginValidator;
 import common.validator.PartyValidator;
 
 @Controller
 @RequestMapping("/partyController")
 public class PartyController {
+
+	@Autowired
+	private PartyValidator validate;
 
 	@Autowired
 	private PartyService partyService;
@@ -58,7 +62,6 @@ public class PartyController {
 		party.setPartyDate(date);
 
 
-		PartyValidator validate = new PartyValidator();
 		validate.validate(party, errors);
 		if (errors.hasErrors()) {
 			return "party/makeParty_form.tiles";
@@ -145,10 +148,20 @@ public class PartyController {
 
 	/*파티 수정폼으로 가기*/
 	@RequestMapping("/logincheck/goUpdateParty.do")
-	public String updateParty(@RequestParam String partyName,
+	public String goUpdateParty(@RequestParam String partyName,
 			HttpSession session) {
-
+		System.out.println(partyName + "---- goUpdateParty.do");
+		session.setAttribute("party", partyName);
 		return "party/modify_fiorm.tiles";
 	}
 
+	@RequestMapping("/logincheck/updateParty.do")
+	public String updateParty(@RequestParam int partyRight,
+			HttpSession session) {
+		String partyName = (String) session.getAttribute("party");
+		System.out.println(partyName + " ---- updateParty.do");
+		System.out.println(partyRight + " ---- updateParty.do");
+		partyService.updatePartyRight(partyName, partyRight);
+		return "/partyController/logincheck/belongParty.do";
+	}
 }

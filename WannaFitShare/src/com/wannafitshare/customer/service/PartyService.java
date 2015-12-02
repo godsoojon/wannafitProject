@@ -15,8 +15,10 @@ public interface PartyService {
 	List<String> belongParty(String csId);
 
 	List<String> friendList(String csId);
-	
-	 int deleteParty(String partyName);
-	 
-	 List <Party> selectPartyBycsId(String csId);
+
+	int deleteParty(String partyName);
+
+	List<Party> selectPartyBycsId(String csId);
+
+	int updatePartyRight(String partyName, int partyRight);
 }
