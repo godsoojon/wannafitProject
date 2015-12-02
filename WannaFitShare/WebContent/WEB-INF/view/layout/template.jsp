@@ -44,35 +44,23 @@ div.template {
 	width: 1024px;
 }
 
-
-nav.template {
-	height: 50px;
-	line-height: 50px;
-	background-color: red;
-	font-weight: bold;
-	text-align: center;
-	border-bottom: 1px solid gray;
+section.template {
+	position: relative;
 }
 
-nav.template a:link {
-	text-decoration: none;
-	color: white;
-}
-
-nav.template a:visited {
-	text-decoration: none;
-	color: white;
-}
-
-nav.template a:active {
-	text-decoration: none;
-	color: white;
-}
-
-nav.template a:hover {
-	text-decoration: underline;
-	color: blue;
-}
+.sidebar {
+	position: relative;
+	float: right;
+	/* bottom: 20px;
+	left:-200px;
+	background-color: white;
+	width: 500px;
+ */
+	/* float: right;
+	position: fixed;
+	right: 20px;
+	top: 400px;
+	position: fixed; */
 }
 </style>
 <!-- jQuery Library import -->
@@ -152,9 +140,14 @@ nav.template a:hover {
 		<nav class="navbar">
 			<tiles:insertAttribute name="menu" />
 		</nav>
-		<section class="template">
-			<tiles:insertAttribute name="body" />
-		</section>
+		<div>
+			<section class="template">
+				<tiles:insertAttribute name="body" />
+			</section>
+			<section class="sidebar">
+				<tiles:insertAttribute name="side" />
+			</section>
+		</div>
 	</div>
 </body>
 </html>

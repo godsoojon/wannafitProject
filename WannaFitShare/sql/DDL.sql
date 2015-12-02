@@ -104,6 +104,7 @@ ALTER TABLE calorie
 /* 사진 */
       
 CREATE TABLE photo (
+<<<<<<< HEAD
    photo_id NUMBER NOT NULL, /* 사진ID */
    cs_id VARCHAR2(10), /* 고객_id */
    party_name VARCHAR2(30), /* 그룹이름 */
@@ -111,6 +112,15 @@ CREATE TABLE photo (
    photo_content VARCHAR2(500), /* 내용 */
    photo_title VARCHAR2(30), /* 사진타이틀 */
 constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
+=======
+	photo_id NUMBER NOT NULL, /* 사진ID */
+	party_name VARCHAR2(30) NOT NULL, /* 앨범 이름 */
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+	photo_time DATE, /* 시간 */
+	photo_content VARCHAR2(1000), /* ???? */
+	photo_title varchar2(30),
+	constraint photo_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
+>>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
 );
 	
 ALTER TABLE photo
@@ -122,12 +132,22 @@ ALTER TABLE photo
 
 /* 댓글 */
 CREATE TABLE reple (
+<<<<<<< HEAD
    reple_id NUMBER NOT NULL, /* 댓글id */
    cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
    photo_id NUMBER, /* 사진ID */
    reple_content VARCHAR2(50), /* 댓글내용 */
    reple_time DATE, /* 시간 */
 constraint reple_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
+=======
+	reple_id NUMBER NOT NULL, /* 댓글id */
+	photo_id NUMBER, /* 사진ID */
+	replet_content VARCHAR2(50), /* 댓글내용 */
+	reple_time DATE, /* 시간 */
+	party_name VARCHAR2(30), /* 앨범 이름 */
+	cs_id VARCHAR2(10), /* 고객_id */
+	constraint reple_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
+>>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
 );
 
 ALTER TABLE reple
@@ -142,11 +162,19 @@ ALTER TABLE reple
 
 /* 그룹 */
 CREATE TABLE party (
+<<<<<<< HEAD
    party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
    cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
    party_right NUMBER NOT NULL, /* 그룹권한 */
    party_date DATE NOT NULL, /* 생성날짜 */
 constraint party_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
+=======
+	party_name VARCHAR2(30) NOT NULL, /* 앨범이름 */
+	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+	party_right NUMBER NOT NULL, /* 그룹권한 */
+	party_date DATE NOT NULL, /* 생성날짜 */
+	constraint party_customer_cs_id_fk foreign key(cs_id) references customer(cs_id) on delete cascade
+>>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
 );
 
 ALTER TABLE party
