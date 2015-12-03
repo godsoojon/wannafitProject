@@ -871,5 +871,5 @@
 
 
 
->>>>>>> branch 'master' of https://github.com/godsoojon/wannafitProject.git
+
 
