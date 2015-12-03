@@ -2,6 +2,7 @@ package com.wannafitshare.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wannafitshare.customer.service.PhotoUploadService;
 import com.wannafitshare.customer.service.RepleService;
@@ -71,9 +73,9 @@ public class AlbumController {
 		Date date = new Date(); 
 		num=service.photoNum(); //photo_id 중복피하여 생성 
 				
-	    //vo를 DB insert에 추가 
+	    // vo를 DB insert에 추가 
 	    service.addPhotoUpload(new PhotoUpload(title,num,name,id,date,content)); 
-	    //model.addAttribute("content",content);
+	    // model.addAttribute("content",content);
 	    return "/album/logincheck/see.do";
 	}
 			
@@ -303,6 +305,114 @@ public class AlbumController {
        }
    }
 
+   
+	@RequestMapping("/logincheck/singleup1.do") //확장자 .do는 생략 가능.
+	//input type="file"로 넘어온 요청파라미터는 MultipartFile 타입의 변수로 받으면 된다.
+	public String singleUpload(@RequestParam MultipartFile upImage,
+								HttpServletRequest request,ModelMap map,HttpSession session) throws IOException, SQLException{
+		String fileName=null;
+		//null : upImage name의 요청파라미터가 없는 경우 
+		//isEmpty()-true : 사용자가 파일을 전송 하지 않은 경우 
+		if(upImage != null && !upImage.isEmpty()){ // 업로드된 파일이 있다.
+			//업로드된 파일의 정보를 조회
+			fileName = upImage.getOriginalFilename();
+			long fileSize = upImage.getSize();
+			System.out.println(fileName+" - "+fileSize);	
+			//long timeMilis = System.currentTimeMillis();
+			
+			//파일을 임시저장경로에서 최종 저장경로로 이동.
+			//%TOMCAT_HOME%\\webapps\\applicationRoot_dir\\upimage
+			String dir = request.getServletContext().getRealPath("/upimage");
+			//  /의 의미 -> application root. application_root/upimage의 실제 파일 경로를 String값을 return.
+			System.out.println(dir);
+			
+			File upImg = new File(dir,fileName);
+			//File file = new File("c:\\java2\\down",fileName);
+			
+			//View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송 
+			//map.addAttribute("image",fileName);
+			//session.setAttribute("image1",fileName);
+			//session.setAttribute("imageContent", fileName);
+			//File file = new File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","ddd");
+			//System.out.println(upImg.exists()); 	
+			//System.out.println(upImg.canWrite());
+			//upImage.transferTo(file); //copy(x) , move(o)9999+
+			//FileCopyUtils.copy(upImage.getInputStream(),new FileOutputStream(file));
+			upImage.transferTo(upImg);		
+		}		
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId(); //cs_id
+		String title="사진";
+		int num=0; // photo_id	
+		String name = (String) session.getAttribute("party"); //party_name		
+		Date date = new Date(); 
+		num=service.photoNum(); //photo_id 중복피하여 생성 
+
+		PhotoUpload load = 	new PhotoUpload(title,num,name,id,date,fileName);
+	    // vo를 DB insert에 추가 
+	    service.addPhotoUpload(load); 
+	    // model.addAttribute("content",content);
+	    //session.setAttribute("image1",load);
+	    return "customer/customer_main2.tiles";
+	}
 
 
+	
+	
+	
+/*	@RequestMapping("/logincheck/singleup1.do") //확장자 .do는 생략 가능.
+	//input type="file"로 넘어온 요청파라미터는 MultipartFile 타입의 변수로 받으면 된다.
+	public String singleUpload(@RequestParam MultipartFile upImage,
+								HttpServletRequest request,ModelMap map,HttpSession session) throws IOException{
+		
+		//null : upImage name의 요청파라미터가 없는 경우 
+		//isEmpty()-true : 사용자가 파일을 전송 하지 않은 경우 
+		if(upImage != null && !upImage.isEmpty()){ // 업로드된 파일이 있다.
+			//업로드된 파일의 정보를 조회
+			String fileName = upImage.getOriginalFilename();
+			long fileSize = upImage.getSize();
+			System.out.println(fileName+" - "+fileSize);	
+			//long timeMilis = System.currentTimeMillis();
+			
+			//파일을 임시저장경로에서 최종 저장경로로 이동.
+			//%TOMCAT_HOME%\\webapps\\applicationRoot_dir\\upimage
+			String dir = request.getServletContext().getRealPath("/upimage");
+			//  /의 의미 -> application root. application_root/upimage의 실제 파일 경로를 String값을 return.
+			System.out.println(dir);
+			
+			File upImg = new File(dir,fileName);
+			//File file = new File("c:\\java2\\down",fileName);
+			
+			//View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송 
+			//map.addAttribute("image",fileName);
+			//session.setAttribute("image1",fileName);
+			session.setAttribute("imageContent", fileName);
+			//File file = new File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","ddd");
+			//System.out.println(upImg.exists()); 	
+			//System.out.println(upImg.canWrite());
+			//upImage.transferTo(file); //copy(x) , move(o)9999+
+			//FileCopyUtils.copy(upImage.getInputStream(),new FileOutputStream(file));
+			upImage.transferTo(upImg);		
+		}		
+		return "/album/logincheck/submit1.do"; //이동 		
+	}
+
+	@RequestMapping("/logincheck/submit1.do")
+	public String submit1(ModelMap model, HttpSession session) throws SQLException{ 
+	
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId(); //cs_id
+		String title="사진";
+		int num=0; // photo_id	
+		String name = (String) session.getAttribute("party"); //party_name		
+		Date date = new Date(); 
+		num=service.photoNum(); //photo_id 중복피하여 생성 
+		model.
+		PhotoUpload load = 	new PhotoUpload(title,num,name,id,date,imageContent);
+	    // vo를 DB insert에 추가 
+	    service.addPhotoUpload(load); 
+	    // model.addAttribute("content",content);
+	    //session.setAttribute("image1",load);
+	    return "customer/customer_main2.tiles";
+	}*/
 }//class

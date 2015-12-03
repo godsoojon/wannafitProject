@@ -30,6 +30,12 @@
 	rel="stylesheet">
 
 <script src="${initParam.rootPath}/assets/js/jquery.js"></script>
+<script type="text/javascript">
+	function popupOpen() {
+		window.open("${initParam.rootPath}/window_popup2.jsp", "",
+				"width=500,heigth=350,resizable=no");
+	}
+</script>
 </head>
 
 <section id="main-content">
@@ -56,8 +62,9 @@
 			<h3>
 				<i class="fa fa-angle-right"></i>Gallery
 			</h3>
-			<a href="${initParam.rootPath}/album/logincheck/write.do"> 사진 올리기
-			</a>
+			<button class="btn btn-success btn-xs" onclick="popupOpen();">
+				<i class="fa fa-check">사진올리기</i>
+			</button>
 			<hr>
 			<div class="row mt">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
@@ -115,17 +122,16 @@
 				<!-- col-lg-4 -->
 			</div>
 			<!-- /row -->
-
 			<div class="row mt">
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 					<div class="project-wrapper">
 						<div class="project">
 							<div class="photo-wrapper">
 								<div class="photo">
 									<a class="fancybox"
-										href="${initParam.rootPath}/assets/img/portfolio/port01.jpg"><img
+										href="${initParam.rootPath}/assets/img/portfolio/port06.jpg"><img
 										class="img-responsive"
-										src="${initParam.rootPath}/assets/img/portfolio/port01.jpg"
+										src="${initParam.rootPath}/assets/img/portfolio/port06.jpg"
 										alt=""></a>
 								</div>
 								<div class="overlay"></div>
@@ -133,8 +139,38 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				
 			<c:choose>
+				<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }" />
+				<c:otherwise>
+					<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
+					
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+								<div class="project-wrapper">
+									<div class="project">
+										<div class="photo-wrapper">
+											<div class="photo">
+												<a class="fancybox"
+													href="${initParam.rootPath}/upimage/${photoList.photoContent}"><img
+													class="img-responsive"
+													src="${initParam.rootPath}/upimage/${photoList.photoContent}"
+													alt=""></a>
+											</div>
+											<div class="overlay"></div>
+											<a
+												href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
+												삭제 </a>
+										</div>
+									</div>
+								</div>
+							</div>
+					
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
+
+			<%-- 		<c:choose>
 				<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }" />
 				<c:otherwise>
 					<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
@@ -146,6 +182,9 @@
 											<div class="photo">
 												<a class="fancybox" href="${photoList.photoContent}"><img
 													class="img-responsive" ${photoList.photoContent}> </a>
+													<a
+								href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
+									삭제 </a>
 											</div>
 											<div class="overlay"></div>
 										</div>
@@ -153,7 +192,7 @@
 								</div>
 							</div>
 						</div>
-						<%-- <tr>
+						<tr>
 
 							<td><a
 								href="${initParam.rootPath}/reple/findReple.do?photoId=${photoList.photoId}">${photoList.photoContent}</a><br>
@@ -161,10 +200,10 @@
 								href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
 									삭제 </a></td>
 
-						</tr> --%>
+						</tr>
 					</c:forEach>
 				</c:otherwise>
-			</c:choose>
+			</c:choose>--%>
 		</section>
 
 		<!-- /MAIN CONTENT -->
