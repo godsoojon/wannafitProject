@@ -229,10 +229,6 @@ public class CustomerController {
 	// 고객 삭제 처리 HandlerattributeValue
 	@RequestMapping("/logincheck/remove.do")
 	public String remove(HttpSession session) throws Exception {
-		// 요청파라미터 검증
-		// if (((String) session.getAttribute("csId")).trim().length() == 0) {
-		// throw new Exception("삭제할 고객의 아이디가 없습니다.");
-		// }
 
 		Customer reCust = (Customer) session.getAttribute("loginInfo");
 		String id = reCust.getCsId();
@@ -242,7 +238,8 @@ public class CustomerController {
 		service.removeCustomer(id);
 		// 응답
 		session.setAttribute("loginInfo", null);
-		return "WannaFitShare/login.do";
+		session.setAttribute("party", null);
+		return "/login.do";
 	}
 
 	@RequestMapping("/idDuplicatedCheck")

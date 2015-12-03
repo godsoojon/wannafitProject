@@ -79,6 +79,7 @@ public class HealthController {
 	@RequestMapping("/modifyHealth")
 	public String modifyHealth(HttpSession session, ModelMap model,
 			@ModelAttribute Health health) {
+		System.out.println("modifyHealth 컨트롤러 들어옴");
 		int hTall = (int) health.gethTall();
 		int hWeight = (int) health.gethWeight();
 		double weight = health.gethWeight();

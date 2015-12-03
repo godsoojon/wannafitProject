@@ -54,6 +54,10 @@
 							</td>
 						</tr>
 						<tr>
+							<th>이름</th>
+							<td>${sessionScope.loginInfo.csName }</td>
+						</tr>
+						<tr>
 							<th>e-mail</th>
 							<td>${sessionScope.loginInfo.csEmail }</td>
 						</tr>

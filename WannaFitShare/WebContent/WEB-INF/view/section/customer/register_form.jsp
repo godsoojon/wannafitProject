@@ -104,7 +104,7 @@
 						</div>
 					</div>
 					<p>
-						<input type="submit" value="수정" class="btn btn-round btn-success">
+						<input type="submit" value="가입" class="btn btn-round btn-success">
 						<input type="reset" value="초기화" class="btn btn-round btn-warning">
 				</form>
 				<p>
