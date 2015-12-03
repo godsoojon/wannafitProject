@@ -98,10 +98,6 @@ public class FriendController {
 			List<String> list = friendService.findFriendListById(id);
 			model.addAttribute("friendList", list);
 			URL = "customer/friend_list.tiles";
-		}
-
-		return URL;
-
-	}
+		}return URL;}
 
 }
