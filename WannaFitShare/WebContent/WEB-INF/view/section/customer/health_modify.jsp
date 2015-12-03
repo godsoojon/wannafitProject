@@ -56,8 +56,8 @@
 								<input type="number" class="form-control round-form"
 									id="hWeight" name="hWeight"
 									value="${requestScope.health.hWeight }"> <span
-									class="help-block">몸무게를 입력해 주세요</span><br> <span
-									class="errorMessage" id="idErrorMessage"></span>
+									class="help-block">몸무게를 입력해 주세요</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br> 
 							</div>
 						</div>
 						<div class="form-group">
@@ -65,8 +65,8 @@
 							<div class="col-sm-10">
 								<input type="number" class="form-control round-form" id="hTall"
 									name="hTall" value="${requestScope.health.hTall}"> <span
-									class="help-block">키를 입력해 주세요.</span><br> <span
-									class="errorMessage" id="idErrorMessage"></span>
+									class="help-block">키를 입력해 주세요.</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br> 
 							</div>
 						</div>
 						<div class="form-group">
@@ -97,17 +97,18 @@
 								<input type="number" class="form-control round-form"
 									id="hBloodPressure" name="hBloodPressure"> <span
 									class="help-block"
-									value="${requestScope.health.hBloodPressure}">혈압~~~~</span><br>
-								<span class="errorMessage" id="idErrorMessage"></span>
+									value="${requestScope.health.hBloodPressure}">혈압~~~~</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br>
+								
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">bmi</label>
 							<div class="col-sm-10">
 								<input type="hidden" class="form-control round-form" name="bmi"
-									id="bmi" value="${requestScope.health.hBmi}"> <span
-									class="help-block">키와 몸무게 입력하면 자동 입력됩니다.</span><br> <span
-									class="errorMessage" id="idErrorMessage"></span>
+									id="bmi" value="0"> <span
+									class="help-block">키와 몸무게 입력하면 자동 입력됩니다.</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br> 
 							</div>
 						</div>
 						<div class="form-group">
@@ -116,8 +117,8 @@
 								<input type="number" class="form-control round-form"
 									id="hBloodSugar" name="hBloodSugar"
 									value="${requestScope.health.hBloodSugar}"> <span
-									class="help-block">혈당을 입력하세요.</span><br> <span
-									class="errorMessage" id="idErrorMessage"></span>
+									class="help-block">혈당을 입력하세요.</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br> 
 							</div>
 						</div>
 						<div class="form-group">
@@ -127,8 +128,8 @@
 									name="hLdl" value="${requestScope.health.hLdl}"> <span
 									class="help-block">low density lipoprotein의 약칭이며 비중
 									1,019~1,063 사이의 분리되는 혈장지질단백질로, 콜레스테롤을 말초로 보내는 기능을 한다. LDL 농도가
-									높으면 죽상동맥경화가 되기 쉽다. 간에서 합성된 콜레스테롤을 체조직으로 운반하는 역할을 한다.</span><br> <span
-									class="errorMessage" id="idErrorMessage"></span>
+									높으면 죽상동맥경화가 되기 쉽다. 간에서 합성된 콜레스테롤을 체조직으로 운반하는 역할을 한다.</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br> 
 							</div>
 						</div>
 						<div class="form-group">
@@ -136,8 +137,8 @@
 							<div class="col-sm-10">
 								<input type="number" class="form-control round-form" id="hHdh"
 									name="hHdh" value="${requestScope.health.hHdh}"> <span
-									class="help-block">HDH</span><br> <span
-									class="errorMessage" id="idErrorMessage"></span>
+									class="help-block">HDH</span>
+									<span class="errorMessage" id="idErrorMessage"></span><br>
 							</div>
 						</div>
 						<input type="submit" value="건강정보 수정"

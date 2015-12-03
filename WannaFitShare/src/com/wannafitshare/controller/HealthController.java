@@ -6,16 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wannafitshare.customer.service.HealthService;
 import com.wannafitshare.vo.Customer;
 import com.wannafitshare.vo.Health;
 
-import common.validator.HealthValidator;
+
 
 @Controller
 @RequestMapping("/health")
@@ -51,7 +49,7 @@ public class HealthController {
 		double hBmi = 0;
 		if (hTall != 0 && hWeight != 0) {
 			hBmi = weight / (health.gethTall() * health.gethTall());
-
+			hBmi=hBmi*10000;
 			health.sethBmi(hBmi);
 
 		}
@@ -78,27 +76,30 @@ public class HealthController {
 
 	@RequestMapping("/modifyHealth")
 	public String modifyHealth(HttpSession session, ModelMap model,
-			@ModelAttribute Health health) {
+			@ModelAttribute Health health,Errors errors) {
 		System.out.println("modifyHealth 컨트롤러 들어옴");
+		
 		int hTall = (int) health.gethTall();
 		int hWeight = (int) health.gethWeight();
 		double weight = health.gethWeight();
 		double hBmi = 0;
 		if (hTall != 0 && hWeight != 0) {
 			hBmi = weight / (health.gethTall() * health.gethTall());
-
+			hBmi=hBmi*10000;
 			health.sethBmi(hBmi);
 
 		}
+		System.out.println("2");
 		hService.updateHealth(health);
 
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
 		Health h = hService.findHealthById(id);
-
+		System.out.println("3");
 		model.addAttribute("health", h);
 		return "customer/health_success.tiles";
 
 	}
 
 }
+

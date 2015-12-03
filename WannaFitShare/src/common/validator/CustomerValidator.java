@@ -33,16 +33,13 @@ public class CustomerValidator implements Validator {
 		}
 
 		if (findcust != null) {
-			System.out.println("findcust != null");
 			error.rejectValue("csId", "existCsId");
 		}
 
 		if (customer.getCsId().length() < 5) {
-			System.out.println("customer.getCsId().length() < 5");
 			error.rejectValue("csId", "shortCsId");
 		}
 		if (customer.getCsPassword().length() < 6) {
-			System.out.println("customer.getCsPassword().length() < 6");
 			error.rejectValue("csPassword", "shortCsPassword");
 		}
 
