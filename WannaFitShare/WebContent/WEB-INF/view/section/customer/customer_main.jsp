@@ -46,7 +46,7 @@ self.close();
 							<th>ID</th>
 							<td>${sessionScope.loginInfo.csId}</td>
 							<td>
-								<button class="btn btn-success btn-xs">
+								<button class="btn btn-success btn-xs" >
 									<i class="fa fa-check"></i>
 								</button>
 								<button class="btn btn-primary btn-xs">

@@ -124,9 +124,9 @@ public class LoginController {
 		//isEmpty()-true : 사용자가 파일을 전송 하지 않은 경우 
 		if(upImage != null && !upImage.isEmpty()){ // 업로드된 파일이 있다.
 			//업로드된 파일의 정보를 조회
-			String fileName = upImage.getOriginalFilename();
+			String fileName1 = upImage.getOriginalFilename();
 			long fileSize = upImage.getSize();
-			System.out.println(fileName+" - "+fileSize);	
+			System.out.println(fileName1+" - "+fileSize);	
 			//long timeMilis = System.currentTimeMillis();
 			
 			//파일을 임시저장경로에서 최종 저장경로로 이동.
@@ -135,12 +135,12 @@ public class LoginController {
 			//  /의 의미 -> application root. application_root/upimage의 실제 파일 경로를 String값을 return.
 			System.out.println(dir);
 			
-			File upImg = new File(dir,fileName);
+			File upImg = new File(dir,fileName1);
 			//File file = new File("c:\\java2\\down",fileName);
 			
 			//View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송 
 			//map.addAttribute("image",fileName);
-			session.setAttribute("image",fileName);
+			session.setAttribute("image",fileName1);
 					
 			//File file = new File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","ddd");
 			//System.out.println(upImg.exists()); 	
