@@ -5,7 +5,6 @@
 		<h3>
 			<i class="fa fa-angle-right"></i> 친구찾기
 		</h3>
-
 		<!-- BASIC FORM ELELEMNTS -->
 		<div class="row mt">
 			<div class="col-lg-12">

@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+<section id="main-content">
+	<section class="wrapper">
 <hr>
 <ul class="nav nav-tabs">
 	<li role="presentation" class="active"><a
@@ -30,3 +32,5 @@
 		<td>${requestScope.party.partyDate }</td>
 	</tr>
 </table>
+</section>
+</section>

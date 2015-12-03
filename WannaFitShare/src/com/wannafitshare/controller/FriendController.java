@@ -73,6 +73,8 @@ public class FriendController {
       return "customer/friend_list.tiles";
    }
 
+
+
    @RequestMapping("/addFriendList")
    public String addFriendList(@RequestParam String friendId, Error errors,
          ModelMap model, HttpSession session)
@@ -103,5 +105,6 @@ public class FriendController {
       return URL;
 
    }
+
 
 }

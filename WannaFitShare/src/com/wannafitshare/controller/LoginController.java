@@ -127,7 +127,6 @@ public class LoginController {
 			long fileSize = upImage.getSize();
 
 			System.out.println(fileName1 + " - " + fileSize);
-
 			//long timeMilis = System.currentTimeMillis();
 
 			//파일을 임시저장경로에서 최종 저장경로로 이동.
