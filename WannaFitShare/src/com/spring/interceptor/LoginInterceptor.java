@@ -46,7 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			//ModelAndViewDefiningException 발생 시켜서 로그인폼 화면으로 이동한다
 			// return false를 하면 그냥 빈 화면을 만들어서 보여주기 때문
 			throw new ModelAndViewDefiningException(new ModelAndView(
-					"/index.do", "message", "로그인이 필요한 서비스입니다"));
+					"/login.do", "message", "로그인이 필요한 서비스입니다"));
 		}
 
 		//로그인한 사용자 -> handler(컨트롤러) 호출 -> return true;

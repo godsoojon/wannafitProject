@@ -5,10 +5,9 @@ self.close();
 </script> -->
 <section id="main-content">
 	<section class="wrapper">
-		<!-- JUSTIFIED BUTTONS -->
 		<div class="showback">
 			<h4>
-				<i class="fa fa-angle-right"></i> Justified Buttons
+				<i class="fa fa-angle-right"></i> 회원 메뉴
 			</h4>
 			<div class="btn-group btn-group-justified">
 				<div class="btn-group">
@@ -56,6 +55,10 @@ self.close();
 									<i class="fa fa-trash-o "></i>
 								</button>
 							</td>
+						</tr>
+						<tr>
+							<th>이름</th>
+							<td>${sessionScope.loginInfo.csName }</td>
 						</tr>
 						<tr>
 							<th>e-mail</th>

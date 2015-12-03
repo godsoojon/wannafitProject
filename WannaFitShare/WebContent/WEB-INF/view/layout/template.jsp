@@ -14,7 +14,8 @@
 <title>DASHGUM - FREE Bootstrap Admin Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="${initParam.rootPath}/assets/css/bootstrap.css" rel="stylesheet">
+<link href="${initParam.rootPath}/assets/css/bootstrap.css"
+	rel="stylesheet">
 <!--external css-->
 <link href="${initParam.rootPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"href="${initParam.rootPath}/assets/css/zabuto_calendar.css">
