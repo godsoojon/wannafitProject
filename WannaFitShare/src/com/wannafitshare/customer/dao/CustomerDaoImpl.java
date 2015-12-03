@@ -81,4 +81,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int selectCountCustomers() {
 		return session.selectOne("customerMapper.selectCountCustomers");
 	}
+
+	@Override
+	public Customer selectCustomerByPhone(String csPhone) {
+		return session.selectOne("customerMapper.selectCustomerByPhone",
+				csPhone);
+	}
+	
+	
 }

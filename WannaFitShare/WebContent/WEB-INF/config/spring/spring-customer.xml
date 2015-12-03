@@ -24,7 +24,11 @@
 	<!-- 메인페이지 -->
 	<mvc:view-controller
 		path="/login.do"
-		view-name="login.tiles" />
+		view-name="/WEB-INF/view/section/login.jsp" />
+	
+		<mvc:view-controller
+		path="/home1.do"
+		view-name="customer/customer_main.tiles" />
 
 	<mvc:view-controller
 		path="/test.do"
@@ -46,7 +50,7 @@
 		view-name="/party/belong_party.tiles" />
 
 		
-	
+	<mvc:view-controller path="/singleFile.do" view-name="/WEB-INF/view/section/picture/single_file.jsp"/>
 	<!-- 
 		multipartResolver를 Bean으로 등록
 		 - 역할 : 요청방식이 post이고 enctype이 multipart/form-data인 경우 업로드된 파일관련 처리를 해주는 Bean
@@ -59,7 +63,7 @@
 		name="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />	
 		
-		
+
 
 	<!-- ViewResolver 등록 
 		  Cotroller가 넘긴 view이름 (view name)을 통해 알맞은 view를 찾는 전달하는 컴포넌트

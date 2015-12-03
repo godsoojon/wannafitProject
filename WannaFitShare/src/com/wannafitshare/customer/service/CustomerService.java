@@ -71,4 +71,6 @@ public interface CustomerService {
 	 * @return
 	 */
 	Map getAllCustomersPaging(int pageNo);
+	
+	Customer findCustomerByPhone(String csPhone);
 }

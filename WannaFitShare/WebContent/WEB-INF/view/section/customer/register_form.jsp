@@ -35,46 +35,80 @@
 		});
 	});
 </script>
-
-<h2>고객등록</h2>
 <spring:hasBindErrors name="customer" />
-<form action="${initParam.rootPath}/customer/add.do" method="post"
-	id="regForm">
-	<!-- 요청 처리할 Controller에 대한 구분값 -->
-	<table border="1" style="width: 550px">
-		<tr>
-			<th>고객 ID</th>
-			<td><input type="text" id="csId" name="csId" size="25">
-				<span class="errorMessage" id="idErrorMessage"><form:errors
-						path="customer.csId" /></span></td>
-		</tr>
-		<tr>
-			<th>패스워드</th>
-			<td><input type="password" id="csPassword" name="csPassword"
-				size="25"> <span class="errorMessage"><form:errors
-						path="customer.csPassword" delimiter=" | " /></span></td>
-		</tr>
-		<tr>
-			<th>고객 이름</th>
-			<td><input type="text" id="csName" name="csName" size="25">
-				<span class="errorMessage"><form:errors
-						path="customer.csName" delimiter=" | " /></span></td>
-		</tr>
-		<tr>
-			<th>고객 Email</th>
-			<td><input type="text" id="csEmail" name="csEmail" size="25">
-				<span class="errorMessage"><form:errors
-						path="customer.csEmail" delimiter=" | " /></span></td>
-		</tr>
-		<tr>
-			<th>고객 휴대폰번호</th>
-			<td><input type="text" id="csPhone" name="csPhone" size="25">
-				<span class="errorMessage"><form:errors
-						path="customer.csPhone" delimiter=" | " /></span></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="submit" value="고객등록"> <input
-				type="reset" value="초기화"></td>
-		</tr>
-	</table>
-</form>
+<section id="main-content">
+	<h3>
+		<i class="fa fa-angle-right"></i> 회원 가입
+	</h3>
+
+	<!-- BASIC FORM ELELEMNTS -->
+	<div class="row mt">
+		<div class="col-lg-12">
+			<div class="form-panel">
+				<h4 class="mb">
+					<i class="fa fa-angle-right"></i> 회원 가입
+				</h4>
+				<form class="form-horizontal style-form"
+					action="${initParam.rootPath}/customer/add.do" method="post"
+					id="regForm">
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">고객 ID</label>
+						<div class="col-sm-10">
+							<input type="text" id="csId" name="csId"
+								class="form-control round-form"><span class="help-block">
+								ID는 5글자 이상을 입력해 주세요</span><br> <span class="errorMessage"
+								id="idErrorMessage"><form:errors path="customer.csId" /></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">비밀번호</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control round-form"
+								id="csPassword" name="csPassword"><span
+								class="errorMessage"><form:errors
+									path="customer.csPassword" delimiter=" | " /></span> <br> <span
+								class="help-block"> 비밀번호는 6글자 이상을 입력해 주세요</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">고객 이름</label>
+						<div class="col-sm-10">
+							<input type="text" id="csName" name="csName"
+								value="${requestScope.customer.csName }"
+								class="form-control round-form"><br> <span
+								class="errorMessage"> <form:errors path="customer.csName"
+									delimiter=" | " />
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">고객 Email</label>
+						<div class="col-sm-10">
+							<input type="text" id="csEmail" name="csEmail"
+								class="form-control round-form"
+								value="${requestScope.customer.csEmail}"> <span
+								class="errorMessage"><form:errors path="customer.csEmail"
+									delimiter=" | " /></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">휴대폰 번호</label>
+						<div class="col-sm-10">
+							<input type="text" id="csPhone" name="csPhone"
+								class="form-control round-form"
+								value="${requestScope.customer.csPhone }"><span
+								class="errorMessage"><form:errors path="customer.csPhone"
+									delimiter=" | " /></span>
+						</div>
+					</div>
+					<p>
+						<input type="submit" value="가입" class="btn btn-round btn-success">
+						<input type="reset" value="초기화" class="btn btn-round btn-warning">
+				</form>
+				<p>
+			</div>
+		</div>
+	</div>
+</section>

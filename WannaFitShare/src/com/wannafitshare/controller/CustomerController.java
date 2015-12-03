@@ -26,6 +26,7 @@ import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.vo.Customer;
 
 import common.util.CalDayMonth;
+import common.validator.CustomerModifyValidator;
 import common.validator.CustomerValidator;
 
 /**
@@ -40,6 +41,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerValidator validate;
+
+	@Autowired
+	private CustomerModifyValidator validateModify;
 
 	@Autowired
 	private CustomerService service;
@@ -211,7 +215,7 @@ public class CustomerController {
 	public String modify(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model, HttpSession session) throws Exception {
 		// Validator를 이용해 요청파라미터 체크
-		validate.validate(customer, errors);
+		validateModify.validate(customer, errors);
 		if (errors.hasErrors()) {
 			return "customer/modify_form.tiles";
 		}
@@ -225,10 +229,6 @@ public class CustomerController {
 	// 고객 삭제 처리 HandlerattributeValue
 	@RequestMapping("/logincheck/remove.do")
 	public String remove(HttpSession session) throws Exception {
-		// 요청파라미터 검증
-		// if (((String) session.getAttribute("csId")).trim().length() == 0) {
-		// throw new Exception("삭제할 고객의 아이디가 없습니다.");
-		// }
 
 		Customer reCust = (Customer) session.getAttribute("loginInfo");
 		String id = reCust.getCsId();
@@ -238,7 +238,8 @@ public class CustomerController {
 		service.removeCustomer(id);
 		// 응답
 		session.setAttribute("loginInfo", null);
-		return "customer/byebye.tiles";
+		session.setAttribute("party", null);
+		return "/login.do";
 	}
 
 	@RequestMapping("/idDuplicatedCheck")
