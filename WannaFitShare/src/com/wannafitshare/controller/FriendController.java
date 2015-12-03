@@ -63,7 +63,7 @@ public class FriendController {
 
    }
 
-   @RequestMapping("/myFriend")
+   @RequestMapping("/logincheck/myFriend")
    public String myFriend(HttpSession session, Error errors, ModelMap model) {
       Customer customer = (Customer) session.getAttribute("loginInfo");
       String id = customer.getCsId();

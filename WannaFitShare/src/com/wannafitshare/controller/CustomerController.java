@@ -23,7 +23,9 @@ import com.wannafitshare.customer.exception.DuplicatedIdException;
 import com.wannafitshare.customer.service.CalorieCalendarService;
 import com.wannafitshare.customer.service.CalorieCalendarServiceImpl;
 import com.wannafitshare.customer.service.CustomerService;
+import com.wannafitshare.customer.service.FriendListService;
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.util.CalDayMonth;
 import common.validator.CustomerModifyValidator;
@@ -47,6 +49,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService service;
+	
+	@Autowired
+	private FriendListService friendService;
 
 	//고객 아이디로 찾기
 	@RequestMapping("/findById")
@@ -186,8 +191,15 @@ public class CustomerController {
 		}
 
 		service.addCustomer(customer);
-		model.addAttribute("csId", customer.getCsId());
+		
+		//회원가입 하고 내친구 리스트에 자기 정보 추가하기
+		String id=customer.getCsId();
+		FriendList friendList=new FriendList(id,id);
+		friendService.addFriendList(friendList);
+		model.addAttribute("csId", customer.getCsId());		
 		return "redirect:/customer/registerSuccess.do";
+		
+		
 	}
 
 	// 등록 후 성공페이지로 이동 처리.
