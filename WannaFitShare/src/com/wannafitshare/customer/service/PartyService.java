@@ -8,15 +8,17 @@ public interface PartyService {
 
 	void insertParty(Party party);
 
-	List<String> selectAllParty();
+	List<Party> selectAllParty();
 
 	public Party selectPartyByName(String partyName);
 
 	List<String> belongParty(String csId);
 
 	List<String> friendList(String csId);
-	
-	 int deleteParty(String partyName);
-	 
-	 List <Party> selectPartyBycsId(String csId);
+
+	int deleteParty(String partyName);
+
+	List<Party> selectPartyBycsId(String csId);
+
+	int updatePartyRight(String partyName, int partyRight);
 }

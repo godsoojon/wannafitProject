@@ -6,7 +6,8 @@
 		href="${initParam.rootPath}/partyController/logincheck/allParty.do">모든
 			앨범 보기</a></li>
 	<li role="presentation"><a
-		href="${initParam.rootPath}/partyController/logincheck/belongParty.do">나의 앨범 목록</a></li>
+		href="${initParam.rootPath}/partyController/logincheck/belongParty.do">나의
+			앨범 목록</a></li>
 	<li role="presentation"><a
 		href="${initParam.rootPath}/partyController/logincheck/makeParty_form.do">앨범
 			만들기</a></li>

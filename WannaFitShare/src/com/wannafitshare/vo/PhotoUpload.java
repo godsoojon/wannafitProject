@@ -4,12 +4,20 @@ import java.util.Date;
 
 public class PhotoUpload {
 	
+/*	 photo_id NUMBER NOT NULL,  사진ID 
+	   cs_id VARCHAR2(10),  고객_id 
+	   party_name VARCHAR2(30),  그룹이름 
+	   photo_time DATE,  시간 
+	   photo_content VARCHAR2(100),  내용 
+	   photo_title VARCHAR2(30),  사진타이틀 */
+	
 	private String photoTitle;
 	private int photoId; //사진 ID
 	private String partyName; //그룹 이름
 	private String csId; //고객 ID 
 	private Date photoTime; //날짜
 	private String photoContent; //사진 HTML
+	
 	
 	
 	public PhotoUpload(String photoTitle, int photoId, String partyName, String csId, Date photoTime,

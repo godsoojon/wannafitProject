@@ -37,6 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao dao;
 
 	public CustomerServiceImpl() {
+		System.out.println("커ㅅ23ㅡ23333333333333333333333");
 	}
 
 	@Autowired

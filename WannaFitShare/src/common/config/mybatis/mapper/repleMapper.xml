@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="ISO-2022-KR"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 
 <!-- reple_id NUMBER NOT NULL, 
 	photo_id NUMBER,
@@ -10,7 +12,7 @@
 	<mapper namespace="repleMapper">
 
 
-	<!-- resultMap $)C<3A$ -->
+	<!-- resultMap 설정 -->
 	<resultMap
 		type="reple"
 		id="reple-resultmap">
@@ -18,20 +20,18 @@
 			property="repleId"
 			column="reple_id" />
 		<result
+			property="csId"
+			column="cs_id" />
+		<result
 			property="photoId"
 			column="photo_id" />
 		<result
-			property="repletContent"
-			column="replet_content" />
+			property="repleContent"
+			column="reple_content" />
 		<result
 			property="repleTime"
 			column="reple_time" />
-		<result
-			property="partyName"
-			column="party_name" />
-			<result
-			property="csId"
-			column="cs_id" />
+		
 	</resultMap>
 
 	<resultMap
@@ -41,6 +41,9 @@
 			<idArg
 				column="reple_id"
 				javaType="int" />
+				<arg
+				column="cs_id"
+				javaType="string" />
 			<arg
 				column="photo_id"
 				javaType="int" />
@@ -50,38 +53,62 @@
 			<arg
 				column="reple_time"
 				javaType="date" />
-			<arg
-				column="party_name"
-				javaType="string" />
-				<arg
-				column="cs_id"
-				javaType="string" />
+			
+				
 		</constructor>
 	</resultMap>
-	
-	<!-- $)C8.GC C_0! -->
+
+	<!-- 리플 추가 -->
 	<insert id="insertReple" parameterType="reple">
+			<selectKey
+			keyProperty="repleId"
+			resultType="int"
+			order="BEFORE">
+			select reple_id.nextval from dual
+		</selectKey>
+			insert into Reple(reple_id,cs_id,photo_id,reple_time,reple_content)
+			values(#{repleId},#{csId},#{photoId},#{repleTime},#{repleContent})
+			
 	
 	</insert>
 	
-	<!-- $)C8.GC <vA$ -->
+	<!-- 리플 수정 -->
 	<update id="updateReple" parameterType="reple">
-	
+		
+		update reple
+		set cs_id=#{csId},
+		reple_time=#{repleTime},
+		reple_content=#{repleContent},
+		photo_id=#{photoId}
+		
+		where
+		reple_id=#{repleId}
+
 	
 	</update>
-	<!-- $)C8.GC ;hA& -->
+	<!-- 리플 삭제 -->
 	<delete id="deleteReple" parameterType="int">
 	
-	
+	delete 
+	from reple
+	where reple_id=#{repleId} 
 	</delete>
 	
-	<!-- $)C8.GC @|C< :R7/?@1b 
-	$)C;gAx >F@L5p7N @z@e5G>n@V4B 8.GC5i 8.=:F.7N 8.EO
+	<!-- 리플 전체 불러오기 
+	사진 아이디로 저장되어있는 리플들 리스트로 리턴
 	-->
-	<select id="selectReple" parameType ="int" resultmap="reple-resultmap">
-	select reple_id,photo_id,reple_content,reple_time,party_Name,cs_id
+	<select id="selectReple" parameterType ="int" resultMap="reple-resultmap">
+	select reple_id,photo_id,reple_content,reple_time,cs_id
 	from reple
 	where photo_id=#{photoId}
+	
+	</select>
+	
+	<!-- 리플 아이디로 리플찾기  -->
+	<select id="selectRepleOne" parameterType="int" resultMap="reple-resultmap">
+	select reple_id,photo_id,reple_content,reple_time,cs_id
+	from reple
+	where reple_id=#{repleId}
 	
 	</select>
 	

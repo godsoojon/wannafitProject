@@ -41,7 +41,7 @@
 <form action="${initParam.rootPath}/customer/add.do" method="post"
 	id="regForm">
 	<!-- 요청 처리할 Controller에 대한 구분값 -->
-	<table border="1" style="width: 500px">
+	<table border="1" style="width: 550px">
 		<tr>
 			<th>고객 ID</th>
 			<td><input type="text" id="csId" name="csId" size="25">
@@ -51,26 +51,26 @@
 		<tr>
 			<th>패스워드</th>
 			<td><input type="password" id="csPassword" name="csPassword"
-				size="25"> <span class="error"><form:errors
+				size="25"> <span class="errorMessage"><form:errors
 						path="customer.csPassword" delimiter=" | " /></span></td>
 		</tr>
 		<tr>
 			<th>고객 이름</th>
 			<td><input type="text" id="csName" name="csName" size="25">
-				<span class="errorMessage"><form:errors path="customer.csName"
-						delimiter=" | " /></span></td>
+				<span class="errorMessage"><form:errors
+						path="customer.csName" delimiter=" | " /></span></td>
 		</tr>
 		<tr>
 			<th>고객 Email</th>
 			<td><input type="text" id="csEmail" name="csEmail" size="25">
-				<span class="errorMessage"><form:errors path="customer.csEmail"
-						delimiter=" | " /></span></td>
+				<span class="errorMessage"><form:errors
+						path="customer.csEmail" delimiter=" | " /></span></td>
 		</tr>
 		<tr>
-			<th>고객 번호</th>
+			<th>고객 휴대폰번호</th>
 			<td><input type="text" id="csPhone" name="csPhone" size="25">
-				<span class="errorMessage"><form:errors path="customer.csPhone"
-						delimiter=" | " /></span></td>
+				<span class="errorMessage"><form:errors
+						path="customer.csPhone" delimiter=" | " /></span></td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="고객등록"> <input

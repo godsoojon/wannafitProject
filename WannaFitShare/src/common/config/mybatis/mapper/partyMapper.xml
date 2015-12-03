@@ -45,10 +45,10 @@
 	<!-- select all party list -->
 	<select
 		id="selectAllParty"
-		resultType="string">
-		select party_name
-		from party
-		where party_right=2 or party_right=3
+		resultMap="party-resultmap">
+		<include refid="select-sql" />
+		where party_right=2 or
+		party_right=3
 	</select>
 
 	<select
@@ -58,7 +58,7 @@
 		<include refid="select-sql" />
 		where party_name=#{partyName}
 	</select>
-	
+
 	<select
 		id="selectPartyBycsId"
 		parameterType="string"
@@ -90,12 +90,23 @@
 		where cs_id=#{csId}
 	</select>
 
-<delete id="deleteParty" parameterType="string">
-	delete 
-	from party
-	where party_name=#{partyName}
-	
+	<delete
+		id="deleteParty"
+		parameterType="string">
+		delete
+		from party
+		where party_name=#{partyName}
+
 	</delete>
+
+	<update
+		id="updateParty"
+		parameterType="map">
+		update party
+		set party_right = #{partyRight}
+		where
+		party_name =#{partyName}
+	</update>
 
 
 
