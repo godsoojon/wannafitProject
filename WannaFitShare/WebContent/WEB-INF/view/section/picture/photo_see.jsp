@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section id="main-content">
+	<section class="wrapper">
 <table width="650" border="3" align="center" bordercolor="gray">
 		<tr height="30">
 			<td colspan="3" align="center" bgcolor="blue"><font
@@ -60,6 +62,7 @@
 			</table>
 		
 	
-
+</section>
+</section>
 </body>
 </html>

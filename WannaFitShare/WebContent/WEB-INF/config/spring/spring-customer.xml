@@ -25,6 +25,9 @@
 	<mvc:view-controller
 		path="/login.do"
 		view-name="/WEB-INF/view/section/login.jsp" />
+		<mvc:view-controller
+		path="/test2.do"
+		view-name="party/test2.tiles" />
 	
 		<mvc:view-controller
 		path="/home1.do"

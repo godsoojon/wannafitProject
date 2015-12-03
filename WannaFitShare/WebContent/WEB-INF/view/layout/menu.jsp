@@ -76,6 +76,10 @@
 				href="${initParam.rootPath}/customer/logincheck/calender.do?mode=0&year=-1&month=0&day&=0">
 					<i class="fa fa-book"></i> <span>Calorie Calender</span>
 			</a>
+			<li class="sub-menu"><a
+				href="${initParam.rootPath}/test2.do">
+					<i class="fa fa-book"></i> <span>border</span>
+			</a>
 		</ul>
 		<!-- sidebar menu end-->
 	</div>

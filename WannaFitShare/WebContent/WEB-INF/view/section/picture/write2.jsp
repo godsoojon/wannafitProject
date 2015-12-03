@@ -63,7 +63,7 @@ $(function(){
 <section id="main-content">
 	<section class="wrapper">
 <!-- action : 에디터에 입력한 html 코드를 전달받을 Controller페이지 URL -->
-<form action="${initParam.rootPath}/album/logincheck/submit.do" id="frm"  method="post" >
+<form action="${initParam.rootPath}/album/logincheck/submit1.do" id="frm"  method="post" >
 
 <table width="100%">
 		<tr>

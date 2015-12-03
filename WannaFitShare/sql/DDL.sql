@@ -1,15 +1,17 @@
-
+create sequence friendlist_fl_key_seq;
 create sequence reple_id;
 create sequence photo_id;
+
 drop sequence reple_id;
 drop sequence photo_id;
+drop sequence friendlist_fl_key_seq;
 
 /* 고객 */
 DROP TABLE customer 
    CASCADE CONSTRAINTS;
 
 /* 건강 */
-DROP TABLE health 
+DROP TABLE health 	
    CASCADE CONSTRAINTS;
 
 /* 친구목록 */
@@ -54,15 +56,15 @@ ALTER TABLE customer
 
 /* 건강 */
 CREATE TABLE health (
-	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	h_weight NUMBER, /* 몸무게 */
-	h_tall NUMBER, /* 키 */
-	h_bloodtype VARCHAR2(10), /* 혈액형 */
-	h_bloodsugar NUMBER, /* 혈당 */
-	h_bmi NUMBER, /* BMI */
-	h_bloodpressure NUMBER, /* 혈압 */
-	h_ldl NUMBER, /* LDL */
-	h_hdh NUMBER, /* HDH */
+   cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+   h_weight NUMBER, /* 몸무게 */
+   h_tall NUMBER, /* 키 */
+   h_bloodtype VARCHAR2(10), /* 혈액형 */
+   h_bloodsugar NUMBER, /* 혈당 */
+   h_bmi NUMBER, /* BMI */
+   h_bloodpressure NUMBER, /* 혈압 */
+   h_ldl NUMBER, /* LDL */
+   h_hdh NUMBER, /* HDH */
 constraint health_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
@@ -75,9 +77,9 @@ ALTER TABLE health
 
 /* 친구목록 */
 CREATE TABLE friendlist (
-	fl_key NUMBER NOT NULL, /* 친구목록식별키 */
-	cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
-	friend_id VARCHAR2(10), /* 친구ID */
+   fl_key NUMBER NOT NULL, /* 친구목록식별키 */
+   cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
+   friend_id VARCHAR2(10), /* 친구ID */
 constraint friendlist_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
@@ -156,7 +158,7 @@ ALTER TABLE party
          party_name,
          cs_id
       );
-	
+   
 /* 칼로리캘린더 */
 CREATE TABLE caloriecalendar (
    cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
@@ -197,15 +199,5 @@ ALTER TABLE reple
       REFERENCES photo (
          photo_id
       );
-
-	ADD
-		CONSTRAINT FK_photo_TO_reple
-		FOREIGN KEY (
-			photo_id
-		)
-		REFERENCES photo (
-			photo_id
-		);
-
 
 

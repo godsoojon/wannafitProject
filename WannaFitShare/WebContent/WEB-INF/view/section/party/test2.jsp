@@ -15,6 +15,10 @@
 }
 
 </style>
+
+<section id="main-content">
+	<section class="wrapper">
+
 <div class="container-fluid text-center bg-grey">
 	<h2>My Album Story</h2>
 	<h4>
@@ -24,14 +28,14 @@
 	<br>
 	<div class="row text-center">
 		<c:choose>
-			<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }">
+			<c:when test="${fn:length(requestScope.listPhotoUpload1)==0 }">
 				<!-- 		등록된 앨범이 없습니다. -->
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
+				<c:forEach items="${requestScope.listPhotoUpload1}" var="photoList">
 					<div class="col-sm-4">
 						<div class="thumbnail">
-							${photoList.photoContent}
+							<a href="${initParam.rootPath}/reple/findReple.do?photoId=${photoList.photoId}">${photoList.photoContent}</a>
 							<p>
 								<strong>${photoList.photoTitle}</strong>
 							</p>
@@ -50,6 +54,8 @@
 
 <!-- Set height and width with CSS -->
 <div id="googleMap" style="height:400px;width:100%;"></div>
+</section>
+</section>
 
 Add Google Maps
 <script src="http://maps.googleapis.com/maps/api/js"></script>
