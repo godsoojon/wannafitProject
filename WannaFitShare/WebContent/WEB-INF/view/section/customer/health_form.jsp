@@ -34,47 +34,50 @@
 		</tr>
 		<tr>
 			<th>몸무게</th>
-			<td><input type="text" id="hWeight" name="hWeight" size="25">
-				<span class="errorMessage"></span></td>
+			<td><input type="number" id="hWeight" name="hWeight" size="25">
+				<span class="errorMessage" id="idErrorMessage"></span></span></td>
 		</tr>
 		<tr>
 			<th>키</th>
-			<td><input type="text" id="hTall" name="hTall" size="25">
-				<span class="errorMessage"></span></td>
+			<td><input type="number" id="hTall" name="hTall" size="25">
+			<span class="errorMessage" id="idErrorMessage"></span></span></td>
 		</tr>
 		<tr>
 			<th>혈액형</th>
-			<td>A<input type="radio" id="hBloodType" name="hBloodType"
-				value="A" size="25"> B<input type="radio" id="hBloodType"
-				name="hBloodType" value="B" size="25"> AB<input type="radio"
-				id="hBloodType" name="hBloodType" value="AB" size="25"> O<input
-				type="radio" id="hBloodType" name="hBloodType" value="O" size="25">
-				<span class="errorMessage"></span></td>
+			<td>A<input type="radio" id="hBloodType" name="hBloodType"value="A" size="25"> 
+				B<input type="radio" id="hBloodType"name="hBloodType" value="B" size="25"> 
+				AB<input type="radio" id="hBloodType" name="hBloodType" value="AB" size="25"> 
+				O<input type="radio" id="hBloodType" name="hBloodType" value="O" size="25">
+			<span class="errorMessage" id="idErrorMessage"></span></span></td>
 		</tr>
 		<tr>
 			<th>혈압</th>
-			<td><input type="text" id="hBloodPressure" name="hBloodPressure"
-				size="25"> <span class="errorMessage"></span></td>
+			<td><input type="number" id="hBloodPressure" name="hBloodPressure"
+				size="25"> 
+				<span class="errorMessage" id="idErrorMessage"></span></span></td>
 		</tr>
 		<tr>
 			<th>bmi</th>
-			<td><input type="text" id="hBmi" name="hBmi" size="25">
-				<span class="errorMessage"></span></td>
+			<td>키와 몸무게 입력하면 자동 입력됩니다.
+				<input type="hidden"
+				name="bmi" id="bmi" value="0">
+			<span class="errorMessage" id="idErrorMessage"></span></td>
 		</tr>
 		<tr>
 			<th>혈당</th>
-			<td><input type="text" id="hBloodSugar" name="hBloodSugar"
-				size="25"> <span class="errorMessage"></span></td>
+			<td><input type="number" id="hBloodSugar" name="hBloodSugar"
+				size="25"> 
+				<span class="errorMessage" id="idErrorMessage"></span></span></td>
 		</tr>
 		<tr>
 			<th>LDL</th>
-			<td><input type="text" id="hLdl" name="hLdl" size="25">
-				<span class="errorMessage"></span></td>
+			<td><input type="number" id="hLdl" name="hLdl" size="25">
+				<span class="errorMessage" id="idErrorMessage"></span></td>
 		</tr>
 		<tr>
 			<th>HDH</th>
-			<td><input type="text" id="hHdh" name="hHdh" size="25">
-				<span class="errorMessage"></span></td>
+			<td><input type="number" id="hHdh" name="hHdh" size="25">
+				<span class="errorMessage" id="idErrorMessage"></span></td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="건강정보 등록"> <input
