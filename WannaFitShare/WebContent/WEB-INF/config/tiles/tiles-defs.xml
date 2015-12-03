@@ -8,15 +8,10 @@
 	<definition
 		name="template"
 		template="/WEB-INF/view/layout/template.jsp">
-		<put-attribute
+		 <put-attribute
 			name="menu"
-			value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute
-			name="side"
-			value="/WEB-INF/view/layout/side.jsp"></put-attribute>
+			value="/WEB-INF/view/layout/menu.jsp" /> 		
 	</definition>
-
-
 
 	<definition
 		name="*.tiles"

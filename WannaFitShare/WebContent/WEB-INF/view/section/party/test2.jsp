@@ -1,81 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	function checkboxCheck() {
-		//name="hobby" 인 checkbox객체가 여러개 이므로 배열(node list)로 리턴된다
-		var chkList = document.f1.hobby //chkList 는 배열
-		alert("checkbox수 : " + chkList.length);
-		//checkbox/radio의 체크 여부 - checked속성 : ture-체크, false-체크해제
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style type="text/css">
+.thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+}
 
-		var cnt = 0;
-		for (var i = 0; i < chkList.length; i++) {
-			// 			alert(chkList[i].checked);//chkList[i] - checkbox객체
-			// 			chkList[i].checked = true;//체크박스 체크되도록 처리
-			if (chkList[i].checked) {
-				cnt++;
-			}//end of if
-		}//end if for
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
 
-		if (!cnt) {//숫자 false:0
-			alert("취미를 하나이상 선택하세요..")
-			return;
-		}
+</style>
+<div class="container-fluid text-center bg-grey">
+	<h2>My Album Story</h2>
+	<h4>
+		<a href="${initParam.rootPath}/album/logincheck/write.do"> 사진 올리기
+		</a>
+	</h4>
+	<br>
+	<div class="row text-center">
+		<c:choose>
+			<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }">
+				<!-- 		등록된 앨범이 없습니다. -->
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
+					<div class="col-sm-4">
+						<div class="thumbnail">
+							${photoList.photoContent}
+							<p>
+								<strong>${photoList.photoTitle}</strong>
+							</p>
+							<a href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진 삭제 </a>
+						</div>
+					</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</div>
 
-		document.f1.submit();
 
-	}
 
-	function checkAll(allchk) {
 
-		// 		var flag = document.f1.allCheck.checked;
-		var flag = allchk.checked;
-		var hobbyChk = document.f1.hobby;
-		for (var i = 0; i < hobbyChk.length; i++) {
-			hobbyChk[i].checked = flag;
-		}
-	}
 
-	function checkRadio() {
-		//메뉴 선택 라디오 버튼이 선택되었을때만 전송되도록 처리
-		var menuRD = document.f1.menu; //radio객체(input type="radio") 배열
-		var flag = false; //라디오는 선택되면 1개->선택된 것이 있니?(true) 없니?(false)
-		for (var i = 0; i < menuRD.length; i++) {
-			if (menuRD[i].checked) {//radio버튼이 선택 돼 있다면, true이면
-				flag = true;
-				break;//반복문을 빠져나감
-			}
-		}
-		if (!flag) {
-			alert("메뉴를 선택하세요");
-			return false;
-		}
+<!-- Set height and width with CSS -->
+<div id="googleMap" style="height:400px;width:100%;"></div>
 
-	}
-</script>
-</head>
-<body>
-	<form action="response.jsp" name="f1" onsubmit="return checkRadio();">
-	 	취미를 선택하세요(1개 이상 선택하세요)<br>
-	 	<label>독서<input type="checkbox" name="hobby" value="reading"></label>
-	 	<label>음악감상<input type="checkbox" name="hobby" value="music"></label>
-	 	<label>게임<input type="checkbox" name="hobby" value="game"></label>
-	 	<label>스포츠<input type="checkbox" name="hobby" value="sports"></label>
-	 	<label>요리<input type="checkbox" name="hobby" value="cooking"></label>
-	 	<br>
-	 	<label>전체선택/해제<input type="checkbox" name="allCheck" onclick="checkAll(allCheck);"></label>
-	 	<input type="button" value="전송" onclick="checkboxCheck();">
-	 	<p>
-	 	메뉴를 선택하세요<br>
-	 	<label>짜장면<input type="radio" name="menu" value="짜장면"></label>
-	 	<label>짬뽕<input type="radio" name="menu" value="짬뽕"></label>
-	 	<label>우육면<input type="radio" name="menu" value="우육면"></label>
-	 	<label>우동<input type="radio" name="menu" value="우동"></label>
-	 	<br>
-	 	<input type="submit" value="전송-라디오체크" >
-	 	</p>
-	</form>
-</body>
-</html>
+Add Google Maps
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+var myCenter = new google.maps.LatLng(37.401936, 127.106250);
+
+function initialize() {
+var mapProp = {
+center:myCenter,
+ zoom:12,
+scrollwheel:false,
+draggable:false,
+ mapTypeId:google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker = new google.maps.Marker({
+position:myCenter,
+});
+
+ marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script> 

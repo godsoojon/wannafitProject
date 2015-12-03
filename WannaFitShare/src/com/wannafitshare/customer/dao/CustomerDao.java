@@ -22,7 +22,7 @@ public interface CustomerDao {
 	List<Customer> selectCustomersByName(String customerName);
 
 	int selectCountCustomers();
-
-
+	
+	Customer selectCustomerByPhone (String csPhone);
 
 }

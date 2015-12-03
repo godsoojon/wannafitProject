@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+<!-- <script type="text/javascript">
+opener.location.reload();
+self.close();
+</script> -->
 <section id="main-content">
 	<section class="wrapper">
 		<div class="showback">

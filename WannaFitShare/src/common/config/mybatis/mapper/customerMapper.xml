@@ -79,6 +79,18 @@
 		where cs_id=#{csId}
 	</select>
 	
+
+	
+	<!-- 	selectCustomerByPhone-->
+	<select
+		id="selectCustomerByPhone"
+		parameterType="string"
+		resultMap="customer-resultmap">
+		<include refid="select-sql" />
+		where cs_phone=#{csPhone}
+	</select>
+	
+	
 	<!-- selectCustomers -->
 	<select
 		id="selectCustomers"
