@@ -63,12 +63,12 @@ public class AlbumController {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId(); // cs_id
 		int num = 0; // photo_id
-		String name = "게시판"; // party_name 앨범 이름
+		String partyName = "게시판"; // party_name 앨범 이름
 		Date date = new Date();
 		num = service.photoNum(); // photo_id 중복피하여 생성
-
+		System.out.println(new PhotoUpload(title, num, partyName, id, date, content));
 		// vo를 DB insert에 추가
-		service.addPhotoUpload(new PhotoUpload(title, num, name, id, date, content));
+		service.addPhotoUpload(new PhotoUpload(title, num, partyName, id, date, content));
 		// model.addAttribute("content",content);
 		return "/album/logincheck/see1.do";
 	}
