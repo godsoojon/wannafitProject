@@ -1,4 +1,6 @@
-
+ 
+create sequence friendlist_fl_key_seq;
+ create sequence reple_reple_id_seq;
 create sequence reple_id;
 create sequence photo_id;
 drop sequence reple_id;
@@ -138,7 +140,6 @@ ALTER TABLE reple
          cs_id
       );
       
-      create sequence reple_reple_id_seq;
 
 /* 그룹 */
 CREATE TABLE party (
