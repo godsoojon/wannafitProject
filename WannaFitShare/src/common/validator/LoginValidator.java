@@ -22,16 +22,12 @@ public class LoginValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors error) {
-
 		Customer customer = (Customer) target;
 		Customer findcust = service.findCustomerById(customer.getCsId());
-
 		if (!supports(target.getClass())) {
 			error.reject("notsupport", "검증할수 없는 객체 입니다.");
 		}
-
 		if (customer.getCsId().length() >= 1 && findcust == null) {
-
 			error.rejectValue("csId", "nullID");
 		}
 		if (findcust != null) {
@@ -39,7 +35,6 @@ public class LoginValidator implements Validator {
 				error.rejectValue("csPassword", "wrongPwd");
 			}
 		}
-
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csId",
 				"loginRequired", new Object[] { "ID" }, "ID를 확인하세요");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csPassword",

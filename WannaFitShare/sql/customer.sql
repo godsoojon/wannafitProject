@@ -1,7 +1,8 @@
 --table 삭제
-	create sequence friendlist_fl_key_seq;
+create sequence friendlist_fl_key_seq;
 delete from PARTY;
 delete from PHOTO;
+delete from REPLE;
 delete from CUSTOMER;
 drop table customer;
 CREATE TABLE friendlist (

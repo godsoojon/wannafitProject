@@ -28,16 +28,9 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 public class LoginInterceptor implements HandlerInterceptor {
 
 	@Override
-	/**
-	 *  매개변수
-	 *  Object : 호출된 Controller객체
-	 *  리턴값 : false - Controller를 호출하지 않는다
-	 *  처리도중 Exception을 던지면 Controller로 이동하지 않는다
-	 */
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("loginInfo") == null) {
 			throw new ModelAndViewDefiningException(new ModelAndView(
 					"/login.do", "message", "로그인이 필요한 서비스입니다"));

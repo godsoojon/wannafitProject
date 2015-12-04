@@ -19,6 +19,8 @@
 			<li role="presentation" class="active"><a
 				href="${initParam.rootPath}/partyController/logincheck/makeParty_form.do">앨범
 					만들기</a></li>
+					<%-- <li role="presentation"><a
+				href="${initParam.rootPath}/test2.do">건강 블로그</a></li> --%>
 		</ul>
 
 		<h2>앨범만들기</h2>

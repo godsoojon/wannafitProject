@@ -49,7 +49,7 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService service;
-	
+
 	@Autowired
 	private FriendListService friendService;
 
@@ -191,15 +191,14 @@ public class CustomerController {
 		}
 
 		service.addCustomer(customer);
-		
+
 		//회원가입 하고 내친구 리스트에 자기 정보 추가하기
-		String id=customer.getCsId();
-		FriendList friendList=new FriendList(id,id);
+		String id = customer.getCsId();
+		FriendList friendList = new FriendList(id, id);
 		friendService.addFriendList(friendList);
-		model.addAttribute("csId", customer.getCsId());		
+		model.addAttribute("csId", customer.getCsId());
 		return "redirect:/customer/registerSuccess.do";
-		
-		
+
 	}
 
 	// 등록 후 성공페이지로 이동 처리.
@@ -226,7 +225,6 @@ public class CustomerController {
 	@RequestMapping("/modify")
 	public String modify(@ModelAttribute Customer customer, Errors errors,
 			ModelMap model, HttpSession session) throws Exception {
-		// Validator를 이용해 요청파라미터 체크
 		validateModify.validate(customer, errors);
 		if (errors.hasErrors()) {
 			return "customer/modify_form.tiles";
@@ -234,7 +232,6 @@ public class CustomerController {
 		service.updateCustomer(customer);
 		Customer newCust = service.findCustomerById(customer.getCsId());
 		session.setAttribute("loginInfo", newCust);
-		// model.addAttribute("csId", customer.getCsId());
 		return "customer/customer_main.tiles";
 	}
 
