@@ -20,7 +20,8 @@
 
 	}
 </script>
-
+<section id="main-content">
+	<section class="wrapper">
 <hr>
 <ul class="nav nav-tabs">
 	<li role="presentation"><a
@@ -32,6 +33,8 @@
 	<li role="presentation" class="active"><a
 		href="${initParam.rootPath}/partyController/logincheck/makeParty_form.do">앨범
 			만들기</a></li>
+			<li role="presentation"><a
+				href="">건강 블로그</a></li>
 </ul>
 
 <h2>앨범 권한 수정</h2>
@@ -59,3 +62,5 @@
 
 	<button type="submit" class="btn btn-info">수정</button>
 </form>
+</section>
+</section>

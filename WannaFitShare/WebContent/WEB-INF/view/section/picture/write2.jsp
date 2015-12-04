@@ -63,19 +63,19 @@ $(function(){
 <section id="main-content">
 	<section class="wrapper">
 <!-- action : 에디터에 입력한 html 코드를 전달받을 Controller페이지 URL -->
-<form action="${initParam.rootPath}/album/logincheck/submit.do" id="frm"  method="post" >
+<form action="${initParam.rootPath}/album/logincheck/submit1.do" id="frm"  method="post" >
 
 <table width="100%">
 		<tr>
 
-			<td>앨범 이름 : partyName</td>
+			<td></td>
 		</tr>
         <tr>
-            <td>제목</td>
+            <td></td>
             <td><input type="text" id="title" name="title" style="width:650px"/></td>
         </tr>
         <tr>
-            <td>내용</td>
+            <td></td>
             <td>
                 <textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "></textarea>
             </td>

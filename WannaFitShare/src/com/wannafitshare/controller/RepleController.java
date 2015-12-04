@@ -44,6 +44,7 @@ public class RepleController {
     	session.setAttribute("photo", photoUpload);
     	
     	model.addAttribute("repleList",list);
+    	
     	return "picture/photo_see.tiles";
     }
     
@@ -65,7 +66,7 @@ public class RepleController {
     		model.addAttribute("repleId",repleId);
     		
     	}else{
-    		JOptionPane.showMessageDialog(null, "고객님이 쓴 글이 아닙니다.");
+    		//JOptionPane.showMessageDialog(null, "고객님이 쓴 글이 아닙니다.");
     		url="/reple/return.do";
     	}
     	return url;
@@ -78,7 +79,7 @@ public class RepleController {
     	Reple reple=new Reple(repleId,customer.getCsId(),photo.getPhotoId(),repletxt,new Date());
     	
     	rService.updateReple(reple);
-    	JOptionPane.showMessageDialog(null, "수정되었습니다.");
+    	//JOptionPane.showMessageDialog(null, "수정되었습니다.");
     	return "/reple/return.do";
     	
     }
@@ -132,7 +133,7 @@ public class RepleController {
     	Reple reple=rService.findRepleOne(repleId);
     	String id2 =reple.getCsId();
     	if(id1.equals(id2)){
-    		JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+    		//JOptionPane.showMessageDialog(null, "삭제되었습니다.");
     		rService.deleteReple(repleId);
     	}
     	
