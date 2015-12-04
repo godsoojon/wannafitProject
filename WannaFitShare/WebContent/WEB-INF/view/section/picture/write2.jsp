@@ -68,14 +68,14 @@ $(function(){
 <table width="100%">
 		<tr>
 
-			<td>앨범 이름 : partyName</td>
+			<td></td>
 		</tr>
         <tr>
-            <td>제목</td>
+            <td></td>
             <td><input type="text" id="title" name="title" style="width:650px"/></td>
         </tr>
         <tr>
-            <td>내용</td>
+            <td></td>
             <td>
                 <textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "></textarea>
             </td>

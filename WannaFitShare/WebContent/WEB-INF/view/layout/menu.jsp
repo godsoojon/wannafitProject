@@ -77,8 +77,8 @@
 					<i class="fa fa-book"></i> <span>Calorie Calender</span>
 			</a>
 			<li class="sub-menu"><a
-				href="${initParam.rootPath}/test2.do">
-					<i class="fa fa-book"></i> <span>border</span>
+				href="${initParam.rootPath}/album/logincheck/see1.do">
+					<i class="fa fa-book"></i> <span>Health Blog</span>
 			</a>
 		</ul>
 		<!-- sidebar menu end-->

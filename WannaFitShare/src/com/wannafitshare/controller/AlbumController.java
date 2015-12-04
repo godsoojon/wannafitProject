@@ -63,7 +63,7 @@ public class AlbumController {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId(); // cs_id
 		int num = 0; // photo_id
-		String partyName = "게시판"; // party_name 앨범 이름
+		String partyName = "건강블로그"; // party_name 앨범 이름
 		Date date = new Date();
 		num = service.photoNum(); // photo_id 중복피하여 생성
 		System.out.println(new PhotoUpload(title, num, partyName, id, date, content));
@@ -83,7 +83,7 @@ public class AlbumController {
 		String name = (String) session.getAttribute("party"); // party_name
 		Date date = new Date();
 		num = service.photoNum(); // photo_id 중복피하여 생성
-
+		System.out.println(new PhotoUpload(title, num, name, id, date, content));
 		// vo를 DB insert에 추가
 		service.addPhotoUpload(new PhotoUpload(title, num, name, id, date, content));
 		// model.addAttribute("content",content);
@@ -97,9 +97,9 @@ public class AlbumController {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String csId = customer.getCsId(); // cs_id
 		//String partyName = (String) session.getAttribute("party");
-		String name = "게시판"; // party_name 앨범 이름
+		String name = "건강블로그"; // party_name 앨범 이름
 		List<PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(name);
-
+		
 		model.addAttribute("listPhotoUpload1", listPhotoUpload);
 		
 		return "party/test2.tiles";
@@ -201,7 +201,7 @@ public class AlbumController {
 	 * "party/test.tiles"; }
 	 */
 
-	// 사진 삭제 처리
+	
 	@RequestMapping("/logincheck/delete.do")
 	public String delete(HttpSession session, @RequestParam int deletephotoId) throws Exception {
 
@@ -212,6 +212,19 @@ public class AlbumController {
 		service.deletePhotoUploadByPhotoId(deletephotoId);
 		// 응답
 		return "/album/logincheck/see.do";
+	}
+	
+
+	@RequestMapping("/logincheck/delete1.do")
+	public String delete1(HttpSession session, @RequestParam int deletephotoId) throws Exception {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId(); // cs_id
+
+		// 비지니스 로직 - 삭제처리
+		service.deletePhotoUploadByPhotoId(deletephotoId);
+		// 응답
+		return "/album/logincheck/see1.do";
 	}
 
 	// 단일파일업로드

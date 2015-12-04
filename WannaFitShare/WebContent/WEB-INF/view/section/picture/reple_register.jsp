@@ -8,15 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>댓글 수정폼</h2>
-<form action="${initParam.rootPath}/reple/updateSuccess.do">
-<input type="text" name="repletxt" id="repletxt" >
+	<section id="main-content">
+		<section class="wrapper">
+			<h2>댓글 수정폼</h2>
+			<form action="${initParam.rootPath}/reple/updateSuccess.do">
+				<input type="text" name="repletxt" id="repletxt"> <input
+					type="hidden" name="repleId" id="repleId"
+					value="${requestScope.repleId}"> <input type="submit"
+					name="전송">
 
-			<input type="hidden" name="repleId" id="repleId"
-					value="${requestScope.repleId}">
-
-<input type="submit" name="전송">
-
-</form>
+			</form>
+		</section>
+	</section>
 </body>
 </html>
