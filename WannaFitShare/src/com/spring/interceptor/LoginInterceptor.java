@@ -28,28 +28,13 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 public class LoginInterceptor implements HandlerInterceptor {
 
 	@Override
-	/**
-	 *  매개변수
-	 *  Object : 호출된 Controller객체
-	 *  리턴값 : false - Controller를 호출하지 않는다
-	 *  처리도중 Exception을 던지면 Controller로 이동하지 않는다
-	 */
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-//		System.out.println("Interceptor.preHandle() 실행-------------");
-
-		//로그인 체크 - session attribute : loginFlag 속성 유무
 		HttpSession session = request.getSession();
-
-		//로그인 안한경우 -
 		if (session.getAttribute("loginInfo") == null) {
-			//ModelAndViewDefiningException 발생 시켜서 로그인폼 화면으로 이동한다
-			// return false를 하면 그냥 빈 화면을 만들어서 보여주기 때문
 			throw new ModelAndViewDefiningException(new ModelAndView(
 					"/login.do", "message", "로그인이 필요한 서비스입니다"));
 		}
-
-		//로그인한 사용자 -> handler(컨트롤러) 호출 -> return true;
 		return true;
 	}
 
