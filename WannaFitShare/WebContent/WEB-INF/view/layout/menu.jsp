@@ -80,6 +80,16 @@
 				href="${initParam.rootPath}/album/logincheck/see1.do">
 					<i class="fa fa-book"></i> <span>Health Blog</span>
 			</a>
+			<li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class=" fa fa-bar-chart-o"></i>
+                          <span>기타</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="${initParam.rootPath}/lock1.do">lock_screen</a></li>
+                          <li><a  href="chartjs.html">Chartjs</a></li>
+                      </ul>
+                  </li>
 		</ul>
 		<!-- sidebar menu end-->
 	</div>

@@ -17,6 +17,10 @@ th { background:#f8f5ee; color:#CC723D; border:1px #F000000 solid;}
 button { background: #fff; border:1px #fff solid; width: 130px; height:50px;}
 </style>
 
+
+<section id="main-content">
+	<section class="wrapper">
+	
 <form name="form" method="post">
 <center><font size="6" color="brown">${requestScope.csId }님의 CalorieCalendar</font></center>
 	<table border="1" style="width: 1000px">
@@ -97,3 +101,6 @@ button { background: #fff; border:1px #fff solid; width: 130px; height:50px;}
 		</tr>
 	</table>
 </form>
+
+<section id="main-content">
+	<section class="wrapper">	

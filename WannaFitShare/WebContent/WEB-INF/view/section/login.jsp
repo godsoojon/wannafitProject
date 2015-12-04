@@ -45,12 +45,12 @@
 				<input type="text" class="form-control" id="csId" name="csId"
 					placeholder="User ID" autofocus> <br> <span
 					class="errorMessage"><form:errors path="customer.csId"
-						delimiter=" | " /><br></span> <input type="password"
+						delimiter=" | " /></span> <input type="password"
 					class="form-control" id="csPassword" name="csPassword"
 					placeholder="Password"> <br> <span
 					class="errorMessage"> <form:errors
 						path="customer.csPassword" delimiter=" | " />
-				</span><br> <label class="checkbox"> <span class="pull-right">
+				</span><label class="checkbox"> <span class="pull-right">
 						<a data-toggle="modal" href="login.html#myModal"> Forgot ID?</a>
 				</span>
 				</label>

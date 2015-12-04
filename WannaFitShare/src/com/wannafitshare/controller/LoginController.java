@@ -82,6 +82,19 @@ public class LoginController {
 		return "/login.do";
 
 	}
+	
+	@RequestMapping("/lock.do")
+	public String lock(HttpSession session,@RequestParam String csPassword){
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		String pw = customer.getCsPassword();
+	
+		if(pw.equals(csPassword)){
+		
+			return "/loginController/logincheck/home.do";
+		}
+		return "/WEB-INF/view/section/lock_screen.jsp";
+	}
 
 	@RequestMapping("/logincheck/home.do")
 	public String goHome(HttpSession session, ModelMap model) {
