@@ -31,6 +31,12 @@
 		<result
 			property="repleTime"
 			column="reple_time" />
+			<result
+			property="csName"
+			column="cs_name" />
+			<result
+			property="csPicture"
+			column="cs_picture" />
 		
 	</resultMap>
 
@@ -53,6 +59,13 @@
 			<arg
 				column="reple_time"
 				javaType="date" />
+				<arg
+				column="cs_name"
+				javaType="string" />
+			<arg
+				column="cs_picture"
+				javaType="string" />
+			
 			
 				
 		</constructor>
@@ -66,8 +79,8 @@
 			order="BEFORE">
 			select reple_id.nextval from dual
 		</selectKey>
-			insert into Reple(reple_id,cs_id,photo_id,reple_time,reple_content)
-			values(#{repleId},#{csId},#{photoId},#{repleTime},#{repleContent})
+			insert into Reple(reple_id,cs_id,photo_id,reple_time,reple_content,cs_name,cs_picture)
+			values(#{repleId},#{csId},#{photoId},#{repleTime},#{repleContent},#{csName},#{csPicture})
 			
 	
 	</insert>
@@ -98,7 +111,7 @@
 	사진 아이디로 저장되어있는 리플들 리스트로 리턴
 	-->
 	<select id="selectReple" parameterType ="int" resultMap="reple-resultmap">
-	select reple_id,photo_id,reple_content,reple_time,cs_id
+	select reple_id,photo_id,reple_content,reple_time,cs_id,cs_name,cs_picture
 	from reple
 	where photo_id=#{photoId}
 	
@@ -106,7 +119,7 @@
 	
 	<!-- 리플 아이디로 리플찾기  -->
 	<select id="selectRepleOne" parameterType="int" resultMap="reple-resultmap">
-	select reple_id,photo_id,reple_content,reple_time,cs_id
+	select reple_id,photo_id,reple_content,reple_time,cs_id,cs_name,cs_picture
 	from reple
 	where reple_id=#{repleId}
 	

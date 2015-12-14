@@ -25,7 +25,7 @@ public class TestCustomer {
 		}
 		
 		String id="ljy8036";
-		Customer customer = new Customer(id, "1111", "이재영", "leejy803@daum.net","010-6363-0844");
+		//Customer customer = new Customer(id, "1111", "이재영", "leejy803@daum.net","010-6363-0844");
 		//service.addCustomer(customer);
 		
 		System.out.printf("--------------------ID %s로 조회----------------%n", id);

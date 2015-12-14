@@ -33,7 +33,7 @@ public class FriendListServiceImpl implements FriendListService{
 
 
 	@Override
-	public List<String> findFriendListById(String csId) {
+	public List<FriendList> findFriendListById(String csId) {
 		return dao.selectfriendList(csId);
 
 	}
@@ -45,4 +45,12 @@ public class FriendListServiceImpl implements FriendListService{
 	public int deleteFriendList(FriendList friendList){
 		return dao.deleteFriendList(friendList);
 	}
+
+	@Override
+	public int updateFriendListByfriendId(FriendList friendList) {
+		return dao.updateFriendListByfriendId(friendList);
+		
+	}
+	
+	
 }

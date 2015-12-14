@@ -32,7 +32,7 @@
 								<td>${requestScope.customer.csEmail }</td>
 								<td>${requestScope.customer.csPhone}</td>
 								<td><a
-									href="${initParam.rootPath}/friendController/addFriendList.do?friendId=${requestScope.customer.csId}"><button
+									href="${initParam.rootPath}/friendController/addFriendList.do?friendId=${requestScope.customer.csId}&friendPicture=${requestScope.customer.csPicture}"><button
 											class="btn btn-success btn-xs">
 											<i class="fa fa-check"></i>
 										</button></a></td>
@@ -40,7 +40,7 @@
 						</tbody>
 					</table>
 					<a
-						href="${initParam.rootPath}/friendController/addFriendList.do?friendId=${requestScope.customer.csId}">
+						href="${initParam.rootPath}/friendController/addFriendList.do?friendId=${requestScope.customer.csId}&friendPicture=${requestScope.customer.csPicture}">
 						<button type="button" class="btn btn-round btn-success">친구
 							등록</button>
 					</a>

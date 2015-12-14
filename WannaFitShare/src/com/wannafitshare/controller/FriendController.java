@@ -50,14 +50,14 @@ public class FriendController {
    }
 
    @RequestMapping("/deleteFriendList")
-   public String deleteFriendList(@RequestParam String friendId, Error errors,
+   public String deleteFriendList(@RequestParam String friendId, @RequestParam String friendPicture,Error errors,
          ModelMap model, HttpSession session) {
       Customer customer = (Customer) session.getAttribute("loginInfo");
       String id = customer.getCsId();
-      FriendList list = new FriendList(id, friendId);
+      FriendList list = new FriendList(id, friendId,friendPicture);
       friendService.deleteFriendList(list);
       JOptionPane.showMessageDialog(null, "삭제되었습니.다");
-      List<String> list1 = friendService.findFriendListById(id);
+      List<FriendList> list1 = friendService.findFriendListById(id);
       model.addAttribute("friendList", list1);
       return "customer/friend_list.tiles";
 
@@ -67,7 +67,7 @@ public class FriendController {
    public String myFriend(HttpSession session, Error errors, ModelMap model) {
       Customer customer = (Customer) session.getAttribute("loginInfo");
       String id = customer.getCsId();
-      List<String> list = friendService.findFriendListById(id);
+      List<FriendList> list = friendService.findFriendListById(id);
       model.addAttribute("friendList", list);
       session.setAttribute("seionFriendList", list);
       return "customer/friend_list.tiles";
@@ -76,20 +76,20 @@ public class FriendController {
 
 
    @RequestMapping("/addFriendList")
-   public String addFriendList(@RequestParam String friendId, Error errors,
+   public String addFriendList(@RequestParam String friendId,@RequestParam String friendPicture, Error errors,
          ModelMap model, HttpSession session)
                throws DuplicatedIdException, SQLException {
       String URL = "";
       Customer customer = (Customer) session.getAttribute("loginInfo");
       String id = customer.getCsId();
       System.out.println(friendId);
-      FriendList friendList = new FriendList(id, friendId);
-      FriendList friendList2 = new FriendList(friendId, id);
+      FriendList friendList = new FriendList(id, friendId,friendPicture);
+    //FriendList friendList2 = new FriendList(friendId, id);
       FriendList fl = friendService.findFriend(friendList);
-      FriendList fl2 = friendService.findFriend(friendList2);
+    // FriendList fl2 = friendService.findFriend(friendList2);
       if (fl == null) {
          friendService.addFriendList(friendList);
-         List<String> list = friendService.findFriendListById(id);
+         List<FriendList> list = friendService.findFriendListById(id);
          model.addAttribute("friendList", list);
          URL = "customer/friend_list.tiles";
          System.out.println(fl);
@@ -97,7 +97,7 @@ public class FriendController {
          //이미친구일때 팝업창.
          System.out.println(fl);
          JOptionPane.showMessageDialog(null, "이미친구입니다..");
-         List<String> list = friendService.findFriendListById(id);
+         List<FriendList> list = friendService.findFriendListById(id);
          model.addAttribute("friendList", list);
          URL = "customer/friend_list.tiles";
       }

@@ -9,19 +9,29 @@ public class Customer implements Serializable {
 	private String csName;
 	private String csEmail;
 	private String csPhone;
+	private String csPicture;
 
 	public Customer() {
 	}
 
 	public Customer(String csId, String csPassword, String csName,
-			String csEmail, String csPhone) {
+			String csEmail, String csPhone, String csPicture) {
 		this.csId = csId;
 		this.csPassword = csPassword;
 		this.csName = csName;
 		this.csEmail = csEmail;
 		this.csPhone = csPhone;
+		this.csPicture = csPicture;
 	}
 
+	public String getCsPicture(){
+		return csPicture;
+	}
+	
+	public void setCsPicture(String csPicture) {
+		this.csPicture = csPicture;
+	}
+	
 	public String getCsId() {
 		return csId;
 	}
@@ -64,9 +74,8 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [csId=" + csId + ", csPassword=" + csPassword
-				+ ", csName=" + csName + ", csEmail=" + csEmail + ", csPhone="
-				+ csPhone + "]";
+		return "Customer [csId=" + csId + ", csPassword=" + csPassword + ", csName=" + csName + ", csEmail=" + csEmail
+				+ ", csPhone=" + csPhone + ", csPicture=" + csPicture + "]";
 	}
 
 	@Override
@@ -76,9 +85,9 @@ public class Customer implements Serializable {
 		result = prime * result + ((csEmail == null) ? 0 : csEmail.hashCode());
 		result = prime * result + ((csId == null) ? 0 : csId.hashCode());
 		result = prime * result + ((csName == null) ? 0 : csName.hashCode());
-		result = prime * result
-				+ ((csPassword == null) ? 0 : csPassword.hashCode());
+		result = prime * result + ((csPassword == null) ? 0 : csPassword.hashCode());
 		result = prime * result + ((csPhone == null) ? 0 : csPhone.hashCode());
+		result = prime * result + ((csPicture == null) ? 0 : csPicture.hashCode());
 		return result;
 	}
 
@@ -116,7 +125,14 @@ public class Customer implements Serializable {
 				return false;
 		} else if (!csPhone.equals(other.csPhone))
 			return false;
+		if (csPicture == null) {
+			if (other.csPicture != null)
+				return false;
+		} else if (!csPicture.equals(other.csPicture))
+			return false;
 		return true;
 	}
+
+	
 
 }

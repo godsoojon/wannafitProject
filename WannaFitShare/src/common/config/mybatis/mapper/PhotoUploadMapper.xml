@@ -4,7 +4,7 @@
 
    <!-- sql 설정 -->
 	<sql id="select-column-sql">
-		photo_title,photo_id,party_name,cs_id,photo_time,photo_content
+		photo_id,cs_id,party_name,photo_time,photo_content,photo_title
 	</sql>
 
 	<sql id="select-sql">
@@ -51,10 +51,9 @@
 		id="insertPhotoUpload"
 		parameterType="PhotoUpload">
 		insert into PHOTO (
-		<include refid="select-column-sql" />
+		<include refid="select-column-sql"/>
 		)
-		values (#{photoTitle}, #{photoId}, #{partyName}, #{csId},#{photoTime},
-		#{photoContent})
+		values (#{photoId},#{csId},#{partyName},#{photoTime},#{photoContent},#{photoTitle})
 	</insert>
    
    <!-- selectPhotoUploadById -->

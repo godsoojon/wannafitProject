@@ -25,6 +25,9 @@
 		<result
 			property="csPhone"
 			column="cs_phone" />
+			<result
+			property="csPicture"
+			column="cs_picture" />
 	</resultMap>
 
 	<resultMap
@@ -51,7 +54,7 @@
 	
 	<!-- sql 설정 -->
 	<sql id="select-column-sql">
-		cs_id,cs_password,cs_name,cs_email,cs_phone
+		cs_id,cs_password,cs_name,cs_email,cs_phone,cs_picture
 	</sql>
 
 	<sql id="select-sql">
@@ -144,7 +147,7 @@
 		insert into customer (
 		<include refid="select-column-sql" />
 		)
-		values (#{csId}, #{csPassword}, #{csName},#{csEmail}, #{csPhone})
+		values (#{csId}, #{csPassword}, #{csName},#{csEmail}, #{csPhone},'basic.png')
 	</insert>
 	
 	
@@ -165,7 +168,7 @@
 		update customer
 		set cs_password=#{csPassword},
 		cs_name=#{csName},cs_email=#{csEmail},
-		cs_phone=#{csPhone}
+		cs_phone=#{csPhone},cs_picture=#{csPicture}
 		where
 		cs_id=#{csId}
 	</update>

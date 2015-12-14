@@ -12,7 +12,8 @@ public interface FriendListService {
 	void addFriendList(FriendList friendList)
 			throws DuplicatedIdException, SQLException;
 
-	List<String> findFriendListById(String csId);
+	List <FriendList> findFriendListById(String csId);
+	int updateFriendListByfriendId(FriendList friendList);
 	
 	FriendList findFriend(FriendList friendList);
 	int deleteFriendList(FriendList friendList);

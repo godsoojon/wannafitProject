@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,11 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wannafitshare.customer.service.PhotoUploadService;
-import com.wannafitshare.customer.service.RepleService;
 import com.wannafitshare.vo.Customer;
 import com.wannafitshare.vo.Photo;
 import com.wannafitshare.vo.PhotoUpload;
@@ -34,8 +33,6 @@ import com.wannafitshare.vo.PhotoUpload;
 @RequestMapping("/album")
 public class AlbumController {
 
-	@Autowired
-	private RepleService repleService;
 	@Autowired
 	private PhotoUploadService service;
 
@@ -46,16 +43,80 @@ public class AlbumController {
 
 	@RequestMapping("/logincheck/write")
 	public String write(HttpSession session) {
-
 		return "picture/write2.tiles";
 	}
 
 	@RequestMapping("/photoSee.do")
 	public String photoSee(HttpSession session) {
-
 		return "picture/photo_see.tiles";
 	}
 
+	
+	//댓글있는 사진보기 컨트롤러  @RequestParam String pictureName
+	@RequestMapping("/logincheck/pictureView.do")
+	public String pictureView(ModelMap model, @RequestParam String pictureName ,@RequestParam int pictureNumber,HttpSession session){
+		
+		System.out.println("사진이름 : "+pictureName);
+		session.setAttribute("pictureName", pictureName);
+		//model.addAttribute("pictureNumber", pictureNumber);
+		PhotoUpload photo=service.findPhotoUploadById(pictureNumber);
+		session.setAttribute("photo", photo);
+		return "/reple/findReple.do";
+	}
+	// 사진 전송 컨트롤러
+	@RequestMapping("/logincheck/submit")
+	public String submit(@RequestParam String content, @RequestParam String title, ModelMap model, HttpSession session)
+			throws SQLException {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId(); // cs_id
+		int num = 0; // photo_id
+		String name = (String) session.getAttribute("party"); // party_name
+		Date date = new Date();// photo_date
+		num = service.photoNum(); // photo_id
+		System.out.println(new PhotoUpload(num,id,name,date,content,title));
+		// vo를 DB insert에 추가
+		service.addPhotoUpload(new PhotoUpload(num,id,name,date,content,title));
+		return "party/test.tiles";
+	}
+
+	// 사진 보는 컨트롤러
+	@RequestMapping("/logincheck/see.do")
+	public String see(HttpSession session, ModelMap model,@RequestParam String partyName) {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String csId = customer.getCsId();
+		session.setAttribute("partyName", partyName);
+		System.out.println("파티이름 : " + (String)session.getAttribute("partyName"));
+		List<PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(partyName);
+		model.addAttribute("listPhotoUpload", listPhotoUpload);
+		return "party/test.tiles";
+	}
+	
+	//삭제후 앨범 보는 컨트롤러
+	@RequestMapping("/logincheck/viewAfterDelete")
+	public String viewAfterDelete(HttpSession session, ModelMap model) {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String csId = customer.getCsId();
+		System.out.println("파티이름 : " + (String)session.getAttribute("partyName"));
+		List<PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName((String)session.getAttribute("partyName"));
+		model.addAttribute("listPhotoUpload", listPhotoUpload);
+		return "party/test.tiles";
+	}
+
+	// 사진 삭제 컨트롤러
+	@RequestMapping("/logincheck/delete.do")
+	public String delete(HttpSession session, @RequestParam int deletephotoId) throws Exception {
+
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		// 비지니스 로직 - 삭제처리
+		service.deletePhotoUploadByPhotoId(deletephotoId);
+		return "/album/logincheck/viewAfterDelete.do";
+	}
+
+	// 건강블로그
 	@RequestMapping("/logincheck/submit1")
 	public String submit1(@RequestParam String content, @RequestParam String title, ModelMap model, HttpSession session)
 			throws SQLException {
@@ -66,155 +127,29 @@ public class AlbumController {
 		String partyName = "건강블로그"; // party_name 앨범 이름
 		Date date = new Date();
 		num = service.photoNum(); // photo_id 중복피하여 생성
-		System.out.println(new PhotoUpload(title, num, partyName, id, date, content));
+		System.out.println(new PhotoUpload(num,id,partyName,date,content,title));
 		// vo를 DB insert에 추가
-		service.addPhotoUpload(new PhotoUpload(title, num, partyName, id, date, content));
+		service.addPhotoUpload(new PhotoUpload(num,id,partyName,date,content,title));
 		// model.addAttribute("content",content);
 		return "/album/logincheck/see1.do";
 	}
 
-	@RequestMapping("/logincheck/submit")
-	public String submit(@RequestParam String content, @RequestParam String title, ModelMap model, HttpSession session)
-			throws SQLException {
-
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId(); // cs_id
-		int num = 0; // photo_id
-		String name = (String) session.getAttribute("party"); // party_name
-		Date date = new Date();
-		num = service.photoNum(); // photo_id 중복피하여 생성
-		System.out.println(new PhotoUpload(title, num, name, id, date, content));
-		// vo를 DB insert에 추가
-		service.addPhotoUpload(new PhotoUpload(title, num, name, id, date, content));
-		// model.addAttribute("content",content);
-		return "/album/logincheck/see.do";
-	}
-
-	/* 내가 올린 사진 보기 */
+	// 건강블로그
 	@RequestMapping("/logincheck/see1.do")
 	public String see1(HttpSession session, ModelMap model) {
 
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String csId = customer.getCsId(); // cs_id
-		//String partyName = (String) session.getAttribute("party");
+		// String partyName = (String) session.getAttribute("party");
 		String name = "건강블로그"; // party_name 앨범 이름
 		List<PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(name);
-		
+
 		model.addAttribute("listPhotoUpload1", listPhotoUpload);
-		
+
 		return "party/test2.tiles";
 	}
 
-	/* 내가 올린 사진 보기 */
-	@RequestMapping("/logincheck/see.do")
-	public String see(HttpSession session, ModelMap model) {
-
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String csId = customer.getCsId(); // cs_id
-		String partyName = (String) session.getAttribute("party");
-
-		List<PhotoUpload> listPhotoUpload = service.listPhotoUploadBypartyName(partyName);
-		/*
-		 * model.addAttribute("listPhotoUpload", listPhotoUpload); return
-		 * "party/test.tiles";
-		 */
-
-		/*
-		 * List <PhotoUpload> list = service.listPhotoUpload(csId); List
-		 * <PhotoUpload> listBypartyName=null; //사용자가 만든 모든 사진 리스트들에서 partyName에
-		 * 해당하는 사진들을 뽑아야한다. Iterator itr = list.iterator();
-		 * while(itr.hasNext()){ PhotoUpload o = (PhotoUpload)itr.next();
-		 * if(o.getPartyName().equals(partyName)){ listBypartyName.add(o); } }
-		 */
-		// session.setAttribute("party", partyName);
-		model.addAttribute("listPhotoUpload", listPhotoUpload);
-		// model.addAttribute("partyName", partyName);
-		// System.out.println(listBypartyName);
-		return "party/test.tiles";
-	}
-
-	/*
-	 * 나만의 앨범에서 사진 보기
-	 * 
-	 * @RequestMapping("/logincheck/mysee.do") public String mysee(@RequestParam
-	 * String partyName, ModelMap model, HttpSession session) { ======= return
-	 * "picture/write2.tiles"; }
-	 * 
-	 * @RequestMapping("/photoSee.do") public String photoSee(HttpSession
-	 * session){ return "picture/photo_see.tiles"; }
-	 * 
-	 * @RequestMapping("/logincheck/submit") public String submit(@RequestParam
-	 * String content , @RequestParam String title ,ModelMap model, HttpSession
-	 * session) throws SQLException{
-	 * 
-	 * Customer customer = (Customer) session.getAttribute("loginInfo"); String
-	 * id = customer.getCsId(); //cs_id int num=0; // photo_id String name =
-	 * (String) session.getAttribute("party"); //party_name Date date = new
-	 * Date(); num=service.photoNum(); //photo_id 중복피하여 생성
-	 * 
-	 * //vo를 DB insert에 추가 service.addPhotoUpload(new
-	 * PhotoUpload(title,num,name,id,date,content));
-	 * //model.addAttribute("content",content); return
-	 * "/album/logincheck/see.do"; }
-	 * 
-	 * /* 내가 올린 사진 보기
-	 * 
-	 * @RequestMapping("/logincheck/see.do") public String see(HttpSession
-	 * session, ModelMap model) {
-	 * 
-	 * Customer customer = (Customer) session.getAttribute("loginInfo"); String
-	 * csId = customer.getCsId(); //cs_id String partyName= (String)
-	 * session.getAttribute("party");
-	 * 
-	 * List <PhotoUpload> listPhotoUpload =
-	 * service.listPhotoUploadBypartyName(partyName);
-	 * 
-	 * model.addAttribute("listPhotoUpload", listPhotoUpload); return
-	 * "party/test.tiles";
-	 * 
-	 * List <PhotoUpload> list = service.listPhotoUpload(csId); List
-	 * <PhotoUpload> listBypartyName=null; //사용자가 만든 모든 사진 리스트들에서 partyName에
-	 * 해당하는 사진들을 뽑아야한다. Iterator itr = list.iterator(); while(itr.hasNext()){
-	 * PhotoUpload o = (PhotoUpload)itr.next();
-	 * if(o.getPartyName().equals(partyName)){ listBypartyName.add(o); } }
-	 * //session.setAttribute("party", partyName);
-	 * model.addAttribute("listPhotoUpload",listPhotoUpload);
-	 * //model.addAttribute("partyName", partyName);
-	 * //System.out.println(listBypartyName); return "party/test.tiles"; }
-	 */
-
-	/*
-	 * 나만의 앨범에서 사진 보기
-	 * 
-	 * @RequestMapping("/logincheck/mysee.do") public String mysee(@RequestParam
-	 * String partyName, ModelMap model, HttpSession session) { >>>>>>> branch
-	 * 'master' of https://github.com/godsoojon/wannafitProject.git
-	 * 
-	 * Customer customer = (Customer) session.getAttribute("loginInfo"); String
-	 * csId = customer.getCsId(); //cs_id List <PhotoUpload> list =
-	 * service.listPhotoUpload(csId); List <PhotoUpload> listBypartyName=null;
-	 * //사용자가 만든 모든 사진 리스트들에서 partyName에 해당하는 사진들을 뽑아야한다. Iterator itr =
-	 * list.iterator(); while(itr.hasNext()){ PhotoUpload o =
-	 * (PhotoUpload)itr.next(); if(o.getPartyName().equals(partyName)){
-	 * listBypartyName.add(o); } } model.addAttribute("listPhotoUpload",
-	 * listBypartyName); System.out.println(listBypartyName); return
-	 * "party/test.tiles"; }
-	 */
-
-	
-	@RequestMapping("/logincheck/delete.do")
-	public String delete(HttpSession session, @RequestParam int deletephotoId) throws Exception {
-
-		Customer customer = (Customer) session.getAttribute("loginInfo");
-		String id = customer.getCsId(); // cs_id
-
-		// 비지니스 로직 - 삭제처리
-		service.deletePhotoUploadByPhotoId(deletephotoId);
-		// 응답
-		return "/album/logincheck/see.do";
-	}
-	
-
+	// 건강 블로그
 	@RequestMapping("/logincheck/delete1.do")
 	public String delete1(HttpSession session, @RequestParam int deletephotoId) throws Exception {
 
@@ -227,7 +162,7 @@ public class AlbumController {
 		return "/album/logincheck/see1.do";
 	}
 
-	// 단일파일업로드
+	// 건강블로그 네이버 에디터 단일파일업로드
 	@RequestMapping("/photoUpload")
 	public String photoUpload(HttpServletRequest request, Photo vo) {
 
@@ -265,7 +200,7 @@ public class AlbumController {
 		return "redirect:" + callback + "?callback_func=" + callback_func + file_result;
 	}
 
-	// 다중파일업로드
+	// 건강블로그 네이버 에디터 다중파일업로드
 	@RequestMapping("/multiplePhotoUpload")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -292,8 +227,6 @@ public class AlbumController {
 			String today = formatter.format(new java.util.Date()) + timeMilis;
 			realFileNm = today + UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
 			String rlFileNm = filePath + realFileNm;
-			// System.out.println("파일경로 : "+filePath);
-			// System.out.println("파일 이름 : "+realFileNm);
 
 			///////////////// 서버에 파일쓰기 /////////////////
 			InputStream is = request.getInputStream();
@@ -316,7 +249,7 @@ public class AlbumController {
 			;
 			sFileInfo += "&sFileURL=" + "/WannaFitShare/photo_upload/" + realFileNm;
 			PrintWriter print = response.getWriter();
-			// System.out.println(sFileInfo);
+
 			print.print(sFileInfo);
 			print.flush();
 			print.close();
@@ -325,9 +258,11 @@ public class AlbumController {
 		}
 	}
 
-	@RequestMapping("/logincheck/singleup1.do") // 확장자 .do는 생략 가능.
-	// input type="file"로 넘어온 요청파라미터는 MultipartFile 타입의 변수로 받으면 된다.
-	public String singleUpload(@RequestParam MultipartFile upImage, HttpServletRequest request, ModelMap map,
+
+	
+	//앨범에 사진 업로드 
+	@RequestMapping("/logincheck/pictureUpload.do")
+	public String pictureUpload(@RequestParam MultipartFile upImage, HttpServletRequest request, ModelMap map,
 			HttpSession session) throws IOException, SQLException {
 		String fileName = null;
 		// null : upImage name의 요청파라미터가 없는 경우
@@ -347,30 +282,35 @@ public class AlbumController {
 			System.out.println(dir);
 
 			File upImg = new File(dir, fileName);
-			// File file = new File("c:\\java2\\down",fileName);
-
-			// View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송
-			// map.addAttribute("image",fileName);
-			// session.setAttribute("image1",fileName);
-			// session.setAttribute("imageContent", fileName);
-			// File file = new
-			// File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","ddd");
-			// System.out.println(upImg.exists());
-			// System.out.println(upImg.canWrite());
-			// upImage.transferTo(file); //copy(x) , move(o)9999+
-			// FileCopyUtils.copy(upImage.getInputStream(),new
-			// FileOutputStream(file));
 			upImage.transferTo(upImg);
+
+			/*
+			 * ****** File to Copy View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송
+			 * *******************
+			 * 
+			 * map.addAttribute("image",fileName);
+			 * session.setAttribute("image1",fileName);
+			 * session.setAttribute("imageContent", fileName); File file = new
+			 * File(
+			 * "c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage",
+			 * "ddd"); System.out.println(upImg.exists());
+			 * System.out.println(upImg.canWrite()); upImage.transferTo(file);
+			 * //copy(x) , move(o)9999+
+			 * FileCopyUtils.copy(upImage.getInputStream(),new
+			 * FileOutputStream(file));
+			 * 
+			 */
 		}
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId(); // cs_id
 		String title = "사진";
-		int num = 0; // photo_id
-		String name = (String) session.getAttribute("party"); // party_name
+		String name = (String) session.getAttribute("partyName"); // party_name
+		System.out.println(name);
 		Date date = new Date();
+		int num = 0; // photo_id
 		num = service.photoNum(); // photo_id 중복피하여 생성
 
-		PhotoUpload load = new PhotoUpload(title, num, name, id, date, fileName);
+		PhotoUpload load = new PhotoUpload(num,id,name,date,fileName,title);
 		// vo를 DB insert에 추가
 		service.addPhotoUpload(load);
 		// model.addAttribute("content",content);
@@ -378,50 +318,4 @@ public class AlbumController {
 		return "customer/customer_main2.tiles";
 	}
 
-	/*
-	 * @RequestMapping("/logincheck/singleup1.do") //확장자 .do는 생략 가능. //input
-	 * type="file"로 넘어온 요청파라미터는 MultipartFile 타입의 변수로 받으면 된다. public String
-	 * singleUpload(@RequestParam MultipartFile upImage, HttpServletRequest
-	 * request,ModelMap map,HttpSession session) throws IOException{
-	 * 
-	 * //null : upImage name의 요청파라미터가 없는 경우 //isEmpty()-true : 사용자가 파일을 전송 하지 않은
-	 * 경우 if(upImage != null && !upImage.isEmpty()){ // 업로드된 파일이 있다. //업로드된 파일의
-	 * 정보를 조회 String fileName = upImage.getOriginalFilename(); long fileSize =
-	 * upImage.getSize(); System.out.println(fileName+" - "+fileSize); //long
-	 * timeMilis = System.currentTimeMillis();
-	 * 
-	 * //파일을 임시저장경로에서 최종 저장경로로 이동.
-	 * //%TOMCAT_HOME%\\webapps\\applicationRoot_dir\\upimage String dir =
-	 * request.getServletContext().getRealPath("/upimage"); // /의 의미 ->
-	 * application root. application_root/upimage의 실제 파일 경로를 String값을 return.
-	 * System.out.println(dir);
-	 * 
-	 * File upImg = new File(dir,fileName); //File file = new
-	 * File("c:\\java2\\down",fileName);
-	 * 
-	 * //View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송
-	 * //map.addAttribute("image",fileName);
-	 * //session.setAttribute("image1",fileName);
-	 * session.setAttribute("imageContent", fileName); //File file = new
-	 * File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","ddd"
-	 * ); //System.out.println(upImg.exists());
-	 * //System.out.println(upImg.canWrite()); //upImage.transferTo(file);
-	 * //copy(x) , move(o)9999+
-	 * //FileCopyUtils.copy(upImage.getInputStream(),new
-	 * FileOutputStream(file)); upImage.transferTo(upImg); } return
-	 * "/album/logincheck/submit1.do"; //이동 }
-	 * 
-	 * @RequestMapping("/logincheck/submit1.do") public String submit1(ModelMap
-	 * model, HttpSession session) throws SQLException{
-	 * 
-	 * Customer customer = (Customer) session.getAttribute("loginInfo"); String
-	 * id = customer.getCsId(); //cs_id String title="사진"; int num=0; //
-	 * photo_id String name = (String) session.getAttribute("party");
-	 * //party_name Date date = new Date(); num=service.photoNum(); //photo_id
-	 * 중복피하여 생성 model. PhotoUpload load = new
-	 * PhotoUpload(title,num,name,id,date,imageContent); // vo를 DB insert에 추가
-	 * service.addPhotoUpload(load); // model.addAttribute("content",content);
-	 * //session.setAttribute("image1",load); return
-	 * "customer/customer_main2.tiles"; }
-	 */
 }// class

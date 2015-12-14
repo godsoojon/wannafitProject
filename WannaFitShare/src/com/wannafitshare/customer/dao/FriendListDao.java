@@ -8,8 +8,10 @@ public interface FriendListDao {
 
 	int insertFriendList(FriendList friendList);
 
-	List<String> selectfriendList(String csId);
+	List<FriendList> selectfriendList(String csId);
 	
 	FriendList selectFriend(FriendList friendList);
 	int deleteFriendList(FriendList friendList);
+	
+	int updateFriendListByfriendId(FriendList friendList);
 }

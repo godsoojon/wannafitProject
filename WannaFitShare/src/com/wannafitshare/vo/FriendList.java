@@ -7,38 +7,38 @@ public class FriendList implements Serializable {
 	private long flKey;
 	private String csId;
 	private String friendId;
+	private String friendPicture;
 
-	public FriendList(long flKey, String csId, String friendId) {
+	public FriendList(long flKey, String csId, String friendId,String friendPicture) {
 		super();
 		this.flKey = flKey;
 		this.csId = csId;
 		this.friendId = friendId;
+		this.friendPicture = friendPicture;
 	}
 
 	public FriendList() {
 		super();
 	}
 
-	public FriendList(String csId, String friendId) {
+	public FriendList(String csId, String friendId,String friendPicture) {
 		super();
 		this.csId = csId;
 		this.friendId = friendId;
+		this.friendPicture = friendPicture;
 	}
 
-	@Override
-	public String toString() {
-		return "FriendList [flKey=" + flKey + ", csId=" + csId + ", friendId="
-				+ friendId + "]";
-	}
 
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((csId == null) ? 0 : csId.hashCode());
 		result = prime * result + (int) (flKey ^ (flKey >>> 32));
-		result = prime * result
-				+ ((friendId == null) ? 0 : friendId.hashCode());
+		result = prime * result + ((friendId == null) ? 0 : friendId.hashCode());
+		result = prime * result + ((friendPicture == null) ? 0 : friendPicture.hashCode());
 		return result;
 	}
 
@@ -63,7 +63,26 @@ public class FriendList implements Serializable {
 				return false;
 		} else if (!friendId.equals(other.friendId))
 			return false;
+		if (friendPicture == null) {
+			if (other.friendPicture != null)
+				return false;
+		} else if (!friendPicture.equals(other.friendPicture))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "FriendList [flKey=" + flKey + ", csId=" + csId + ", friendId=" + friendId + ", friendPicture="
+				+ friendPicture + "]";
+	}
+
+	public String getFriendPicture() {
+		return friendPicture;
+	}
+
+	public void setFriendPicture(String friendPicture) {
+		this.friendPicture = friendPicture;
 	}
 
 	public long getFlKey() {

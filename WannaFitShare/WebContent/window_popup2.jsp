@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>팝업</h2>
-<form action="${initParam.rootPath}/album/logincheck/singleup1.do" method="post" enctype="multipart/form-data" >
+<form action="${initParam.rootPath}/album/logincheck/pictureUpload.do" method="post" enctype="multipart/form-data" >
 	전송할 사진 : <input type="file" name="upImage"><br>
 	<input type="submit" value="전송" >
 <!-- <script type="text/javascript">

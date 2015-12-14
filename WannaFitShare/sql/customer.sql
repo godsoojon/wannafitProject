@@ -45,6 +45,7 @@ create table customer(
 
 --insert
 insert into customer values ('id-001','1111','유재석', 'ryujs@abc.com','010-6363-0844');
+insert into photo values ('0','admin','앨범', '','cc.png','사진');
 --table customer DB 전체 삭제
 delete from photo
 --table customer 전체 조회

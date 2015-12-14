@@ -41,7 +41,7 @@ public class PartyController {
 		return "party/party_index.tiles";
 	}
 
-	/*앨범 만드는 makeParty_form.jsp 로 이동*/
+	//앨범 만들기 폼으로 이동 
 	@RequestMapping("/logincheck/makeParty_form.do")
 	public String goMakePartyForm() {
 		return "party/makeParty_form.tiles";
@@ -61,9 +61,7 @@ public class PartyController {
 		if (errors.hasErrors()) {
 			return "party/makeParty_form.tiles";
 		}
-
 		partyService.insertParty(party);
-//      partyListservice.insertPartyList(id, partyName);
 		model.addAttribute("party", party);
 		return "party/party_info.tiles";
 	}
