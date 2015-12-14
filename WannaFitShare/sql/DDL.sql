@@ -1,3 +1,5 @@
+ 
+ create sequence reple_reple_id_seq;
 create sequence friendlist_fl_key_seq;
 create sequence reple_id;
 create sequence photo_id;
@@ -150,8 +152,7 @@ ALTER TABLE reple
          reple_id,
          cs_id
       );
-      
-     
+
 /* 그룹 */
 CREATE TABLE party (
    party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */
