@@ -6,7 +6,6 @@
 	src="${initParam.rootPath }/script/formcheck.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#regForm").on("submit", registerFormCheck);
 		$("#csId").on("keyup", function() {
 			$.ajax({
 				url : "${initParam.rootPath}/customer/idDuplicatedCheck.do", //요청 url
@@ -17,7 +16,7 @@
 				dataType : "text",//응답 데이터 타입 - text(기본), json, jsonp, xml
 				beforeSend : function() {
 					//전송 전에 호출할 함수 등록
-					if ($("#id").val() == "") {
+					if ($("#csId").val() == "") {
 						alert("조회할 ID를 입력하세요");
 						return false;//false 리턴시 서버단으로 요청을 하지 않는다.
 					}
@@ -26,10 +25,13 @@
 					if (txt == 'true') {//중복
 						$("#idErrorMessage").text("이미 사용중인 ID입니다.");
 						idDuplicated = true;
-					} else {
-						$("#idErrorMessage").text("사용가능한 ID입니다.");
-						idDuplicated = false;
+					} else if (txt == "shortId") {
+						$("#idErrorMessage").text("ID는 5글자 이상 입력해 주세요.");
 					}
+
+					else
+						$("#idErrorMessage").text("사용가능한 ID입니다.");
+					idDuplicated = false;
 				}
 			});
 		});
@@ -55,9 +57,10 @@
 						<label class="col-sm-2 col-sm-2 control-label">고객 ID</label>
 						<div class="col-sm-10">
 							<input type="text" id="csId" name="csId"
-								class="form-control round-form"><span class="help-block">
-								ID는 5글자 이상을 입력해 주세요</span><br> <span class="errorMessage"
-								id="idErrorMessage"><form:errors path="customer.csId" /></span>
+								class="form-control round-form"
+								value="${requestScope.customer.csId }"><br> <span
+								class="errorMessage" id="idErrorMessage"><form:errors
+									path="customer.csId" delimiter=" | " /></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -66,8 +69,7 @@
 							<input type="password" class="form-control round-form"
 								id="csPassword" name="csPassword"><span
 								class="errorMessage"><form:errors
-									path="customer.csPassword" delimiter=" | " /></span> <br> <span
-								class="help-block"> 비밀번호는 6글자 이상을 입력해 주세요</span>
+									path="customer.csPassword" delimiter=" | " /></span>
 						</div>
 					</div>
 					<div class="form-group">

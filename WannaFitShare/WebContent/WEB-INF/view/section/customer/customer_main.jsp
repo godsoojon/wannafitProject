@@ -33,7 +33,7 @@ self.close();
 								type="button" class="btn btn-theme">로그아웃</button></a>
 					</div>
 					<div class="btn-group">
-						<a href="${initParam.rootPath}/customer/logincheck/remove.do"><button
+						<a href="${initParam.rootPath}/customer/logincheck/goremove.do"><button
 								type="button" class="btn btn-theme">회원탈퇴</button></a>
 					</div>
 				</div>

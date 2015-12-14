@@ -30,6 +30,7 @@ import com.wannafitshare.vo.FriendList;
 import common.util.CalDayMonth;
 import common.validator.CustomerModifyValidator;
 import common.validator.CustomerValidator;
+import common.validator.RemoveValidator;
 
 /**
  * @RequestMapping - 요청 URL 등록 - 요청 url 등록 value="url" - 요청 방식 등록 :
@@ -46,6 +47,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerModifyValidator validateModify;
+
+	@Autowired
+	private RemoveValidator validateRemove;
 
 	@Autowired
 	private CustomerService service;
@@ -235,12 +239,24 @@ public class CustomerController {
 		return "customer/customer_main.tiles";
 	}
 
+	@RequestMapping("/logincheck/goremove.do")
+	public String goRemove() {
+
+		return "customer/remove_form.tiles";
+	}
+
 	// 고객 삭제 처리 HandlerattributeValue
 	@RequestMapping("/logincheck/remove.do")
-	public String remove(HttpSession session) throws Exception {
+	public String remove(@ModelAttribute Customer customer, Errors errors,
+			HttpSession session) throws Exception {
 
 		Customer reCust = (Customer) session.getAttribute("loginInfo");
 		String id = reCust.getCsId();
+
+		validateRemove.validate(customer, errors);
+		if (errors.hasErrors()) {
+			return "customer/remove_form.tiles";
+		}
 
 		// 비지니스 로직 - 삭제처리(removeCustomer())
 		System.out.println(id + "삭제할 아이디*-------");
@@ -255,7 +271,13 @@ public class CustomerController {
 	@ResponseBody
 	public String idDuplicatedCheck(@RequestParam String csId) {
 		Customer cust = service.findCustomerById(csId);
-		return String.valueOf(cust != null); // 중복인 경우 "true" 리턴
+		if (cust != null) {
+			return String.valueOf(cust != null);
+		} else if (csId.length() < 5) {
+			return "shortId";
+		} else
+			return "false";
+//		return String.valueOf(cust != null); // 중복인 경우 "true" 리턴
 	}
 
 	@RequestMapping("/logincheck/findByName")

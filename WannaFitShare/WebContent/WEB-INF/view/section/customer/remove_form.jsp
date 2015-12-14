@@ -31,13 +31,13 @@
 							type="button" class="btn btn-theme">로그아웃</button></a>
 				</div>
 				<div class="btn-group">
-					<a href="${initParam.rootPath}/customer/logincheck/goremove.do"><button
+					<a href="${initParam.rootPath}/customer/logincheck/remove.do"><button
 							type="button" class="btn btn-theme">회원탈퇴</button></a>
 				</div>
 			</div>
 		</div>
 		<h3>
-			<i class="fa fa-angle-right"></i> 회원정보 수정
+			<i class="fa fa-angle-right"></i> 회원 탈퇴
 		</h3>
 
 		<!-- BASIC FORM ELELEMNTS -->
@@ -45,17 +45,17 @@
 			<div class="col-lg-12">
 				<div class="form-panel">
 					<h4 class="mb">
-						<i class="fa fa-angle-right"></i> 회원정보 수정
+						<i class="fa fa-angle-right"></i> 탈퇴 확인
 					</h4>
 					<form class="form-horizontal style-form"
-						action="${initParam.rootPath}/customer/modify.do" method="post"
-						id="modifyForm">
+						action="${initParam.rootPath}/customer/logincheck/remove.do"
+						method="post" id="modifyForm">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">고객 ID</label>
 							<div class="col-sm-10">
-								${requestScope.customer.csId } <input type="hidden"
+								${sessionScope.loginInfo.csId } <input type="hidden"
 									class="form-control" name="csId" id="csId"
-									value="${requestScope.customer.csId }">
+									value="${sessionScope.loginInfo.csId }">
 							</div>
 						</div>
 						<div class="form-group">
@@ -64,46 +64,12 @@
 								<input type="password" class="form-control round-form"
 									id="csPassword" name="csPassword"><span
 									class="errorMessage"><form:errors
-										path="customer.csPassword" delimiter=" | " /></span> <span
-									class="help-block"> 비밀번호는 6글자 이상을 입력해 주세요</span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">고객 이름</label>
-							<div class="col-sm-10">
-								<input type="text" id="csName" name="csName"
-									value="${requestScope.customer.csName }"
-									class="form-control round-form"><br> <span
-									class="errorMessage"> <form:errors
-										path="customer.csName" delimiter=" | " />
-								</span>
+										path="customer.csPassword" delimiter=" | " /></span>
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">고객 Email</label>
-							<div class="col-sm-10">
-								<input type="text" id="csEmail" name="csEmail"
-									class="form-control round-form"
-									value="${requestScope.customer.csEmail}"> <span
-									class="errorMessage"><form:errors
-										path="customer.csEmail" delimiter=" | " /></span>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 col-sm-2 control-label">휴대폰 번호</label>
-							<div class="col-sm-10">
-								<input type="text" id="csPhone" name="csPhone"
-									class="form-control round-form"
-									value="${requestScope.customer.csPhone }"><span
-									class="errorMessage"><form:errors
-										path="customer.csPhone" delimiter=" | " /></span>
-							</div>
-						</div>
 						<p>
-							<input type="submit" value="수정" class="btn btn-round btn-success">
-							<input type="reset" value="초기화" class="btn btn-round btn-warning">
+							<input type="submit" value="탈퇴" class="btn btn-round btn-success">
 					</form>
 					<p>
 				</div>

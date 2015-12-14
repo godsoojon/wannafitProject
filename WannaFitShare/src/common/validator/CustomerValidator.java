@@ -1,5 +1,8 @@
 package common.validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -26,21 +29,41 @@ public class CustomerValidator implements Validator {
 	public void validate(Object target, Errors error) {
 
 		Customer customer = (Customer) target;
+
 		Customer findcust = service.findCustomerById(customer.getCsId());
+
+		Pattern p = Pattern.compile(
+				"([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])");
+
+		Matcher m = p.matcher(customer.getCsPassword());
 
 		if (!supports(target.getClass())) {
 			error.reject("notsupport", "검등할수 없는 객체 입니다.");
 		}
+
+//		Matcher m = p.matcher(customer.getCsPassword());
+//		if (m.find()) {
+//			System.err.println(customer.getCsPassword() + " 은 패턴에 해당함!!!");
+//		} else {
+//			System.err.println(customer.getCsPassword() + " 은 패턴에 어긋남!!!");
+//		}
 
 		if (findcust != null) {
 			error.rejectValue("csId", "existCsId");
 		}
 
 		if (customer.getCsId().length() < 5) {
-			error.rejectValue("csId", "shortCsId");
+			System.err.println(customer.getCsPassword() + " 은 패턴에 해당함!!!");
 		}
 		if (customer.getCsPassword().length() < 6) {
 			error.rejectValue("csPassword", "shortCsPassword");
+		}
+
+		if (m.find()) {
+			System.err.println(customer.getCsPassword());
+		} else {
+			System.err.println(customer.getCsPassword() + " 은 패턴에 어긋남!!!");
+			error.rejectValue("csPassword", "inappropriatePwd");
 		}
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "csId", "required",
