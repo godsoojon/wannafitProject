@@ -11,17 +11,17 @@ public class PhotoUpload {
 	   photo_content VARCHAR2(100),  내용 
 	   photo_title VARCHAR2(30),  사진타이틀 */
 	
-	private String photoTitle;
 	private int photoId; //사진 ID
-	private String partyName; //그룹 이름
 	private String csId; //고객 ID 
+	private String partyName; //그룹 이름
 	private Date photoTime; //날짜
 	private String photoContent; //사진 HTML
+	private String photoTitle;
 	
 	
 	
-	public PhotoUpload(String photoTitle, int photoId, String partyName, String csId, Date photoTime,
-			String photoContent) {
+	public PhotoUpload(int photoId, String csId, String partyName,Date photoTime, String photoContent ,String photoTitle
+			) {
 		super();
 		this.photoTitle = photoTitle;
 		this.photoId = photoId;
@@ -99,9 +99,12 @@ public class PhotoUpload {
 
 	@Override
 	public String toString() {
-		return "PhotoUpload [photoTitle=" + photoTitle + ", photoId=" + photoId + ", partyName=" + partyName + ", csId="
-				+ csId + ", photoTime=" + photoTime + ", photoContent=" + photoContent + "]";
+		return "PhotoUpload [photoId=" + photoId + ", csId=" + csId + ", partyName=" + partyName + ", photoTime="
+				+ photoTime + ", photoContent=" + photoContent + ", photoTitle=" + photoTitle + "]";
 	}
+
+
+
 	
 	
 	

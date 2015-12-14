@@ -97,7 +97,7 @@ self.close();
 
 							<div class="desc">
 								<div class="thumb">
-									<img class="img-circle" src="assets/img/ui-divya.jpg"
+									<img class="img-circle" src="${initParam.rootPath}/upimage/${friendList.friendPicture}"
 										width="35px" height="35px" align="">
 								</div>
 								<div class="details">

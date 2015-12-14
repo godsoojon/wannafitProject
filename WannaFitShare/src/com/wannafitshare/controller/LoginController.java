@@ -1,13 +1,15 @@
 package com.wannafitshare.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wannafitshare.customer.exception.CustomerNotFoundException;
 import com.wannafitshare.customer.service.CustomerService;
 import com.wannafitshare.customer.service.FriendListService;
 import com.wannafitshare.customer.service.LoginService;
 import com.wannafitshare.vo.Customer;
+import com.wannafitshare.vo.FriendList;
 
 import common.validator.LoginValidator;
 
@@ -48,7 +52,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute Customer customer, Errors errors,
-			HttpSession session) {
+			HttpSession session) throws FileNotFoundException, IOException {
 		String returnURL = "";
 		validate.validate(customer, errors);
 		if (errors.hasErrors()) {//true - 오류가 있다
@@ -65,8 +69,10 @@ public class LoginController {
 				&& findCustomer.getCsPassword()
 						.equals(customer.getCsPassword())) {//아이디,비번 비교
 			session.setAttribute("loginInfo", findCustomer);
-//         returnURL = "redirect:/customer/customer_main.do";
-//         returnURL = "customer/customer_main.tiles";
+			File input = new File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","basic.png");
+			File output = new File("c:\\Java2\\eclipse-jee-mars-R-win32-x86_64\\tomcat\\apache-tomcat-8.0.26\\webapps\\WannaFitShare\\upimage","basic.png");
+			FileCopyUtils.copy(new FileInputStream(input),new FileOutputStream(output));
+			System.out.println(findCustomer);
 			returnURL = "/loginController/logincheck/home.do";
 		} else {
 			returnURL = "/login.do";//패스워드 틀리면 로그인 페이지로 이동 index.jsp
@@ -91,19 +97,44 @@ public class LoginController {
 	
 		if(pw.equals(csPassword)){
 		
-			return "/loginController/logincheck/home.do";
+			return "/loginController/logincheck/lockhome.do";
 		}
 		return "/WEB-INF/view/section/lock_screen.jsp";
+	}
+	
+	@RequestMapping("/logincheck/lockhome.do")
+	public String lockHome(HttpSession session, ModelMap model) {
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		List <FriendList> list = friendService.findFriendListById(id);
+
+		session.setAttribute("seionFriendList", list);
+		
+		System.out.println("Dddddddddddddddddddddddddddd");
+		//return "customer/customer_main.tiles";
+		return "redirect:/lockhome1.do";
+	}
+
+	@RequestMapping("/logincheck/lockhome1.do")
+	public String lockHome1(HttpSession session, ModelMap model) {
+		Customer customer = (Customer) session.getAttribute("loginInfo");
+		String id = customer.getCsId();
+		List <FriendList> list = friendService.findFriendListById(id);
+
+		session.setAttribute("seionFriendList", list);
+		System.out.println("Dddddddddddddddddddddddddddd");
+		return "redirect:/customer/mainAfterLock.tiles";
 	}
 
 	@RequestMapping("/logincheck/home.do")
 	public String goHome(HttpSession session, ModelMap model) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-		List<String> list = friendService.findFriendListById(id);
+		List <FriendList> list = friendService.findFriendListById(id);
 
 		session.setAttribute("seionFriendList", list);
-
+		
+			
 		//return "customer/customer_main.tiles";
 		return "redirect:/home1.do";
 	}
@@ -112,7 +143,7 @@ public class LoginController {
 	public String goHome1(HttpSession session, ModelMap model) {
 		Customer customer = (Customer) session.getAttribute("loginInfo");
 		String id = customer.getCsId();
-		List<String> list = friendService.findFriendListById(id);
+		List <FriendList> list = friendService.findFriendListById(id);
 
 		session.setAttribute("seionFriendList", list);
 
@@ -130,7 +161,7 @@ public class LoginController {
 	//input type="file"로 넘어온 요청파라미터는 MultipartFile 타입의 변수로 받으면 된다.
 	public String singleUpload(@RequestParam MultipartFile upImage,
 			HttpServletRequest request, ModelMap map, HttpSession session)
-					throws IOException {
+					throws IOException, CustomerNotFoundException, SQLException {
 
 		//null : upImage name의 요청파라미터가 없는 경우 
 		//isEmpty()-true : 사용자가 파일을 전송 하지 않은 경우 
@@ -154,8 +185,10 @@ public class LoginController {
 
 			//View(JSP)에 업로드된 이미지 파일명을 request 속성으로 전송 
 			//map.addAttribute("image",fileName);
-
-			session.setAttribute("image", fileName1);
+			Customer customer = (Customer) session.getAttribute("loginInfo");
+			customer.setCsPicture(fileName1);
+			service.updateCustomer(customer);
+			session.setAttribute("loginInfo", customer);
 
 			//File file = new File("c:\\java2\\WannaFitShare\\WannaFitShare\\WebContent\\upimage","ddd");
 			//System.out.println(upImg.exists());    
@@ -163,6 +196,13 @@ public class LoginController {
 			//upImage.transferTo(file); //copy(x) , move(o)9999+
 			//FileCopyUtils.copy(upImage.getInputStream(),new FileOutputStream(file));
 			upImage.transferTo(upImg);
+			
+			//자신의 프로필 사진 업데이트
+			//Customer customer = (Customer) session.getAttribute("loginInfo");
+			//String id = customer.getCsId();
+			friendService.updateFriendListByfriendId(new FriendList(customer.getCsId(),customer.getCsId(),customer.getCsPicture()));
+			List<FriendList> list = friendService.findFriendListById(customer.getCsId());
+			session.setAttribute("seionFriendList", list);
 		}
 		return "customer/customer_main2.tiles"; //이동       
 	}

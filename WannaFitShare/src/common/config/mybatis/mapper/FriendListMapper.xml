@@ -16,7 +16,12 @@
 		<result
 			property="friendId"
 			column="friend_id" />
+			<result
+			property="friendPicture"
+			column="friend_picture" />
 	</resultMap>
+	
+	
 	<resultMap
 		type="friendList"
 		id="friendList-constructor-resultmap">
@@ -29,6 +34,9 @@
 				javaType="string" />
 			<arg
 				column="friend_id"
+				javaType="string" />
+				<arg
+				column="friend_picture"
 				javaType="string" />
 		</constructor>
 	</resultMap>
@@ -44,22 +52,36 @@
 			order="BEFORE">
 			select friendList_fl_key_seq.nextval from dual
 		</selectKey>
-		insert into FriendList(fl_key,cs_id,friend_id)
+		insert into FriendList(fl_key,cs_id,friend_id,friend_picture)
 		values(#{flKey},
-		#{csId}, #{friendId})
+		#{csId}, #{friendId},#{friendPicture})
 
 	</insert>
+	
+		<!-- updateFriendList -->
+	<update
+		id="updateFriendListByfriendId"
+		parameterType="friendList">
+		update friendList
+		set friend_picture=#{friendPicture}
+		where
+		cs_id=#{csId} and friend_id=#{friendId}
+	</update>
+	
 	
 <!-- select FriendList 고객아이디로 그사람의 친구 리스트를 select해옴-->
 	<select
 		id="selectFriendList"
-		parameterType="string"
+		parameterType="FriendList"
 		resultMap="friend-resultmap">
-		select friend_id
+		select friend_id,friend_picture
 		from friendList
 		where
 		cs_id=#{csId}
 	</select>
+	
+	
+	
 	
 	<select id="selectFriend" parameterType="friendList" resultMap="friend-resultmap">
 			select fl_key,cs_id,friend_id

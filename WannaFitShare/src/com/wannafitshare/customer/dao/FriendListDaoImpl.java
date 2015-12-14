@@ -28,7 +28,7 @@ public class FriendListDaoImpl implements FriendListDao{
 	}
 
 	@Override
-	public List<String> selectfriendList(String csId) {
+	public List<FriendList> selectfriendList(String csId) {
 		return session.selectList("friendListMapper.selectFriendList", csId);
 	}
 	
@@ -39,4 +39,12 @@ public class FriendListDaoImpl implements FriendListDao{
 	public int deleteFriendList(FriendList friendList){
 		return session.delete("friendListMapper.deleteFriend",friendList);
 	}
+
+	@Override
+	public int updateFriendListByfriendId(FriendList friendList) {
+		return session.update("friendListMapper.updateFriendListByfriendId",friendList);
+		
+	}
+	
+	
 }

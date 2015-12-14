@@ -6,6 +6,12 @@ drop sequence reple_id;
 drop sequence photo_id;
 drop sequence friendlist_fl_key_seq;
 
+delete from CUSTOMER;
+delete from FRIENDLIST;
+delete from PHOTO;
+delete from PARTY;
+delete from REPLE;
+
 /* 고객 */
 DROP TABLE customer 
    CASCADE CONSTRAINTS;
@@ -44,7 +50,8 @@ CREATE TABLE customer (
    cs_password VARCHAR2(20) NOT NULL, /* 패스워드 */
    cs_name VARCHAR2(30) NOT NULL, /* 고객이름 */
    cs_email VARCHAR2(50) NOT NULL, /* 이메일 */
-   cs_phone VARCHAR2(20) NOT NULL /* 폰번호 */
+   cs_phone VARCHAR2(20) NOT NULL, /* 폰번호 */
+   cs_picture VARCHAR2(500) /*고객 사진 */
 );
 
 ALTER TABLE customer
@@ -80,6 +87,7 @@ CREATE TABLE friendlist (
    fl_key NUMBER NOT NULL, /* 친구목록식별키 */
    cs_id VARCHAR2(10) NOT NULL, /* 고객_id */
    friend_id VARCHAR2(10), /* 친구ID */
+   friend_picture VARCHAR2(500),
 constraint friendlist_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
@@ -129,6 +137,9 @@ CREATE TABLE reple (
    photo_id NUMBER, /* 사진ID */
    reple_content VARCHAR2(50), /* 댓글내용 */
    reple_time DATE, /* 시간 */
+   cs_name VARCHAR2(30), /* 고객이름 */
+   cs_picture VARCHAR2(500), /*고객 사진 */
+   
 constraint reple_customer_cs_id_pk foreign key(cs_id) references customer(cs_id) on delete cascade
 );
 
@@ -140,8 +151,7 @@ ALTER TABLE reple
          cs_id
       );
       
-      create sequence reple_reple_id_seq;
-
+     
 /* 그룹 */
 CREATE TABLE party (
    party_name VARCHAR2(30) NOT NULL, /* 그룹이름 */

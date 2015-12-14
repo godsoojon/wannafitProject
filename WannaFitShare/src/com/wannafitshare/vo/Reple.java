@@ -16,69 +16,32 @@ public class Reple {
  private int photoId;
  private String repleContent;
  private Date repleTime;
-public Reple(int repleId, String csId, int photoId, String repleContent, Date repleTime) {
+ private String csName;
+ private String csPicture;
+
+ 
+ 
+public Reple(int repleId, String csId, int photoId, String repleContent, Date repleTime, String csName,String csPicture) {
 	super();
 	this.repleId = repleId;
 	this.csId = csId;
 	this.photoId = photoId;
 	this.repleContent = repleContent;
 	this.repleTime = repleTime;
+	this.csName = csName;
+	this.csPicture = csPicture;
 }
 public Reple() {
 	super();
 }
-public Reple(String csId, int photoId, String repleContent, Date repleTime) {
+public Reple(String csId, int photoId, String repleContent, Date repleTime ,String csName, String csPicture) {
 	super();
 	this.csId = csId;
 	this.photoId = photoId;
 	this.repleContent = repleContent;
 	this.repleTime = repleTime;
-}
-@Override
-public String toString() {
-	return "Reple [repleId=" + repleId + ", csId=" + csId + ", photoId=" + photoId + ", repleContent=" + repleContent
-			+ ", repleTime=" + repleTime + "]";
-}
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((csId == null) ? 0 : csId.hashCode());
-	result = prime * result + photoId;
-	result = prime * result + ((repleContent == null) ? 0 : repleContent.hashCode());
-	result = prime * result + repleId;
-	result = prime * result + ((repleTime == null) ? 0 : repleTime.hashCode());
-	return result;
-}
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (!(obj instanceof Reple))
-		return false;
-	Reple other = (Reple) obj;
-	if (csId == null) {
-		if (other.csId != null)
-			return false;
-	} else if (!csId.equals(other.csId))
-		return false;
-	if (photoId != other.photoId)
-		return false;
-	if (repleContent == null) {
-		if (other.repleContent != null)
-			return false;
-	} else if (!repleContent.equals(other.repleContent))
-		return false;
-	if (repleId != other.repleId)
-		return false;
-	if (repleTime == null) {
-		if (other.repleTime != null)
-			return false;
-	} else if (!repleTime.equals(other.repleTime))
-		return false;
-	return true;
+	this.csName = csName;
+	this.csPicture = csPicture;
 }
 public int getRepleId() {
 	return repleId;
@@ -110,7 +73,77 @@ public Date getRepleTime() {
 public void setRepleTime(Date repleTime) {
 	this.repleTime = repleTime;
 }
+public String getCsName() {
+	return csName;
+}
+public void setCsName(String csName) {
+	this.csName = csName;
+}
+public String getCsPicture() {
+	return csPicture;
+}
+public void setCsPicture(String csPicture) {
+	this.csPicture = csPicture;
+}
+@Override
+public String toString() {
+	return "Reple [repleId=" + repleId + ", csId=" + csId + ", photoId=" + photoId + ", repleContent=" + repleContent
+			+ ", repleTime=" + repleTime + ", csName=" + csName + ", csPicture=" + csPicture + "]";
+}
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((csId == null) ? 0 : csId.hashCode());
+	result = prime * result + ((csName == null) ? 0 : csName.hashCode());
+	result = prime * result + ((csPicture == null) ? 0 : csPicture.hashCode());
+	result = prime * result + photoId;
+	result = prime * result + ((repleContent == null) ? 0 : repleContent.hashCode());
+	result = prime * result + repleId;
+	result = prime * result + ((repleTime == null) ? 0 : repleTime.hashCode());
+	return result;
+}
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Reple other = (Reple) obj;
+	if (csId == null) {
+		if (other.csId != null)
+			return false;
+	} else if (!csId.equals(other.csId))
+		return false;
+	if (csName == null) {
+		if (other.csName != null)
+			return false;
+	} else if (!csName.equals(other.csName))
+		return false;
+	if (csPicture == null) {
+		if (other.csPicture != null)
+			return false;
+	} else if (!csPicture.equals(other.csPicture))
+		return false;
+	if (photoId != other.photoId)
+		return false;
+	if (repleContent == null) {
+		if (other.repleContent != null)
+			return false;
+	} else if (!repleContent.equals(other.repleContent))
+		return false;
+	if (repleId != other.repleId)
+		return false;
+	if (repleTime == null) {
+		if (other.repleTime != null)
+			return false;
+	} else if (!repleTime.equals(other.repleTime))
+		return false;
+	return true;
+}
 
- 
+
 
  }

@@ -13,7 +13,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-
 <!-- Bootstrap core CSS -->
 <link href="${initParam.rootPath}/assets/css/bootstrap.css"
 	rel="stylesheet">
@@ -30,6 +29,7 @@
 	rel="stylesheet">
 
 <script src="${initParam.rootPath}/assets/js/jquery.js"></script>
+<!-- PopupOpen -->
 <script type="text/javascript">
 	function popupOpen() {
 		window.open("${initParam.rootPath}/window_popup2.jsp", "",
@@ -37,6 +37,8 @@
 	}
 </script>
 </head>
+
+<!-- ------------------------------------------------------------------------------------------------------------ -->
 
 <section id="main-content">
 	<section class="wrapper">
@@ -53,10 +55,11 @@
 					만들기</a></li>
 		</ul>
 
+		<!-- ------------------------------------------------------------------------------------------------------------ -->
 
-<!-- **********************************************************************************************************************************************************
+		<!-- **********************************************************************************************************************************************************
       MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
+*********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section class="wrapper site-min-height">
 			<h3>
@@ -67,49 +70,35 @@
 			</button>
 			<hr>
 			<div class="row mt">
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+
+				<%-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 					<div class="project-wrapper">
 						<div class="project">
 							<div class="photo-wrapper">
 								<div class="photo">
+									<!-- ${initParam.rootPath}/album/logincheck/sample.do?pictureName=port04.jpg -->
 									<a class="fancybox"
-										href="${initParam.rootPath}/assets/img/portfolio/port04.jpg"><img
-										class="img-responsive"
+										href="${initParam.rootPath}/assets/img/portfolio/port04.jpg">
+										<img class="img-responsive"
 										src="${initParam.rootPath}/assets/img/portfolio/port04.jpg"
-										alt=""></a>
+										alt="">
+									</a>
+									<!-- 이미지를 반응형으로 사용하기 위해선 이미지 태그에 img-responsive 클래스를 추가 -->
 								</div>
 								<div class="overlay"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- col-lg-4 -->
+--%>
 
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+				<%-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 					<div class="project-wrapper">
 						<div class="project">
 							<div class="photo-wrapper">
 								<div class="photo">
-									<a class="fancybox"
-										href="${initParam.rootPath}/assets/img/portfolio/port05.jpg"><img
-										class="img-responsive"
-										src="${initParam.rootPath}/assets/img/portfolio/port05.jpg"
-										alt=""></a>
-								</div>
-								<div class="overlay"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- col-lg-4 -->
-
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-					<div class="project-wrapper">
-						<div class="project">
-							<div class="photo-wrapper">
-								<div class="photo">
-									<a class="fancybox"
-										href="${initParam.rootPath}/assets/img/portfolio/port06.jpg"><img
+									<a 
+										href="${initParam.rootPath}/album/logincheck/pictureView.do?pictureName=port06.jpg " ><img
 										class="img-responsive"
 										src="${initParam.rootPath}/assets/img/portfolio/port06.jpg"
 										alt=""></a>
@@ -118,40 +107,20 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- col-lg-4 -->
-			</div>
-			<!-- /row -->
-			<div class="row mt">
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-					<div class="project-wrapper">
-						<div class="project">
-							<div class="photo-wrapper">
-								<div class="photo">
-									<a class="fancybox"
-										href="${initParam.rootPath}/assets/img/portfolio/port06.jpg"><img
-										class="img-responsive"
-										src="${initParam.rootPath}/assets/img/portfolio/port06.jpg"
-										alt=""></a>
-								</div>
-								<div class="overlay"></div>
-							</div>
-						</div>
-					</div>
-				</div>
+				</div>  --%>
 				
-			<c:choose>
-				<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }" />
-				<c:otherwise>
-					<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
-					
+				<c:choose>
+					<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }" />
+					<c:otherwise>
+						<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
+
 							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 								<div class="project-wrapper">
 									<div class="project">
 										<div class="photo-wrapper">
 											<div class="photo">
-												<a class="fancybox"
-													href="${initParam.rootPath}/upimage/${photoList.photoContent}"><img
+												<a 
+													href="${initParam.rootPath}/album/logincheck/pictureView.do?pictureName=${photoList.photoContent}&pictureNumber=${photoList.photoId}"><img
 													class="img-responsive"
 													src="${initParam.rootPath}/upimage/${photoList.photoContent}"
 													alt=""></a>
@@ -164,116 +133,60 @@
 									</div>
 								</div>
 							</div>
-					
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</div>
 
-			<%-- 		<c:choose>
-				<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }" />
-				<c:otherwise>
-					<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
-						<div class="row mt">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-								<div class="project-wrapper">
-									<div class="project">
-										<div class="photo-wrapper">
-											<div class="photo">
-												<a class="fancybox" href="${photoList.photoContent}"><img
-													class="img-responsive" ${photoList.photoContent}> </a>
-													<a
-								href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
-									삭제 </a>
-											</div>
-											<div class="overlay"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<tr>
-
-							<td><a
-								href="${initParam.rootPath}/reple/findReple.do?photoId=${photoList.photoId}">${photoList.photoContent}</a><br>
-								<a
-								href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
-									삭제 </a></td>
-
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>--%>
-		</section>
-
-		<!-- /MAIN CONTENT -->
-
-
-		<!--footer start-->
-		<footer class="site-footer">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="gallery.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
-				</a>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
-		</footer>
-		<!--footer end-->
 
+		</section>
 	</section>
+	<!-- /MAIN CONTENT -->
 
-	<!-- js placed at the end of the document so the pages load faster -->
-	<script
-		src="${initParam.rootPath}/assets/js/fancybox/jquery.fancybox.js"></script>
-	<script src="${initParam.rootPath}/assets/js/bootstrap.min.js"></script>
-	<script class="include" type="text/javascript"
-		src="${initParam.rootPath}/assets/js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="${initParam.rootPath}/assets/js/jquery.scrollTo.min.js"></script>
-	<script src="${initParam.rootPath}/assets/js/jquery.nicescroll.js"
-		type="text/javascript"></script>
+	<!-- ------------------------------------------------------------------------------------------------------------ -->
 
 
-	<!--common script for all pages-->
-	<script src="${initParam.rootPath}/assets/js/common-scripts.js"></script>
+	<!--footer start-->
+	<footer class="site-footer">
+		<div class="text-center">
+			2014 - Alvarez.is <a href="gallery.html#" class="go-top"> <i
+				class="fa fa-angle-up"></i>
+			</a>
+		</div>
+	</footer>
+	<!--footer end-->
 
-	<!--script for this page-->
+</section>
 
-	<script type="text/javascript">
-		$(function() {
-			//    fancybox
-			jQuery(".fancybox").fancybox();
-		});
-	</script>
+<!-- js placed at the end of the document so the pages load faster -->
+<script
+	src="${initParam.rootPath}/assets/js/fancybox/jquery.fancybox.js"></script>
+<script src="${initParam.rootPath}/assets/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript"
+	src="${initParam.rootPath}/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="${initParam.rootPath}/assets/js/jquery.scrollTo.min.js"></script>
+<script src="${initParam.rootPath}/assets/js/jquery.nicescroll.js"
+	type="text/javascript"></script>
 
-	<script>
-		//custom select box
 
-		$(function() {
-			$("select.styled").customSelect();
-		});
-	</script>
+<!--common script for all pages-->
+<script src="${initParam.rootPath}/assets/js/common-scripts.js"></script>
+
+<!--script for this page-->
+
+<script type="text/javascript">
+	$(function() {
+		//    fancybox
+		jQuery(".fancybox").fancybox();
+		
+	});
+</script>
+
+<script>
+	//custom select box
+
+	$(function() {
+		$("select.styled").customSelect();
+	});
+</script>
 </html>
-
-<%-- <c:choose>
-	<c:when test="${fn:length(requestScope.listPhotoUpload)==0 }">
-		등록된 앨범이 없습니다.
-	</c:when>
-	<c:otherwise>
-		<table style="width: 500px" border="1">
-			<tr>
-				<th>사진들</th>
-			</tr>
-			<c:forEach items="${requestScope.listPhotoUpload}" var="photoList">
-				<tr>
-
-					<td><a
-						href="${initParam.rootPath}/reple/findReple.do?photoId=${photoList.photoId}">${photoList.photoContent}</a><br>
-						<a
-						href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
-							삭제 </a></td>
-
-				</tr>
-			</c:forEach>
-		</table>
-	</c:otherwise>
-</c:choose>
- --%>

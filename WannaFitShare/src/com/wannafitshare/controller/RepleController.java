@@ -1,17 +1,15 @@
 package com.wannafitshare.controller;
-import javax.swing.JOptionPane;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestAttributes;
 
 import com.wannafitshare.customer.service.PhotoUploadService;
 import com.wannafitshare.customer.service.RepleService;
@@ -35,17 +33,17 @@ public class RepleController {
  */
 
     @RequestMapping("/findReple")
-    public String findReple(@RequestParam int photoId,ModelMap model,HttpSession session){
+    public String findReple(ModelMap model,HttpSession session){
+    	PhotoUpload photo = (PhotoUpload)session.getAttribute("photo");
     	List<Reple> list=null;
+    	list =rService.findReple(photo.getPhotoId());
+    	//PhotoUpload photoUpload=pService.findPhotoUploadById(photoId);
     	
-    	list =rService.findReple(photoId);
-    	PhotoUpload photoUpload=pService.findPhotoUploadById(photoId);
-    	
-    	session.setAttribute("photo", photoUpload);
+    	//session.setAttribute("photo", photoUpload);
     	
     	model.addAttribute("repleList",list);
     	
-    	return "picture/photo_see.tiles";
+    	return "picture/sample.tiles";
     }
     
     /*
@@ -76,7 +74,7 @@ public class RepleController {
     	
     	Customer customer =(Customer)session.getAttribute("loginInfo");
     	PhotoUpload photo =(PhotoUpload)session.getAttribute("photo");
-    	Reple reple=new Reple(repleId,customer.getCsId(),photo.getPhotoId(),repletxt,new Date());
+    	Reple reple=new Reple(repleId,customer.getCsId(),photo.getPhotoId(),repletxt,new Date(),customer.getCsName(),customer.getCsPicture());
     	
     	rService.updateReple(reple);
     	//JOptionPane.showMessageDialog(null, "수정되었습니다.");
@@ -90,23 +88,20 @@ public class RepleController {
     */
     @RequestMapping("/addReple")
     public String addReple(HttpSession session, ModelMap model,@RequestParam String repletxt){
-    	
     	Customer customer =(Customer)session.getAttribute("loginInfo");
     	String csId=customer.getCsId();
     	PhotoUpload photo=(PhotoUpload)session.getAttribute("photo");
-    	
     	String repleContent=repletxt;
     	repleContent.trim();
+    	
     	if(repletxt.length()==0){
     		JOptionPane.showMessageDialog(null, "댓글 내용이 없습니다.");
     		return "/reple/return.do";
     	}else{
-    	int photoId=photo.getPhotoId();
-    	System.out.println(photoId);
-    	
-    	Reple reple= new Reple(csId,photoId,repleContent,new Date());
+    	Reple reple= new Reple(csId,photo.getPhotoId(),repleContent,new Date(),customer.getCsName(),customer.getCsPicture());
+    	System.out.println(reple);
     	rService.addReple(reple);
-    	model.addAttribute("reple",reple);
+  
     	return "/reple/return.do";
     	}
     	
@@ -114,13 +109,13 @@ public class RepleController {
     
     @RequestMapping("/return")
     public String returnPhoto(HttpSession session,ModelMap model){
-    PhotoUpload photo=(PhotoUpload)session.getAttribute("photo");
-    int photoId=photo.getPhotoId();
+    	
+    PhotoUpload photo=(PhotoUpload)session.getAttribute("photo");	
  	List<Reple> list=null;
-	list =rService.findReple(photoId);
+	list =rService.findReple(photo.getPhotoId());
     
 	model.addAttribute("repleList",list);
-	return "picture/photo_see.tiles";
+	return "picture/sample.tiles";
     
     }
     

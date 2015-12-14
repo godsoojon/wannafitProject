@@ -187,15 +187,17 @@ public class CustomerController {
 			ModelMap model) throws DuplicatedIdException, SQLException {
 		validate.validate(customer, errors);
 		if (errors.hasErrors()) {
-			return "customer/register_form.tiles";
+			return "customer/register_form.do";
 		}
 
 		service.addCustomer(customer);
 
 		//회원가입 하고 내친구 리스트에 자기 정보 추가하기
 		String id = customer.getCsId();
-		FriendList friendList = new FriendList(id, id);
+		String picture = "basic.png";
+		FriendList friendList = new FriendList(id,id,picture);
 		friendService.addFriendList(friendList);
+		System.out.println("자기정보등록 성공");
 		model.addAttribute("csId", customer.getCsId());
 		return "redirect:/customer/registerSuccess.do";
 
