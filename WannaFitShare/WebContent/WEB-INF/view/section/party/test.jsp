@@ -127,8 +127,7 @@
 											</div>
 											<div class="overlay"></div>
 											<a
-												href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진
-												삭제 </a>
+												href="${initParam.rootPath}/album/logincheck/delete.do?deletephotoId=${photoList.photoId}">사진삭제 </a>
 										</div>
 									</div>
 								</div>

@@ -29,9 +29,8 @@ public class RepleController {
 
     
 /*
- * 포토 아이디로 리플 리스트 가져오기
+ * photo_id 로 reple list 가져오기
  */
-
     @RequestMapping("/findReple")
     public String findReple(ModelMap model,HttpSession session){
     	PhotoUpload photo = (PhotoUpload)session.getAttribute("photo");
@@ -45,6 +44,7 @@ public class RepleController {
     	
     	return "picture/sample.tiles";
     }
+    
     
     /*
      * 리플 수정
@@ -116,25 +116,19 @@ public class RepleController {
     
 	model.addAttribute("repleList",list);
 	return "picture/sample.tiles";
-    
     }
     
     
     @RequestMapping("/deleteReple")
     public String deleteReple(@RequestParam int repleId,HttpSession session){
     	Customer customer =(Customer)session.getAttribute("loginInfo");
-    	String id1=customer.getCsId();
-    	
+    	String id1=customer.getCsId();    	
     	Reple reple=rService.findRepleOne(repleId);
     	String id2 =reple.getCsId();
     	if(id1.equals(id2)){
     		//JOptionPane.showMessageDialog(null, "삭제되었습니다.");
     		rService.deleteReple(repleId);
-    	}
-    	
-    	return "/reple/return.do";
-    	
+    	}    	
+    	return "/reple/return.do";    	
     }
-    
-
 }

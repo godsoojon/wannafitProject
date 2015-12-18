@@ -122,7 +122,6 @@ public class LoginController {
 		List <FriendList> list = friendService.findFriendListById(id);
 
 		session.setAttribute("seionFriendList", list);
-		System.out.println("Dddddddddddddddddddddddddddd");
 		return "redirect:/customer/mainAfterLock.tiles";
 	}
 

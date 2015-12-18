@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,36 +14,20 @@
 <title>DASHGUM - Bootstrap Admin Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="${initParam.rootPath}/assets/css/bootstrap.css" rel="stylesheet">
+<link href="${initParam.rootPath}/assets/css/bootstrap.css"
+	rel="stylesheet">
 <!--external css-->
-<link href="${initParam.rootPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link
+	href="${initParam.rootPath}/assets/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
 
 <!-- Custom styles for this template -->
 <link href="${initParam.rootPath}/assets/css/style.css" rel="stylesheet">
-<link href="${initParam.rootPath}/assets/css/style-responsive.css" rel="stylesheet">
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<%-- <%
-	response.setHeader("Pragma","NO-cache");
-	response.setDateHeader("Expires",0);
-	response.setHeader("Cache-Control","NO-cache");
-
-%>
-<script type="text/javascript">
-    window.history.go(1); 
-</script>  --%>
-<!-- <script type="text/javascript">
-opener.location.reload();
-self.close();
-</script>  -->
+<link href="${initParam.rootPath}/assets/css/style-responsive.css"
+	rel="stylesheet">
 
 </head>
 <body>
-
 <body onload="getTime()">
 
 	<!-- **********************************************************************************************************************************************************
@@ -72,10 +56,11 @@ self.close();
 							</div>
 							<form action="${initParam.rootPath}/loginController/lock.do"
 								method="post">
-								
+
 								<div class="modal-body">
 									<p class="centered">
-										<img class="img-circle" width="80" src="${initParam.rootPath}/upimage/${sessionScope.image}">
+										<img class="img-circle" width="80"
+											src="${initParam.rootPath}/upimage/${sessionScope.loginInfo.csPicture}">
 									</p>
 									<input type="password" name="csPassword" id="csPassword"
 										placeholder="Password" autocomplete="off"
@@ -95,7 +80,7 @@ self.close();
 
 
 			</div>
-		
+
 		</div>
 		<!-- /col-lg-4 -->
 
@@ -111,32 +96,34 @@ self.close();
 	<script type="text/javascript"
 		src="${initParam.rootPath}/assets/js/jquery.backstretch.min.js"></script>
 	<script>
-        $.backstretch("/WannaFitShare/assets/img/login-bg.jpg", {speed: 500});
-    </script>
+		$.backstretch("/WannaFitShare/assets/img/login-bg.jpg", {
+			speed : 500
+		});
+	</script>
 
 	<script>
-        function getTime()
-        {
-            var today=new Date();
-            var h=today.getHours();
-            var m=today.getMinutes();
-            var s=today.getSeconds();
-            // add a zero in front of numbers<10
-            m=checkTime(m);
-            s=checkTime(s);
-            document.getElementById('showtime').innerHTML=h+":"+m+":"+s;
-            t=setTimeout(function(){getTime()},500);
-        }
+		function getTime() {
+			var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			// add a zero in front of numbers<10
+			m = checkTime(m);
+			s = checkTime(s);
+			document.getElementById('showtime').innerHTML = h + ":" + m + ":"
+					+ s;
+			t = setTimeout(function() {
+				getTime()
+			}, 500);
+		}
 
-        function checkTime(i)
-        {
-            if (i<10)
-            {
-                i="0" + i;
-            }
-            return i;
-        }
-    </script>
+		function checkTime(i) {
+			if (i < 10) {
+				i = "0" + i;
+			}
+			return i;
+		}
+	</script>
 </body>
 </html>
 

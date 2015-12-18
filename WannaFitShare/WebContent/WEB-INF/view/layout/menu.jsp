@@ -31,13 +31,12 @@
 			<li><a class="logout"
 				href="${initParam.rootPath}/loginController/logincheck/logout.do">Logout</a></li>
 		</ul>
-	</div>
-	
+	</div>	
 	<!-- 로그아웃 end -->
+	
+	
 	<script type="text/javascript">
 		function myFunction() {
-			//window.history.forward();
-			//window.location.replace("/WannaFitShare/lock1.do ");	
 			window.open("/WannaFitShare/lock1.do","mywindow","status=1,toolbar=0");
 			parent.close();
 		}
@@ -98,9 +97,7 @@
 					class=" fa fa-bar-chart-o"></i> <span>기타</span>
 			</a>
 				<ul class="sub">
-					<%-- ${initParam.rootPath}/lock1.do --%>
 					<li><a href="javascript:myFunction();">lock_screen</a></li>
-					<li><a href="chartjs.html">Chartjs</a></li>
 				</ul></li>
 		</ul>
 		<!-- sidebar menu end-->

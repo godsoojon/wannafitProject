@@ -80,9 +80,6 @@ public class PartyController {
 	@RequestMapping("/logincheck/allParty.do")
 	public String allParty(ModelMap model) {
 		List<Party> list = partyService.selectAllParty();
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i));
-//		}
 		model.addAttribute("list", list);
 		return "party/allParty.tiles";
 	}
